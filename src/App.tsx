@@ -68,7 +68,7 @@ export const App = () => {
                         <User
                             avatarProps={{
                                 radius: "lg",
-                                src: `/${user.id}.jpg`,
+                                src: `${import.meta.env.BASE_URL}${user.id}.jpg`,
                             }}
                             description={
                                 <>
