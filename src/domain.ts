@@ -64,12 +64,12 @@ export const getLeagueDetails = async () => {
 export interface User {
     id: number
     name: string
-    record: Record[]
+    record: SeasonRecord[]
     fairPoints: number
     fairPointsRank: number
 }
 
-export interface Record {
+export interface SeasonRecord {
     season: string
     position: number
 }
