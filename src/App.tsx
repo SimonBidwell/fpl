@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { LeagueDetails, Standing, getLeagueDetails, userMap } from "./domain";
+import { TableRow as LeagueTableRow, Match, getTable } from "./domain";
 import {
     Table,
     TableHeader,
@@ -8,194 +8,151 @@ import {
     TableRow,
     TableCell,
     User,
-    SortDescriptor,
-    Tooltip
+    SortDescriptor
 } from "@nextui-org/react";
 import { useCallback, useState, useMemo } from "react";
 import { Records } from "./Records";
+import { Result } from "./Result";
 import { MovementIcon } from "./MovementIcon";
+import { ReactNode, Key } from "react";
 
-const columns = [
-    "Rank",
-    "Team & Manager",
-    "W",
-    "D",
-    "L",
-    "+",
-    "-",
-    "+/-",
-    "Pts",
-    "Fair Pts",
-    "Pts - Fair Pts",
-    "Fair Rank",
-    "Rank - Fair Rank"
-] as const;
-const columnsWithKeys = columns.map((label) => ({ key: label, label: label }));
+const columns = {
+    "Rank": {
+        render: ({rank, previousRank}: LeagueTableRow): ReactNode => (
+            <div className="flex items-center gap-1">
+                {rank}
+                <MovementIcon currentRank={rank} previousRank={previousRank}/>
+            </div>
+        ),
+        sort: (a: LeagueTableRow, b: LeagueTableRow): number => a.rank - b.rank
+    },
+    "Team & Manager": {
+        render: ({manager, team}: LeagueTableRow): ReactNode => (
+            <User
+                avatarProps={{
+                    radius: "lg",
+                    src: `./${manager.id}.jpg`,
+                }}
+                description={
+                    <>
+                        {manager.name}{" "}
+                        <Records records={manager.record} />
+                    </>
+                }
+                name={team}
+            />
+        ),
+        sort: (a: LeagueTableRow, b: LeagueTableRow): number => a.team.localeCompare(b.team)
+    },
+    "W": {
+        render: ({wins}: LeagueTableRow): ReactNode => wins,
+        sort: (a: LeagueTableRow, b: LeagueTableRow): number => a.wins - b.wins
+    },
+    "D": {
+        render: ({draws}: LeagueTableRow): ReactNode => draws,
+        sort: (a: LeagueTableRow, b: LeagueTableRow): number => a.draws - b.draws
+    },
+    "L": {
+        render: ({losses}: LeagueTableRow): ReactNode => losses,
+        sort: (a: LeagueTableRow, b: LeagueTableRow): number => a.losses - b.losses
+    },
+    "+": {
+        render: ({scoreFor}: LeagueTableRow): ReactNode => scoreFor,
+        sort: (a: LeagueTableRow, b: LeagueTableRow): number => a.scoreFor - b.scoreFor
+    },
+    "-": {
+        render: ({scoreAgainst}: LeagueTableRow): ReactNode => scoreAgainst,
+        sort: (a: LeagueTableRow, b: LeagueTableRow): number => a.scoreAgainst - b.scoreAgainst
+    },
+    "+/-": {
+        render: ({scoreFor, scoreAgainst}: LeagueTableRow): ReactNode => <>{scoreFor - scoreAgainst}</>,
+        sort: (a: LeagueTableRow, b: LeagueTableRow): number => (a.scoreFor - a.scoreAgainst) - (b.scoreFor - b.scoreAgainst)
+    },
+    "Pts": {
+        render: ({points}: LeagueTableRow): ReactNode => points,
+        sort: (a: LeagueTableRow, b: LeagueTableRow): number => a.points
+    },
+    "xPts": {
+        render: ({expectedPoints}: LeagueTableRow): ReactNode => expectedPoints.toFixed(3),
+        sort: (a: LeagueTableRow, b: LeagueTableRow): number => a.expectedPoints
+    },
+    "Pts - xPts": {
+        render: ({points, expectedPoints}: LeagueTableRow): ReactNode =>  {
+            const diff = points - expectedPoints;
+            return <span className={diff > 0 ? "text-success-500" : diff < 0 ? "text-danger-500" : undefined}>{diff > 0 ? "+" : ""}{diff.toFixed(3)}</span>
+        },
+        sort: (a: LeagueTableRow, b: LeagueTableRow): number => (a.points - a.expectedPoints) - (b.points - b.expectedPoints)
+    },
+    "xRank": {
+        render: ({expectedRank}: LeagueTableRow): ReactNode => expectedRank,
+        sort: (a: LeagueTableRow, b: LeagueTableRow): number => a.expectedRank - b.expectedRank
+    },
+    "Rank - xRank": {
+        render: ({rank, expectedRank}: LeagueTableRow): ReactNode => {
+            const diff = rank - expectedRank
+            return <span className={diff > 0 ? "text-success-500" : diff < 0 ? "text-danger-500" : undefined}>{diff > 0 ? "+" : ""}{diff}</span>
+        },
+        sort: (a: LeagueTableRow, b: LeagueTableRow): number => (a.rank - a.expectedRank) - (b.rank - b.expectedRank)
+    },
+    "Form": {
+        //TODO tidy up duplication etc, can possibly add some weighting for more recent games?
+        render: ({id, matches}: LeagueTableRow) => {
+            const mostRecent = matches.sort((a, b) => b.event - a.event).slice(0, 4)
+            const isWinner = (m: Match) => id === m.league_entry_1 && m.league_entry_1_points > m.league_entry_2_points || id === m.league_entry_2 && m.league_entry_2_points > m.league_entry_1_points
+            const isDraw = (m: Match) => m.league_entry_1_points === m.league_entry_2_points
+            return <div className="flex gap-[0.1rem]">
+                {mostRecent.map(match => <Result result={isWinner(match) ? "win" : isDraw(match) ? "draw" : "loss"}/>)}
+            </div>
+        },
+        sort: (a: LeagueTableRow, b: LeagueTableRow) => {
+            const isWinner = (id: number, m: Match) => id === m.league_entry_1 && m.league_entry_1_points > m.league_entry_2_points || id === m.league_entry_2 && m.league_entry_2_points > m.league_entry_1_points
+            const isDraw = (m: Match) => m.league_entry_1_points === m.league_entry_2_points
+            const formSum = (id: number, matches: Match[]): number => {
+                return matches.reduce((a, b) => a + (isWinner(id, b) ? 3 : isDraw(b) ? 1 : 0), 0)
+            }
+            const mostRecent = (matches: Match[]) => matches.sort((a, b) => b.event - a.event).slice(0, 4)
+            return formSum(a.id, mostRecent(a.matches)) - formSum(b.id, mostRecent(b.matches))
+        }
+
+    }
+}
+type Column = keyof typeof columns
+const isColumn = (key: Key | undefined): key is Column => typeof key === 'string' && Object.keys(columns).includes(key)
+
 
 export const App = () => {
     const { isLoading, error, data } = useQuery(
         "leagueDetails",
-        getLeagueDetails
+        getTable
     );
     const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
         column: "Rank",
         direction: "ascending",
     });
 
-    const entries = useMemo(() => {
-        if (data === undefined) {
-            return new Map();
-        } else {
-            return LeagueDetails.getEntries(data);
-        }
-    }, [data]);
-
     const renderCell = useCallback(
-        (standing: Standing, columnKey: (typeof columns)[number]) => {
-            switch (columnKey) {
-                case "Rank":
-                    return (
-                        <div className="flex items-center gap-1">
-                            {standing.rank}
-                            <MovementIcon currentRank={standing.rank} lastRank={standing.last_rank}/>
-                        </div>
-                    );
-                case "Team & Manager":
-                    const entry = entries.get(standing.league_entry);
-                    const id = (entry as any).id as number;
-                    const user = userMap[id];
-                    return (
-                        <User
-                            avatarProps={{
-                                radius: "lg",
-                                src: `${import.meta.env.BASE_URL}${user.id}.jpg`,
-                            }}
-                            description={
-                                <>
-                                    {user.name}{" "}
-                                    <Records records={user.record} />
-                                </>
-                            }
-                            name={entry.entry_name}
-                        />
-                    );
-                case "W":
-                    return standing.matches_won;
-                case "D":
-                    return standing.matches_drawn;
-                case "L":
-                    return standing.matches_lost;
-                case "+":
-                    return standing.points_for;
-                case "-":
-                    return standing.points_against;
-                case "+/-":
-                    return standing.points_for - standing.points_against;
-                case "Pts":
-                    return standing.total;
-                case "Fair Pts": {
-                    const entry = entries.get(standing.league_entry);
-                    const id = (entry as any).id as number;
-                    const user = userMap[id];
-                    return user.fairPoints
-                }
-                case "Pts - Fair Pts": {
-                    const entry = entries.get(standing.league_entry);
-                    const id = (entry as any).id as number;
-                    const user = userMap[id];
-                    const diff = standing.total - user.fairPoints
-                    return <span className={diff > 0 ? "text-success-500" : diff < 0 ? "text-danger-500" : undefined}>{diff > 0 ? "+" : ""}{diff.toFixed(3)}</span>
-                }
-                case "Fair Rank": {
-                    const entry = entries.get(standing.league_entry);
-                    const id = (entry as any).id as number;
-                    const user = userMap[id];
-                    return user.fairPointsRank
-                }
-                case "Rank - Fair Rank": {
-                    const entry = entries.get(standing.league_entry);
-                    const id = (entry as any).id as number;
-                    const user = userMap[id];
-                    const diff = standing.rank - user.fairPointsRank
-                    return <span className={diff > 0 ? "text-success-500" : diff < 0 ? "text-danger-500" : undefined}>{diff > 0 ? "+" : ""}{diff}</span>
-                }
+        (row: LeagueTableRow, key: Key) => {
+            if (isColumn(key)) {
+                const { render } = columns[key]
+                return render(row)
+            } else {
+                return null
             }
         },
-        [entries]
+        []
     );
 
     const sortedItems = useMemo(() => {
-        return [...(data?.standings ?? [])].sort((a, b) => {
-            const getComparison = () => {
-                switch (sortDescriptor.column) {
-                    case "Rank":
-                        return a.rank - b.rank;
-                    case "Team & Manager":
-                        return a.league_entry - b.league_entry;
-                    case "W":
-                        return a.matches_won - b.matches_won;
-                    case "D":
-                        return a.matches_drawn - b.matches_drawn;
-                    case "L":
-                        return a.matches_lost - b.matches_lost;
-                    case "+":
-                        return a.points_for - b.points_for;
-                    case "-":
-                        return a.points_against - b.points_against;
-                    case "+/-":
-                        return (
-                            a.points_for -
-                            a.points_against -
-                            (b.points_for - b.points_against)
-                        );
-                    case "Pts":
-                        return a.total - b.total;
-                    case "Fair Pts": {
-                        const aentry = entries.get(a.league_entry);
-                        const aid = (aentry as any).id as number;
-                        const auser = userMap[aid];
-                        const bentry = entries.get(b.league_entry);
-                        const bid = (bentry as any).id as number;
-                        const buser = userMap[bid];
-                        return auser.fairPoints - buser.fairPoints
-                    }
-                    case "Pts - Fair Pts": {
-                        const aentry = entries.get(a.league_entry);
-                        const aid = (aentry as any).id as number;
-                        const auser = userMap[aid];
-                        const bentry = entries.get(b.league_entry);
-                        const bid = (bentry as any).id as number;
-                        const buser = userMap[bid];
-                        return (a.total - auser.fairPoints) - (b.total - buser.fairPoints)
-                    }
-                    case "Fair Rank": {
-                        const aentry = entries.get(a.league_entry);
-                        const aid = (aentry as any).id as number;
-                        const auser = userMap[aid];
-                        const bentry = entries.get(b.league_entry);
-                        const bid = (bentry as any).id as number;
-                        const buser = userMap[bid];
-                        return auser.fairPointsRank - buser.fairPointsRank
-                    }
-                    case "Rank - Fair Rank": {
-                        const aentry = entries.get(a.league_entry);
-                        const aid = (aentry as any).id as number;
-                        const auser = userMap[aid];
-                        const bentry = entries.get(b.league_entry);
-                        const bid = (bentry as any).id as number;
-                        const buser = userMap[bid];
-                        return (a.rank - auser.fairPointsRank) - (b.rank - buser.fairPointsRank)
-                    }
-                    default:
-                        return 0;
-                }
-            };
-            const comparison = getComparison();
-            return sortDescriptor.direction === "descending"
-                ? -comparison
-                : comparison;
+        return [...(data ?? [])].sort((a, b) => {
+            const { direction, column } = sortDescriptor
+            if (isColumn(column)) {
+                const comparison = columns[column].sort(a, b)
+                return direction === "descending" ? -comparison : comparison;
+            } else {
+                return 0
+            }
         });
-    }, [sortDescriptor, data, entries]);
+    }, [sortDescriptor, data]);
 
     if (isLoading) return "Loading...";
     if (error || data === undefined) {
@@ -205,13 +162,13 @@ export const App = () => {
     return (
         <main className="h-screen w-screen flex items-center justify-center">
             <div className="w-4/5">
-                <h1 className="text-3xl font-semibold p-2">{data.league.name}</h1>
+                <h1 className="text-3xl font-semibold p-2">A Real Sport 2023/24</h1>
                 <Table
                     aria-label="Example table with custom cells"
                     sortDescriptor={sortDescriptor}
                     onSortChange={setSortDescriptor}
                 >
-                    <TableHeader columns={columnsWithKeys}>
+                    <TableHeader columns={Object.keys(columns).map(c => ({key: c, label: c}))}>
                         {(column) => (
                             <TableColumn key={column.key} allowsSorting>
                                 {column.label}
@@ -220,10 +177,10 @@ export const App = () => {
                     </TableHeader>
                     <TableBody items={sortedItems}>
                         {(item) => (
-                            <TableRow key={item.league_entry}>
+                            <TableRow key={item.manager.id}>
                                 {(columnKey) => (
                                     <TableCell>
-                                        {renderCell(item, columnKey as any)}
+                                        {renderCell(item, columnKey)}
                                     </TableCell>
                                 )}
                             </TableRow>
