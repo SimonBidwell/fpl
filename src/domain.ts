@@ -1,147 +1,268 @@
-import { z } from "zod";
+import { TableRow } from "@nextui-org/react";
+import { indexBy, rankBy } from "./helpers";
+import { Match as FPLMatch, LeagueDetails, Season, Entry } from "./api/domain";
 
-export const leagueSchema = z.object({
-    id: z.number(),
-    name: z.string(),
-    transaction_mode: z.string(),
-});
-export type League = z.infer<typeof leagueSchema>;
-
-export const entrySchema = z.object({
-    entry_name: z.string(),
-    id: z.number(),
-    player_first_name: z.string(),
-    player_last_name: z.string(),
-    short_name: z.string(),
-    waiver_pick: z.number(),
-});
-export type Entry = z.infer<typeof entrySchema>;
-
-export const matchSchema = z.object({
-    event: z.number(),
-    finished: z.boolean(),
-    league_entry_1: z.number(),
-    league_entry_1_points: z.number(),
-    league_entry_2: z.number(),
-    league_entry_2_points: z.number(),
-    started: z.boolean(),
-});
-export type Match = z.infer<typeof matchSchema>;
-
-export const standingSchema = z.object({
-    last_rank: z.number(),
-    league_entry: z.number(),
-    matches_drawn: z.number(),
-    matches_lost: z.number(),
-    matches_played: z.number(),
-    matches_won: z.number(),
-    points_against: z.number(),
-    points_for: z.number(),
-    rank: z.number(),
-    total: z.number(),
-});
-export type Standing = z.infer<typeof standingSchema>;
-
-export const leagueDetailsSchema = z.object({
-    league: leagueSchema,
-    league_entries: z.array(entrySchema),
-    matches: z.array(matchSchema),
-    standings: z.array(standingSchema),
-});
-export type LeagueDetails = z.infer<typeof leagueDetailsSchema>;
-export const LeagueDetails = {
-    getEntries: (leagueDetails: LeagueDetails): Map<number, Entry> =>
-        leagueDetails.league_entries.reduce((acc, entry) => {
-            acc.set(entry.id, entry);
-            return acc;
-        }, new Map()),
-};
-
-export const getLeagueDetails = async () => {
-    const res = await fetch("./2023-24.json");
-    return leagueDetailsSchema.parse(await res.json());
-};
-
-export interface User {
-    id: number;
-    name: string;
-    //TODO rename to accolade/achievement/something
-    record: SeasonRecord[]
-}
-
-export interface SeasonRecord {
+export interface NotablePlacement {
     season: string;
     position: number;
 }
 
-export const userMap: Record<number, User> = {
-    115199: {
+export interface Manager {
+    id: number;
+    name: string;
+    teams: Record<Season, number>;
+    notablePlacements: NotablePlacement[];
+}
+export const MANAGERS = [
+    {
         id: 1,
         name: "Ed Brett",
-        record: []
+        teams: {
+            "2021/22": 154306,
+            "2022/23": 1,
+            "2023/24": 115199,
+        },
+        notablePlacements: [],
     },
-    115222: {
+    {
         id: 2,
         name: "Alex Harrison",
-        record: [{ season: "2021/22", position: 1 }],
+        teams: {
+            "2021/22": 154519,
+            "2022/23": 3,
+            "2023/24": 115222,
+        },
+        notablePlacements: [{ season: "2021/22", position: 1 }],
     },
-    116308: {
+    {
         id: 3,
         name: "Ollie Craig",
-        record: [],
+        teams: {
+            "2021/22": 154677,
+            "2022/23": 4,
+            "2023/24": 116308,
+        },
+        notablePlacements: [],
     },
-    118328: {
+    {
         id: 4,
         name: "Charlie Schofield",
-        record: [{ season: "2022/23", position: 1 }],
+        teams: {
+            "2021/22": 201935,
+            "2022/23": 6,
+            "2023/24": 118328,
+        },
+        notablePlacements: [{ season: "2022/23", position: 1 }],
     },
-    123888: {
+    {
         id: 5,
         name: "Simon Bidwell",
-        record: [{ season: "2019/20", position: 1 }],
+        teams: {
+            "2021/22": 208300,
+            "2022/23": 12,
+            "2023/24": 123888,
+        },
+        notablePlacements: [{ season: "2019/20", position: 1 }],
     },
-    139985: {
+    {
         id: 6,
         name: "Anjit Aulakh",
-        record: [{ season: "2020/21", position: 1 }],
+        teams: {
+            "2021/22": 154909,
+            "2022/23": 5,
+            "2023/24": 139985,
+        },
+        notablePlacements: [{ season: "2020/21", position: 1 }],
     },
-    140440: {
+    {
         id: 7,
         name: "Aaron Veale",
-        record: [{ season: "2021/22", position: 12 }],
+        teams: {
+            "2021/22": 154352,
+            "2022/23": 2,
+            "2023/24": 140440,
+        },
+        notablePlacements: [{ season: "2021/22", position: 12 }],
     },
-    142413: {
+    {
         id: 8,
         name: "Sebastian Waters",
-        record: [],
+        teams: {
+            "2021/22": 206495,
+            "2022/23": 9,
+            "2023/24": 142413,
+        },
+        notablePlacements: [],
     },
-    142602: {
+    {
         id: 9,
         name: "Alexander Greenhalgh",
-        record: [],
+        teams: {
+            "2021/22": 205525,
+            "2022/23": 7,
+            "2023/24": 142602,
+        },
+        notablePlacements: [],
     },
-    147306: {
+    {
         id: 10,
         name: "Sam Senior",
-        record: [
+        teams: {
+            "2021/22": 207042,
+            "2022/23": 10,
+            "2023/24": 147306,
+        },
+        notablePlacements: [
             { season: "2020/21", position: 12 },
             { season: "2022/23", position: 12 },
         ],
     },
-    150040: {
+    {
         id: 11,
         name: "Ben Malpass",
-        record: [],
+        teams: {
+            "2021/22": 206241,
+            "2022/23": 8,
+            "2023/24": 150040,
+        },
+        notablePlacements: [],
     },
-    169965: {
+    {
         id: 12,
         name: "Luke Trevett",
-        record: [],
+        teams: {
+            "2021/22": 208287,
+            "2022/23": 11,
+            "2023/24": 169965,
+        },
+        notablePlacements: [],
     },
+];
+export const Manager = {
+    //TODO change this to a constant rather than a function in the form Record<Season, Record<number, Manager>>
+    getManagersForSeason: (season: Season): Map<number, Manager> =>
+        MANAGERS.reduce((acc, manager) => {
+            acc.set(manager.teams[season], manager);
+            return acc;
+        }, new Map()),
+    byId: indexBy(MANAGERS, (manager) => manager.id),
+};
+
+export interface Match {
+    season: Season;
+    gameWeek: number;
+    status: "scheduled" | "live" | "finished";
+    teamOne: {
+        id: number;
+        name: string;
+        manager: Manager;
+        points: number;
+    };
+    teamTwo: {
+        id: number;
+        name: string;
+        manager: Manager;
+        points: number;
+    };
+}
+export const Match = {
+    from: (
+        fplMatch: FPLMatch,
+        season: Season,
+        teams: Map<number, Entry>
+    ): Match | undefined => {
+        const {
+            event,
+            finished,
+            started,
+            league_entry_1: oneId,
+            league_entry_1_points: onePoints,
+            league_entry_2: twoId,
+            league_entry_2_points: twoPoints,
+        } = fplMatch;
+        const managers = Manager.getManagersForSeason(season);
+        const managerOne = managers.get(oneId);
+        const managerTwo = managers.get(twoId);
+        const teamNameOne = teams.get(oneId)?.entry_name;
+        const teamNameTwo = teams.get(twoId)?.entry_name;
+        if (managerOne && managerTwo && teamNameOne && teamNameTwo) {
+            return {
+                season,
+                gameWeek: event,
+                status: finished ? "finished" : started ? "live" : "scheduled",
+                teamOne: {
+                    id: oneId,
+                    name: teamNameOne,
+                    manager: managerOne,
+                    points: onePoints,
+                },
+                teamTwo: {
+                    id: twoId,
+                    name: teamNameTwo,
+                    manager: managerTwo,
+                    points: twoPoints,
+                },
+            };
+        } else {
+            return undefined;
+        }
+    },
+    sort: (a: Match, b: Match): number =>
+        Season.sort(a.season, b.season) || a.gameWeek - b.gameWeek,
+    //TODO tidy this up as the ternaries are getting messy
+    getWinner: ({ teamOne, teamTwo, status }: Match) =>
+        status === "finished"
+            ? teamOne.points > teamTwo.points
+                ? teamOne
+                : teamTwo.points > teamOne.points
+                ? teamTwo
+                : undefined
+            : undefined,
+    getLoser: ({ teamOne, teamTwo, status }: Match) =>
+        status === "finished"
+            ? teamOne.points > teamTwo.points
+                ? teamTwo
+                : teamTwo.points > teamOne.points
+                ? teamOne
+                : undefined
+            : undefined,
+    isWinner: (match: Match, teamId: number): boolean =>
+        Match.getWinner(match)?.id === teamId,
+    isLoser: (match: Match, teamId: number): boolean =>
+        Match.getLoser(match)?.id === teamId,
+    isDraw: ({
+        teamOne: { points: teamOnePoints },
+        teamTwo: { points: teamTwoPoints },
+        status,
+    }: Match): boolean =>
+        status === "finished" && teamOnePoints === teamTwoPoints,
+    resultForTeam: (
+        match: Match,
+        teamId: number
+    ): "win" | "draw" | "loss" | undefined =>
+        Match.isDraw(match)
+            ? "draw"
+            : Match.isWinner(match, teamId)
+            ? "win"
+            : Match.isLoser(match, teamId)
+            ? "loss"
+            : undefined,
+    getTeam: ({ teamOne, teamTwo }: Match, teamId: number) =>
+        teamOne.id === teamId
+            ? teamOne
+            : teamTwo.id === teamId
+            ? teamTwo
+            : undefined,
+    getOpposition: ({ teamOne, teamTwo }: Match, teamId: number) =>
+        teamOne.id === teamId
+            ? teamTwo
+            : teamTwo.id === teamId
+            ? teamOne
+            : undefined,
 };
 
 export const calculateExpectedPointsForGameWeek = (
-    matches: Match[],
+    matches: FPLMatch[],
     gameWeek: number,
     allPossibleMatches: [number, number][],
     teamIds: number[]
@@ -153,32 +274,27 @@ export const calculateExpectedPointsForGameWeek = (
             acc.set(match.league_entry_2, match.league_entry_2_points);
             return acc;
         }, new Map());
-    const pointsForWeek = allPossibleMatches.reduce(
-        (acc, [teamA, teamB]) => {
-            const teamATotal = acc.get(teamA) ?? 0;
-            const teamBTotal = acc.get(teamB) ?? 0;
-            const teamAPoints = gameWeekScores.get(teamA) ?? 0;
-            const teamBPoints = gameWeekScores.get(teamB) ?? 0;
-            if (teamAPoints > teamBPoints) {
-                acc.set(teamA, teamATotal + 3);
-            } else if (teamBPoints > teamAPoints) {
-                acc.set(teamB, teamBTotal + 3)
-            } else {
-                acc.set(teamA, teamATotal + 1)
-                acc.set(teamB, teamBTotal + 1)
-            }
-            return acc;
-        },
-        new Map()
-    )
-    return teamIds.reduce(
-        (acc, teamId) => {
-            const expectedPoints = (pointsForWeek.get(teamId) ?? 0) / (teamIds.length - 1)
-            acc.set(teamId, expectedPoints)
-            return acc;
-        },
-        new Map()
-    )
+    const pointsForWeek = allPossibleMatches.reduce((acc, [teamA, teamB]) => {
+        const teamATotal = acc.get(teamA) ?? 0;
+        const teamBTotal = acc.get(teamB) ?? 0;
+        const teamAPoints = gameWeekScores.get(teamA) ?? 0;
+        const teamBPoints = gameWeekScores.get(teamB) ?? 0;
+        if (teamAPoints > teamBPoints) {
+            acc.set(teamA, teamATotal + 3);
+        } else if (teamBPoints > teamAPoints) {
+            acc.set(teamB, teamBTotal + 3);
+        } else {
+            acc.set(teamA, teamATotal + 1);
+            acc.set(teamB, teamBTotal + 1);
+        }
+        return acc;
+    }, new Map());
+    return teamIds.reduce((acc, teamId) => {
+        const expectedPoints =
+            (pointsForWeek.get(teamId) ?? 0) / (teamIds.length - 1);
+        acc.set(teamId, expectedPoints);
+        return acc;
+    }, new Map());
 };
 
 const getAllUniquePairs = (ids: number[]): [number, number][] => {
@@ -186,62 +302,69 @@ const getAllUniquePairs = (ids: number[]): [number, number][] => {
     for (let i = 0; i < ids.length; i++) {
         const team = ids[i];
         for (let j = i + 1; j < ids.length; j++) {
-            const opponent = ids[j]
-            const game = [team, opponent] as [number, number]
-            allPossibleMatches.push(game)
+            const opponent = ids[j];
+            const game = [team, opponent] as [number, number];
+            allPossibleMatches.push(game);
         }
     }
-    return allPossibleMatches
-}
+    return allPossibleMatches;
+};
 
 export const calculateExpectedPoints = (
     teamIds: number[],
-    matches: Match[],
+    matches: FPLMatch[]
 ): Map<number, number> => {
     const allPossibleMatches = getAllUniquePairs(teamIds);
-    const finishedMatches = matches.filter(m => m.finished);
-    const lastCompletedGameWeek = Math.max(...finishedMatches.map(m => m.event))
-    const matchesByGameWeek = finishedMatches.reduce(
-        (acc, match) => {
-            const { event } = match;
-            const matches = acc.get(event) ?? []; 
-            acc.set(event, [...matches, match])
-            return acc
-        }, 
-        new Map()
+    const finishedMatches = matches.filter((m) => m.finished);
+    const lastCompletedGameWeek = Math.max(
+        ...finishedMatches.map((m) => m.event)
     );
-    return [...Array(lastCompletedGameWeek).keys()].map(idx => {
-        const gameWeek = idx + 1;
-        const matches = matchesByGameWeek.get(gameWeek) ?? []
-        return calculateExpectedPointsForGameWeek(
-            matches,
-            gameWeek,
-            allPossibleMatches,
-            teamIds
-        )
-    }).reduce(
-        (acc, gameWeekExpectedPoints) => {
+    const matchesByGameWeek = finishedMatches.reduce((acc, match) => {
+        const { event } = match;
+        const matches = acc.get(event) ?? [];
+        acc.set(event, [...matches, match]);
+        return acc;
+    }, new Map());
+    return [...Array(lastCompletedGameWeek).keys()]
+        .map((idx) => {
+            const gameWeek = idx + 1;
+            const matches = matchesByGameWeek.get(gameWeek) ?? [];
+            return calculateExpectedPointsForGameWeek(
+                matches,
+                gameWeek,
+                allPossibleMatches,
+                teamIds
+            );
+        })
+        .reduce((acc, gameWeekExpectedPoints) => {
             for (const [teamId, points] of gameWeekExpectedPoints) {
-                const currentPoints = acc.get(teamId) ?? 0
-                acc.set(teamId, currentPoints + points)
+                const currentPoints = acc.get(teamId) ?? 0;
+                acc.set(teamId, currentPoints + points);
             }
-            return acc
-        },
-        new Map()
-    )
-}
+            return acc;
+        }, new Map());
+};
 
-const calculateExpectedPointsRank = (expectedPoints: Map<number, number>): Map<number, number> => 
-    new Map([...expectedPoints.entries()]
-        .sort(([,aPoints], [,bPoints]) => bPoints - aPoints)
-        .map(([teamId,], idx) => [teamId, idx + 1]))
+export interface SeasonRecord {
+    entryId: number;
+    managerId: number;
+    teamName: string;
+    wins: number; //TODO should this be an array of matches instead? Same for draws and losses
+    draws: number;
+    losses: number;
+    scoreFor: number;
+    scoreAgainst: number;
+    points: number;
+    expectedPoints: number;
+    matches: Match[];
+}
 
 export interface TableRow {
     id: number;
-    rank: number; //TODO rename to position
-    previousRank: number;
+    position: number;
+    previousPosition: number | undefined;
     team: string;
-    manager: User;
+    manager: Manager;
     wins: number;
     draws: number;
     losses: number;
@@ -249,84 +372,154 @@ export interface TableRow {
     scoreAgainst: number;
     points: number;
     expectedPoints: number;
-    expectedRank: number;
-    matches: Match[] //TODO use my own domain object
+    expectedPosition: number;
+    matches: Match[];
+    waiverPick: number | undefined;
 }
+//TODO change this to take an object instead so the DX is nicer
 export const buildTableRow = (
-    id: number,
-    manager: User,
-    standing: Standing,
-    matches: Match[],
-    entry: Entry,
-    expectedPoints: number,
-    expectedRank: number
+    manager: Manager,
+    position: number,
+    previousPosition: number | undefined,
+    expectedPosition: number,
+    {
+        entryId,
+        wins,
+        draws,
+        losses,
+        scoreFor,
+        scoreAgainst,
+        points,
+        expectedPoints,
+        matches,
+        teamName,
+    }: SeasonRecord
 ): TableRow => ({
-    id: id,
-    rank: standing.rank,
-    previousRank: standing.last_rank,
-    team: entry.entry_name,
-    manager: manager,
-    wins: standing.matches_won,
-    draws: standing.matches_drawn,
-    losses: standing.matches_lost,
-    scoreFor: standing.points_for,
-    scoreAgainst: standing.points_against,
-    points: standing.total,
-    expectedPoints: expectedPoints,
-    expectedRank: expectedRank,
-    matches: matches
+    id: entryId,
+    position,
+    previousPosition,
+    manager,
+    wins,
+    losses,
+    draws,
+    scoreFor,
+    scoreAgainst,
+    points,
+    expectedPoints,
+    expectedPosition,
+    matches,
+    team: teamName,
+    waiverPick: 0,
 });
 
-export const buildTable = ({
-    league_entries,
-    standings,
-    matches
-}: LeagueDetails): TableRow[] => {
-    const teams: Map<number, Entry> = league_entries.reduce((acc, entry) => {
-        acc.set(entry.id, entry);
-        return acc;
-    }, new Map());
-    const teamIds = new Array(...teams.keys());
+export const buildSeasonRecords = (
+    { league_entries, standings, matches }: LeagueDetails,
+    season: Season
+): SeasonRecord[] => {
+    const managers = Manager.getManagersForSeason(season);
+    const standingsByTeamId = indexBy(standings, (s) => s.league_entry);
 
-    const standingsByTeamId: Map<number, Standing> = standings.reduce(
-        (acc, standing) => {
-            acc.set(standing.league_entry, standing);
-            return acc;
-        },
-        new Map()
-    );
-
-    const expectedPointsByTeamId = calculateExpectedPoints(
-        teamIds,
-        matches
-    )
-    const expectedPointsRankByTeamId = calculateExpectedPointsRank(expectedPointsByTeamId)
-
-    const matchesByTeam = matches.filter(m => m.finished).reduce((acc, match) => {
+    const matchesByTeam = matches.reduce((acc, match) => {
         const teamA = match.league_entry_1;
         const teamB = match.league_entry_2;
-        const teamAMatches = acc.get(teamA) ?? []
-        const teamBMatches = acc.get(teamB) ?? []
-        acc.set(teamA, [...teamAMatches, match])
-        acc.set(teamB, [...teamBMatches, match])       
-        return acc
-    }, new Map<number, Match[]>())
-
-    return league_entries.reduce<TableRow[]>((acc, entry) => {
-        const { id } = entry;
-        const manager = userMap[id];
+        const teamAMatches = acc.get(teamA) ?? [];
+        const teamBMatches = acc.get(teamB) ?? [];
+        acc.set(teamA, [...teamAMatches, match]);
+        acc.set(teamB, [...teamBMatches, match]);
+        return acc;
+    }, new Map<number, FPLMatch[]>());
+    const teams = indexBy(league_entries, (le) => le.id);
+    const teamIds = league_entries.map((le) => le.id);
+    const expectedPointsByTeamId = calculateExpectedPoints(teamIds, matches);
+    return league_entries.reduce<SeasonRecord[]>((acc, entry) => {
+        const { id, entry_name } = entry;
+        const manager = managers.get(id);
         const standing = standingsByTeamId.get(id);
-        const expectedPoints = expectedPointsByTeamId.get(id) ?? 0
-        const expectedPointsRank = expectedPointsRankByTeamId.get(id) ?? 0
-        const matches = matchesByTeam.get(id) ?? []
-        if (manager && standing) {
-            acc.push(buildTableRow(id, manager, standing, matches, entry, expectedPoints, expectedPointsRank));
+        const expectedPoints = expectedPointsByTeamId.get(id) ?? 0;
+        const fplMatches = matchesByTeam.get(id) ?? [];
+        const matches = fplMatches
+            .map((m) => Match.from(m, season, teams))
+            .filter((m): m is Match => m !== undefined);
+        if (standing && manager) {
+            acc.push({
+                entryId: id,
+                teamName: entry_name,
+                managerId: manager.id,
+                wins: standing.matches_won,
+                draws: standing.matches_drawn,
+                losses: standing.matches_lost,
+                scoreFor: standing.points_for,
+                scoreAgainst: standing.points_against,
+                points: standing.total,
+                expectedPoints: expectedPoints,
+                matches: matches,
+            });
         }
         return acc;
     }, []);
 };
 
-export const getTable = async () => {
-    const leagueDetails = await getLeagueDetails();
-    return buildTable(leagueDetails);
+export const buildTable = (
+    leagueDetails: [Season, LeagueDetails][]
+): TableRow[] => {
+    const seasonRecordsBySeason: SeasonRecord[][] = leagueDetails.map(
+        ([season, leagueDetails]) => buildSeasonRecords(leagueDetails, season)
+    );
+    const seasonRecordsByManager: Map<number, SeasonRecord[]> =
+        seasonRecordsBySeason.reduce((acc, records) => {
+            records.forEach((record) => {
+                const existingRecords = acc.get(record.managerId) ?? [];
+                acc.set(record.managerId, [...existingRecords, record]);
+            });
+            return acc;
+        }, new Map());
+    const mergedRecords: SeasonRecord[] = [
+        ...seasonRecordsByManager.values(),
+    ].map((records) =>
+        records.reduce((a, b) => ({
+            entryId: a.entryId, //TODO how to handle
+            managerId: a.managerId,
+            teamName: `${a.teamName}, ${b.teamName}`, //TODO can merge here maybe
+            wins: a.wins + b.wins,
+            draws: a.draws + b.draws,
+            losses: a.losses + b.losses,
+            scoreFor: a.scoreFor + b.scoreFor,
+            scoreAgainst: a.scoreAgainst + b.scoreAgainst,
+            points: a.points + b.points,
+            expectedPoints: a.expectedPoints + b.expectedPoints,
+            matches: [...a.matches, ...b.matches],
+        }))
+    );
+    const pointsPositionByManagerId = rankBy(
+        mergedRecords,
+        (a, b) => b.points - a.points || b.scoreFor - a.scoreFor,
+        (row) => row.managerId
+    );
+    const expectedPointsPositionByManagerId = rankBy(
+        mergedRecords,
+        (a, b) => b.expectedPoints - a.expectedPoints,
+        (row) => row.managerId
+    );
+    const tableRows: TableRow[] = mergedRecords
+        .map((sr) => {
+            const { managerId } = sr;
+            const position = pointsPositionByManagerId.get(managerId) ?? 0;
+            const previousPosition = undefined;
+            const expectedRank =
+                expectedPointsPositionByManagerId.get(managerId) ?? 0;
+            const manager = Manager.byId.get(managerId);
+            if (manager) {
+                return buildTableRow(
+                    manager,
+                    position,
+                    previousPosition,
+                    expectedRank,
+                    sr
+                );
+            } else {
+                return undefined;
+            }
+        })
+        .filter((tr): tr is TableRow => tr !== undefined);
+    return tableRows;
 };

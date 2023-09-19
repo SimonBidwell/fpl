@@ -1,8 +1,8 @@
 import { Tooltip } from "@nextui-org/react";
 
 export interface Props {
-    previousRank: number;
-    currentRank: number;
+    previousPosition: number;
+    currentPosition: number;
 }
 
 const toOrdinal = (num: number): string => {
@@ -18,19 +18,20 @@ const toOrdinal = (num: number): string => {
         return `${num}rd`;
     }
     return `${num}th`;
-}
+};
 
-export const MovementIcon = ({ previousRank, currentRank }: Props) => {
-    const movedUp = previousRank > currentRank;
-    const movedDown = previousRank < currentRank;
-    const noMovement = previousRank === currentRank;
+export const MovementIcon = ({ previousPosition, currentPosition }: Props) => {
+    const movedUp = previousPosition > currentPosition;
+    const movedDown = previousPosition < currentPosition;
+    const noMovement = previousPosition === currentPosition;
 
-    const tooltipContent = noMovement ? "No rank change" : `Moved ${movedUp ? "up" : "down"} from ${toOrdinal(previousRank)} to ${toOrdinal(currentRank)}`
+    const tooltipContent = noMovement
+        ? "No position change"
+        : `Moved ${movedUp ? "up" : "down"} from ${toOrdinal(
+              previousPosition
+          )} to ${toOrdinal(currentPosition)}`;
     return (
-        <Tooltip
-            content={tooltipContent}
-            placement="right"
-        >
+        <Tooltip content={tooltipContent} placement="right">
             <div
                 className={`rounded-full flex items-center w-3 h-3 ${
                     noMovement

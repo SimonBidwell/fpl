@@ -11,6 +11,15 @@ export default {
     extend: {},
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [
+    nextui(),
+    //TODO comment more details what this is doing see: https://github.com/tailwindlabs/tailwindcss/issues/8200
+    function ({ addVariant }) {
+      addVariant('supports-scrollbars', '@supports selector(::-webkit-scrollbar)')
+      addVariant('scrollbar', '&::-webkit-scrollbar')
+      addVariant('scrollbar-track', '&::-webkit-scrollbar-track')
+      addVariant('scrollbar-thumb', '&::-webkit-scrollbar-thumb')
+    },
+  ],
 }
 

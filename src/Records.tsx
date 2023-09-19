@@ -1,8 +1,8 @@
-import { SeasonRecord } from "./domain";
+import { NotablePlacement } from "./domain";
 import { Tooltip } from "@nextui-org/react";
 
 export interface Props {
-    records: SeasonRecord[];
+    records: NotablePlacement[];
 }
 export const Records = ({ records }: Props) => (
     <>
@@ -12,7 +12,7 @@ export const Records = ({ records }: Props) => (
     </>
 );
 
-const Record = ({ record }: { record: SeasonRecord }) => {
+const Record = ({ record }: { record: NotablePlacement }) => {
     const { season, position } = record;
     const { tooltip, content } =
         position === 1
