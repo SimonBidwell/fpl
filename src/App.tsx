@@ -462,13 +462,18 @@ export const App = () => {
 
     return (
         <main className="h-screen w-screen flex items-center justify-center">
-            <div className="w-4/5">
+            <div className="w-4/5 h-[90%]">
                 <Table
-                    aria-label="Example table with custom cells"
+                    isHeaderSticky
                     sortDescriptor={sortDescriptor}
                     onSortChange={setSortDescriptor}
                     topContent={topContent}
                     topContentPlacement="outside"
+                    classNames={{
+                        base: "max-h-full",
+                        wrapper:
+                            "overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-default-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-default-300 scrollbar-track:!rounded",
+                    }}
                 >
                     <TableHeader
                         columns={headerColumns.map((c) => ({
