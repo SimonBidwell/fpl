@@ -274,7 +274,7 @@ const columns = {
             if (opposition === undefined) {
                 return (
                     <span className="text-xs text-foreground-400">
-                        No upcoming fixture
+                        No upcoming fixtures
                     </span>
                 );
             } else {
@@ -385,57 +385,63 @@ export const App = () => {
                         : [...seasonSelection].join(", ")}
                     )
                 </h1>
-                {/* Dropdown is disabled for now as theres various bugs with the id and counting for wins etc */}
-                {/* <Dropdown>
-                    <DropdownTrigger className="hidden sm:flex">
-                        <Button
-                            endContent={
-                                <ChevronDownIcon className="text-small" />
-                            }
-                            variant="flat"
+                <div className="flex gap-3">
+                    <Dropdown>
+                        <DropdownTrigger className="hidden sm:flex">
+                            <Button
+                                endContent={
+                                    <ChevronDownIcon className="text-small" />
+                                }
+                                variant="flat"
+                            >
+                                Columns
+                            </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu
+                            disallowEmptySelection
+                            aria-label="Columns"
+                            closeOnSelect={false}
+                            selectedKeys={visibleColumns}
+                            selectionMode="multiple"
+                            onSelectionChange={setVisibleColumns}
                         >
-                            Season
-                        </Button>
-                    </DropdownTrigger>
-                    <DropdownMenu
-                        disallowEmptySelection
-                        aria-label="Seasons"
-                        closeOnSelect={false}
-                        selectedKeys={seasonSelection}
-                        selectionMode="multiple"
-                        onSelectionChange={setSeasonSelection}
-                    >
-                        {SEASONS.map((status) => (
-                            <DropdownItem key={status} className="capitalize">
-                                {status}
-                            </DropdownItem>
-                        ))}
-                    </DropdownMenu>
-                </Dropdown> */}
-                <Dropdown>
-                    <DropdownTrigger className="hidden sm:flex">
-                        <Button
-                            endContent={
-                                <ChevronDownIcon className="text-small" />
-                            }
-                            variant="flat"
+                            {Object.keys(columns).map((column) => (
+                                <DropdownItem key={column}>
+                                    {column}
+                                </DropdownItem>
+                            ))}
+                        </DropdownMenu>
+                    </Dropdown>
+                    <Dropdown>
+                        <DropdownTrigger className="hidden sm:flex">
+                            <Button
+                                endContent={
+                                    <ChevronDownIcon className="text-small" />
+                                }
+                                variant="flat"
+                            >
+                                Season
+                            </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu
+                            disallowEmptySelection
+                            aria-label="Seasons"
+                            closeOnSelect={true}
+                            selectedKeys={seasonSelection}
+                            selectionMode="single"
+                            onSelectionChange={setSeasonSelection}
                         >
-                            Columns
-                        </Button>
-                    </DropdownTrigger>
-                    <DropdownMenu
-                        disallowEmptySelection
-                        aria-label="Columns"
-                        closeOnSelect={false}
-                        selectedKeys={visibleColumns}
-                        selectionMode="multiple"
-                        onSelectionChange={setVisibleColumns}
-                    >
-                        {Object.keys(columns).map((column) => (
-                            <DropdownItem key={column}>{column}</DropdownItem>
-                        ))}
-                    </DropdownMenu>
-                </Dropdown>
+                            {SEASONS.map((status) => (
+                                <DropdownItem
+                                    key={status}
+                                    className="capitalize"
+                                >
+                                    {status}
+                                </DropdownItem>
+                            ))}
+                        </DropdownMenu>
+                    </Dropdown>
+                </div>
             </div>
         );
     }, [seasonSelection, visibleColumns]);
