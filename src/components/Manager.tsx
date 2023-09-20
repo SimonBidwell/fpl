@@ -1,6 +1,6 @@
 import { User } from "@nextui-org/react";
-import { Records } from "./Records";
-import { Manager as ManagerType } from "./domain";
+import { Records } from "../Records";
+import { Manager as ManagerType } from "../domain";
 import { ReactNode } from "react";
 
 export type Props = ManagerProps | DescriptionProps;

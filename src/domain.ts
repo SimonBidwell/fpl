@@ -1,5 +1,5 @@
 import { TableRow } from "@nextui-org/react";
-import { indexBy, rankBy } from "./helpers";
+import { groupBy, indexBy, rankBy } from "./helpers";
 import { Match as FPLMatch, LeagueDetails, Season, Entry } from "./api/domain";
 
 export interface NotablePlacement {
@@ -18,6 +18,7 @@ export const MANAGERS = [
         id: 1,
         name: "Ed Brett",
         teams: {
+            "2020/21": 1,
             "2021/22": 154306,
             "2022/23": 1,
             "2023/24": 115199,
@@ -28,6 +29,7 @@ export const MANAGERS = [
         id: 2,
         name: "Alex Harrison",
         teams: {
+            "2020/21": 3,
             "2021/22": 154519,
             "2022/23": 3,
             "2023/24": 115222,
@@ -38,6 +40,7 @@ export const MANAGERS = [
         id: 3,
         name: "Ollie Craig",
         teams: {
+            "2020/21": 4,
             "2021/22": 154677,
             "2022/23": 4,
             "2023/24": 116308,
@@ -48,6 +51,7 @@ export const MANAGERS = [
         id: 4,
         name: "Charlie Schofield",
         teams: {
+            "2020/21": 6,
             "2021/22": 201935,
             "2022/23": 6,
             "2023/24": 118328,
@@ -58,6 +62,7 @@ export const MANAGERS = [
         id: 5,
         name: "Simon Bidwell",
         teams: {
+            "2020/21": 12,
             "2021/22": 208300,
             "2022/23": 12,
             "2023/24": 123888,
@@ -68,6 +73,7 @@ export const MANAGERS = [
         id: 6,
         name: "Anjit Aulakh",
         teams: {
+            "2020/21": 5,
             "2021/22": 154909,
             "2022/23": 5,
             "2023/24": 139985,
@@ -78,6 +84,7 @@ export const MANAGERS = [
         id: 7,
         name: "Aaron Veale",
         teams: {
+            "2020/21": 2,
             "2021/22": 154352,
             "2022/23": 2,
             "2023/24": 140440,
@@ -88,6 +95,7 @@ export const MANAGERS = [
         id: 8,
         name: "Sebastian Waters",
         teams: {
+            "2020/21": 9,
             "2021/22": 206495,
             "2022/23": 9,
             "2023/24": 142413,
@@ -98,6 +106,7 @@ export const MANAGERS = [
         id: 9,
         name: "Alexander Greenhalgh",
         teams: {
+            "2020/21": 7,
             "2021/22": 205525,
             "2022/23": 7,
             "2023/24": 142602,
@@ -108,6 +117,7 @@ export const MANAGERS = [
         id: 10,
         name: "Sam Senior",
         teams: {
+            "2020/21": 10,
             "2021/22": 207042,
             "2022/23": 10,
             "2023/24": 147306,
@@ -121,6 +131,7 @@ export const MANAGERS = [
         id: 11,
         name: "Ben Malpass",
         teams: {
+            "2020/21": 8,
             "2021/22": 206241,
             "2022/23": 8,
             "2023/24": 150040,
@@ -131,6 +142,7 @@ export const MANAGERS = [
         id: 12,
         name: "Luke Trevett",
         teams: {
+            "2020/21": 11,
             "2021/22": 208287,
             "2022/23": 11,
             "2023/24": 169965,
@@ -371,8 +383,8 @@ export interface TableRow {
     scoreFor: number;
     scoreAgainst: number;
     points: number;
-    expectedPoints: number;
-    expectedPosition: number;
+    fairPoints: number;
+    fairPosition: number;
     matches: Match[];
     waiverPick: number | undefined;
 }
@@ -405,8 +417,8 @@ export const buildTableRow = (
     scoreFor,
     scoreAgainst,
     points,
-    expectedPoints,
-    expectedPosition,
+    fairPoints: expectedPoints,
+    fairPosition: expectedPosition,
     matches,
     team: teamName,
     waiverPick: 0,
@@ -522,4 +534,40 @@ export const buildTable = (
         })
         .filter((tr): tr is TableRow => tr !== undefined);
     return tableRows;
+};
+
+export const SEASON_NOTES: Partial<
+    Record<
+        Season,
+        {
+            general: string;
+            gameweeks: Record<number, { description: string; url?: string }>;
+        }
+    >
+> = {
+    "2020/21": {
+        general:
+            "The data for the 2020/21 season was manually reconstructed. It could contain mistakes/inaccuracies.",
+        gameweeks: {
+            11: {
+                description:
+                    "No results could be found. The scores are best guesses based on the known fixtures and standings before gameweek 11 and after gameweek 12.",
+            },
+            12: {
+                description:
+                    "No results could be found. The scores are best guesses based on the known fixtures and standings before gameweek 11 and after gameweek 12.",
+            },
+        },
+    },
+    "2022/23": {
+        general:
+            "The data for the 2022/23 season was manually reconstructed. It could contain mistakes/inaccuracies.",
+        gameweeks: {
+            7: {
+                description:
+                    "The Premier League postponed games as a mark of respect to Queen Elizabeth II so all teams scored 0 points",
+                url: "https://twitter.com/OfficialFPL/status/1568210457286086661",
+            },
+        },
+    },
 };

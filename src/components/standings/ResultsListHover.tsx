@@ -8,8 +8,8 @@ import {
     Divider,
     Tooltip,
 } from "@nextui-org/react";
-import { Match } from "./domain";
-import { Manager } from "./Manager";
+import { Match } from "../../domain";
+import { Manager } from "../Manager";
 
 export interface Props {
     teamId: number;
