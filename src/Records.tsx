@@ -7,7 +7,7 @@ export interface Props {
 export const Records = ({ records }: Props) => (
     <>
         {records.map((record) => (
-            <Record record={record} />
+            <Record key={record.season} record={record} />
         ))}
     </>
 );

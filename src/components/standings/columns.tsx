@@ -1,28 +1,27 @@
-import { ReactNode, Key } from "react";
+import { ReactNode } from "react";
 import {
     TableRow as LeagueTableRow,
     Match,
-    Manager as ManagerType,
 } from "../../domain";
 import { MovementIcon } from "./MovementIcon";
 import { Manager } from "../Manager";
 import { ResultsListHover } from "./ResultsListHover";
 import { Result } from "./Result";
-import { Card, Tooltip } from "@nextui-org/react";
+import { Tooltip } from "@nextui-org/react";
 
-const TOOLTIP_DELAY_MS = 600;
-export const COLUMNS = [
+export interface Column {
+    key: string;
+    abbr?: string;
+    description?: string;
+    render: (row: LeagueTableRow) => ReactNode;
+    sort?: (a: LeagueTableRow, b: LeagueTableRow) => number;
+    isVisibleByDefault?: boolean;
+}
+
+export const COLUMNS: readonly Column[] = [
     {
         key: "Position",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={<span className="text-tiny">Position</span>}
-            >
-                <span>Pos</span>
-            </Tooltip>
-        ),
+        abbr: "Pos",
         render: ({ position, previousPosition }: LeagueTableRow): ReactNode => (
             <div className="flex items-center gap-1">
                 {position}
@@ -36,47 +35,27 @@ export const COLUMNS = [
         ),
         sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
             a.position - b.position,
-        selectedByDefault: true,
+        isVisibleByDefault: true,
     },
     {
         key: "Team & Manager",
-        renderLabel: () => "Team & Manager",
         render: ({ manager, team }: LeagueTableRow): ReactNode => (
             <Manager manager={manager} teamName={team} />
         ),
-        sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
-            a.team.localeCompare(b.team),
-        selectedByDefault: true,
+        isVisibleByDefault: true,
     },
     {
         key: "Played",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={<span className="text-tiny">Played</span>}
-            >
-                <span>P</span>
-            </Tooltip>
-        ),
+        abbr: "P",
         render: ({ matches }: LeagueTableRow) =>
             matches.filter((m) => m.status === "finished").length,
         sort: (a: LeagueTableRow, b: LeagueTableRow) =>
             a.matches.filter((m) => m.status === "finished").length -
             b.matches.filter((m) => m.status === "finished").length,
-        selectedByDefault: false,
     },
     {
         key: "Won",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={<span className="text-tiny">Won</span>}
-            >
-                <span>W</span>
-            </Tooltip>
-        ),
+        abbr: "W",
         render: ({ id, matches, manager, team }: LeagueTableRow): ReactNode => {
             const matchesWon = matches.filter((m) => Match.isWinner(m, id));
             return (
@@ -90,19 +69,11 @@ export const COLUMNS = [
             );
         },
         sort: (a: LeagueTableRow, b: LeagueTableRow): number => a.wins - b.wins,
-        selectedByDefault: true,
+        isVisibleByDefault: true,
     },
     {
         key: "Drawn",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={<span className="text-tiny">Drawn</span>}
-            >
-                <span>D</span>
-            </Tooltip>
-        ),
+        abbr: "D",
         render: ({ id, matches, manager, team }: LeagueTableRow): ReactNode => {
             const matchesDrawn = matches.filter(Match.isDraw);
             return (
@@ -117,19 +88,11 @@ export const COLUMNS = [
         },
         sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
             a.draws - b.draws,
-        selectedByDefault: true,
+        isVisibleByDefault: true,
     },
     {
         key: "Lost",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={<span className="text-tiny">Lost</span>}
-            >
-                <span>L</span>
-            </Tooltip>
-        ),
+        abbr: "L",
         render: ({ id, matches, manager, team }: LeagueTableRow): ReactNode => {
             const matchesLost = matches.filter((m) => Match.isLoser(m, id));
             return (
@@ -144,130 +107,60 @@ export const COLUMNS = [
         },
         sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
             a.losses - b.losses,
-        selectedByDefault: true,
+        isVisibleByDefault: true,
     },
     {
         key: "Points Scored",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={<span className="text-tiny">Points Scored</span>}
-            >
-                <span>+</span>
-            </Tooltip>
-        ),
+        abbr: "+",
         render: ({ id, matches }: LeagueTableRow): ReactNode =>
             matches
                 .map((x) => Match.getTeam(x, id))
                 .reduce((a, b) => a + (b?.points ?? 0), 0),
         sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
             a.scoreFor - b.scoreFor,
-        selectedByDefault: true,
+        isVisibleByDefault: true,
     },
     {
         key: "Points Against",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={<span className="text-tiny">Points Against</span>}
-            >
-                <span>-</span>
-            </Tooltip>
-        ),
+        abbr: "-",
         render: ({ scoreAgainst }: LeagueTableRow): ReactNode => scoreAgainst,
         sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
             a.scoreAgainst - b.scoreAgainst,
-        selectedByDefault: true,
+        isVisibleByDefault: true,
     },
     {
         key: "Points Score Difference",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={
-                    <span className="text-tiny">Points Score Difference</span>
-                }
-            >
-                <span>+/-</span>
-            </Tooltip>
-        ),
+        abbr: "+/-",
         render: ({ scoreFor, scoreAgainst }: LeagueTableRow): ReactNode => (
             <>{scoreFor - scoreAgainst}</>
         ),
         sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
             a.scoreFor - a.scoreAgainst - (b.scoreFor - b.scoreAgainst),
-        selectedByDefault: true,
+        isVisibleByDefault: true,
     },
     {
         key: "Points",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={<span className="text-tiny">Points</span>}
-            >
-                <span>Pts</span>
-            </Tooltip>
-        ),
+        abbr: "Pts",
         render: ({ points }: LeagueTableRow): ReactNode => points,
         sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
             a.points - b.points,
-        selectedByDefault: true,
+        isVisibleByDefault: true,
     },
     {
         key: "Fair Points",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={
-                    <div className="w-52 py-2 text-tiny">
-                        <Card
-                            className="bg-default-100 p-2 text-tiny text-foreground-500 font-semibold"
-                            radius="sm"
-                            shadow="sm"
-                        >
-                            Fair Points (fPts)
-                        </Card>
-                        <p className="py-2">
-                            The Fair Points for a gameweek are calculated by
-                            taking the average points a manager would have
-                            scored if they played every other manager for that
-                            week.
-                        </p>
-                        <p>
-                            Fair Points can then be used to see how (un)lucky a
-                            manager has been due to their assigned matchups.
-                        </p>
-                    </div>
-                }
-            >
-                <span className="underline underline-offset-2 decoration-dotted decoration-foreground-400">
-                    fPts
-                </span>
-            </Tooltip>
-        ),
+        abbr: "fPts",
+        description: `The Fair Points for a gameweek are calculated by taking the average points a manager would have scored if they played every other manager for that week. 
+        Fair Points can then be used to see how (un)lucky a manager has been due to their assigned matchups.`,
         render: ({ fairPoints: expectedPoints }: LeagueTableRow): ReactNode =>
             expectedPoints.toFixed(3),
         sort: (a: LeagueTableRow, b: LeagueTableRow): number => a.fairPoints,
-        selectedByDefault: true,
+        isVisibleByDefault: true,
     },
     {
         key: "Points - Fair Points",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={
-                    <span className="text-tiny">Points - Fair Points</span>
-                }
-            >
-                <span>Pts - fPts</span>
-            </Tooltip>
-        ),
+        abbr: "Pts - fPts",
+        description: `Shows how much a manager is over or underperforming their fair points. 
+        A manager with a positive value is overperforming i.e their actual points are higher than their weekly points would imply. A negative value is the opposite.`,
         render: ({
             points,
             fairPoints: expectedPoints,
@@ -290,39 +183,24 @@ export const COLUMNS = [
         },
         sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
             a.points - a.fairPoints - (b.points - b.fairPoints),
-        selectedByDefault: true,
+        isVisibleByDefault: true,
     },
     {
         key: "Fair Position",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={<span className="text-tiny">Fair Position</span>}
-            >
-                <span>fPos</span>
-            </Tooltip>
-        ),
+        abbr: "fPos",
+        description: `Where the manager would be ranked if the table was ordered by fair points rather than actual points.`,
         render: ({
             fairPosition: expectedPosition,
         }: LeagueTableRow): ReactNode => expectedPosition,
         sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
             a.fairPosition - b.fairPosition,
-        selectedByDefault: true,
+        isVisibleByDefault: true,
     },
     {
         key: "Position - Fair Position",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={
-                    <span className="text-tiny">Position - Fair Position</span>
-                }
-            >
-                <span>Pos - fPos</span>
-            </Tooltip>
-        ),
+        abbr: "Pos - fPos",
+        description: `Shows how much a manager is over or underperforming their fair position. 
+        A manager with a positive value is overperforming i.e their actual position is higher than their fair points would imply. A negative value is the opposite.`,
         render: ({
             position,
             fairPosition: expectedPosition,
@@ -345,11 +223,10 @@ export const COLUMNS = [
         },
         sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
             a.position - a.fairPosition - (b.position - b.fairPosition),
-        selectedByDefault: true,
+        isVisibleByDefault: true,
     },
     {
         key: "Form",
-        renderLabel: () => "Form",
         //TODO tidy up duplication etc, can possibly add some weighting for more recent games?
         //TODO disable for all time table/when there are more than 2 leagues selected
         render: ({ id, matches }: LeagueTableRow) => {
@@ -365,6 +242,7 @@ export const COLUMNS = [
                         if (thisTeam && opposition) {
                             return (
                                 <Tooltip
+                                    key={i}
                                     content={
                                         <div className="flex flex-col p-1">
                                             <div className="text-tiny uppercase font-medium text-foreground-400 pb-1">
@@ -421,11 +299,10 @@ export const COLUMNS = [
                 formSum(b.id, mostRecent(b.matches))
             );
         },
-        selectedByDefault: true,
+        isVisibleByDefault: true,
     },
     {
         key: "Up next",
-        renderLabel: () => "Up next",
         render: ({ id, matches }: LeagueTableRow) => {
             const nextMatch = matches
                 .filter((m) => m.status !== "finished")
@@ -448,80 +325,41 @@ export const COLUMNS = [
                 );
             }
         },
-        selectedByDefault: true,
-        sort: undefined,
+        isVisibleByDefault: true,
     },
     {
         key: "Average Points Score For",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={<span className="text-tiny">Average Score For</span>}
-            >
-                <span>Avg +</span>
-            </Tooltip>
-        ),
+        abbr: "Avg. +",
         render: (row: LeagueTableRow) =>
             row.scoreFor /
             row.matches.filter((m) => m.status === "finished").length,
         sort: () => 0,
-        selectedByDefault: false,
     },
     {
         key: "Average Score Against",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={
-                    <span className="text-tiny">Average Score Against</span>
-                }
-            >
-                <span>Avg -</span>
-            </Tooltip>
-        ),
+        abbr: "Avg. -",
         render: (row: LeagueTableRow) =>
             row.scoreAgainst /
             row.matches.filter((m) => m.status === "finished").length,
         sort: () => 0,
-        selectedByDefault: false,
     },
     {
         key: "Average Points",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={<span className="text-tiny">Average Points</span>}
-            >
-                <span>Avg Pts</span>
-            </Tooltip>
-        ),
+        abbr: "Avg. Pts",
         render: (row: LeagueTableRow) =>
             row.points /
             row.matches.filter((m) => m.status === "finished").length,
         sort: () => 0,
-        selectedByDefault: false,
     },
     {
         key: "Average Fair Points",
-        renderLabel: () => (
-            <Tooltip
-                delay={TOOLTIP_DELAY_MS}
-                placement="bottom"
-                content={<span className="text-tiny">Average Fair Points</span>}
-            >
-                <span>Avg fPts</span>
-            </Tooltip>
-        ),
+        abbr: "Avg. fPts",
         render: (row: LeagueTableRow) =>
             (
                 row.fairPoints /
                 row.matches.filter((m) => m.status === "finished").length
             ).toFixed(3),
         sort: () => 0,
-        selectedByDefault: false,
     },
     //TODO reinstate when I make things selectable
     // "Waiver": {
@@ -530,10 +368,9 @@ export const COLUMNS = [
     //     render: ({waiverPick}: LeagueTableRow) => waiverPick,
     //     sort: (a: LeagueTableRow, b: LeagueTableRow) => (a.waiverPick ?? 0) - (b.waiverPick ?? 0)
     // }
-] as const;
+];
 
-export type ColumnKey = (typeof COLUMNS)[number]["key"];
-export const COLUMN_KEYS: ColumnKey[] = COLUMNS.map((col) => col.key);
-export const INITIAL_COLUMNS: ColumnKey[] = COLUMNS.filter(
-    (col) => col.selectedByDefault
+export const COLUMN_KEYS: readonly string[] = COLUMNS.map((col) => col.key);
+export const INITIAL_COLUMNS: readonly string[] = COLUMNS.filter(
+    (col) => col.isVisibleByDefault
 ).map((col) => col.key);

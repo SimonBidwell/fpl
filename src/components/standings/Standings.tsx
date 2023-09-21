@@ -13,6 +13,8 @@ import { Header } from "./Header";
 import { COLUMNS, INITIAL_COLUMNS } from "./columns";
 import { TableRow as LeagueTableRow, buildTable } from "../../domain";
 import { Season, LeagueDetails } from "../../api/domain";
+import { ColumnHeader } from "./ColumnHeader";
+import { getSeasons } from "./helpers";
 
 export interface Props {
     data: [Season, LeagueDetails][];
@@ -65,6 +67,7 @@ export const Standings = ({ data }: Props) => {
 
     return (
         <Table
+            aria-label={`League Standings for ${getSeasons(seasonSelection).join(", ")}`}
             isHeaderSticky
             sortDescriptor={sortDescriptor}
             onSortChange={setSortDescriptor}
@@ -84,9 +87,15 @@ export const Standings = ({ data }: Props) => {
             }}
         >
             <TableHeader columns={columns}>
-                {({ key, renderLabel, sort }) => (
+                {({ key, abbr, sort, description }) => (
                     <TableColumn key={key} allowsSorting={sort !== undefined}>
-                        {renderLabel()}
+                        <ColumnHeader
+                            key={key}
+                            name={key}
+                            abbr={abbr}
+                            description={description}
+                            setSortDescriptor={sort!== undefined ? setSortDescriptor : undefined}
+                        />
                     </TableColumn>
                 )}
             </TableHeader>
