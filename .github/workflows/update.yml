@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
       - name: Create json file
         run: curl https://draft.premierleague.com/api/league/32589/details -o public/2023-24.json
       - name: Commit updated json file
