@@ -1,6 +1,16 @@
-import { TableRow } from "@nextui-org/react";
-import { groupBy, indexBy, rankBy } from "./helpers";
-import { Match as FPLMatch, LeagueDetails, Season, Entry } from "./api/domain";
+import { indexBy } from "./helpers";
+import {
+    LeagueDetails as FplLeagueDetails,
+    Match as FplMatch,
+} from "./api/domain";
+import { getLeagueDetails } from "./api/requests";
+
+export const SEASONS = ["2020/21", "2021/22", "2022/23", "2023/24"] as const;
+export type Season = (typeof SEASONS)[number];
+export const Season = {
+    isSeason: (s: unknown): s is Season => SEASONS.includes(s as Season),
+    sort: (a: Season, b: Season) => a.localeCompare(b),
+};
 
 export interface NotablePlacement {
     season: string;
@@ -150,13 +160,18 @@ export const MANAGERS = [
         notablePlacements: [],
     },
 ];
+
 export const Manager = {
-    //TODO change this to a constant rather than a function in the form Record<Season, Record<number, Manager>>
-    getManagersForSeason: (season: Season): Map<number, Manager> =>
-        MANAGERS.reduce((acc, manager) => {
-            acc.set(manager.teams[season], manager);
-            return acc;
-        }, new Map()),
+    bySeason: SEASONS.reduce<Partial<Record<Season, Record<number, Manager>>>>(
+        (acc, season) => ({
+            ...acc,
+            [season]: MANAGERS.reduce(
+                (acc, manager) => ({ ...acc, [manager.teams[season]]: manager }),
+                {}
+            ),
+        }),
+        {}
+    ),
     byId: indexBy(MANAGERS, (manager) => manager.id),
 };
 
@@ -178,11 +193,15 @@ export interface Match {
     };
 }
 export const Match = {
-    from: (
-        fplMatch: FPLMatch,
-        season: Season,
-        teams: Map<number, Entry>
-    ): Match | undefined => {
+    from: ({
+        fplMatch,
+        season,
+        teams,
+    }: {
+        fplMatch: FplMatch;
+        season: Season;
+        teams: Map<number, Entry>;
+    }): Match | undefined => {
         const {
             event,
             finished,
@@ -192,11 +211,11 @@ export const Match = {
             league_entry_2: twoId,
             league_entry_2_points: twoPoints,
         } = fplMatch;
-        const managers = Manager.getManagersForSeason(season);
-        const managerOne = managers.get(oneId);
-        const managerTwo = managers.get(twoId);
-        const teamNameOne = teams.get(oneId)?.entry_name;
-        const teamNameTwo = teams.get(twoId)?.entry_name;
+        const managers = Manager.bySeason[season];
+        const managerOne = managers?.[oneId];
+        const managerTwo = managers?.[twoId];
+        const teamNameOne = teams.get(oneId)?.name;
+        const teamNameTwo = teams.get(twoId)?.name;
         if (managerOne && managerTwo && teamNameOne && teamNameTwo) {
             return {
                 season,
@@ -221,33 +240,37 @@ export const Match = {
     },
     sort: (a: Match, b: Match): number =>
         Season.sort(a.season, b.season) || a.gameWeek - b.gameWeek,
-    //TODO tidy this up as the ternaries are getting messy
-    getWinner: ({ teamOne, teamTwo, status }: Match) =>
-        status === "finished"
-            ? teamOne.points > teamTwo.points
-                ? teamOne
-                : teamTwo.points > teamOne.points
-                ? teamTwo
-                : undefined
-            : undefined,
-    getLoser: ({ teamOne, teamTwo, status }: Match) =>
-        status === "finished"
-            ? teamOne.points > teamTwo.points
-                ? teamTwo
-                : teamTwo.points > teamOne.points
-                ? teamOne
-                : undefined
-            : undefined,
+    getResult: (match: Match) => {
+        if (Match.isFinished(match)) {
+            const { teamOne, teamTwo } = match;
+            if (teamOne.points === teamTwo.points) {
+                return "draw";
+            } else if (teamOne.points > teamTwo.points) {
+                return { winner: teamOne, loser: teamTwo };
+            } else {
+                return { winner: teamTwo, loser: teamOne };
+            }
+        } else {
+            return undefined;
+        }
+    },
+    getWinner: (match: Match) => {
+        const result = Match.getResult(match);
+        return result === undefined || result === "draw"
+            ? undefined
+            : result.winner;
+    },
+    getLoser: (match: Match) => {
+        const result = Match.getResult(match);
+        return result === undefined || result === "draw"
+            ? undefined
+            : result.loser;
+    },
     isWinner: (match: Match, teamId: number): boolean =>
         Match.getWinner(match)?.id === teamId,
     isLoser: (match: Match, teamId: number): boolean =>
         Match.getLoser(match)?.id === teamId,
-    isDraw: ({
-        teamOne: { points: teamOnePoints },
-        teamTwo: { points: teamTwoPoints },
-        status,
-    }: Match): boolean =>
-        status === "finished" && teamOnePoints === teamTwoPoints,
+    isDraw: (match: Match): boolean => Match.getResult(match) === "draw",
     resultForTeam: (
         match: Match,
         teamId: number
@@ -259,281 +282,17 @@ export const Match = {
             : Match.isLoser(match, teamId)
             ? "loss"
             : undefined,
-    getTeam: ({ teamOne, teamTwo }: Match, teamId: number) =>
+    getTeam: (match: Match, teamId: number) =>
+        Match.getAlignment(match, teamId)?.team,
+    getOpposition: (match: Match, teamId: number) =>
+        Match.getAlignment(match, teamId)?.opposition,
+    getAlignment: ({ teamOne, teamTwo }: Match, teamId: number) =>
         teamOne.id === teamId
-            ? teamOne
+            ? { team: teamOne, opposition: teamTwo }
             : teamTwo.id === teamId
-            ? teamTwo
+            ? { team: teamTwo, opposition: teamOne }
             : undefined,
-    getOpposition: ({ teamOne, teamTwo }: Match, teamId: number) =>
-        teamOne.id === teamId
-            ? teamTwo
-            : teamTwo.id === teamId
-            ? teamOne
-            : undefined,
-};
-
-export const calculateExpectedPointsForGameWeek = (
-    matches: FPLMatch[],
-    gameWeek: number,
-    allPossibleMatches: [number, number][],
-    teamIds: number[]
-): Map<number, number> => {
-    const gameWeekScores = matches
-        .filter((match) => match.event === gameWeek)
-        .reduce((acc, match) => {
-            acc.set(match.league_entry_1, match.league_entry_1_points);
-            acc.set(match.league_entry_2, match.league_entry_2_points);
-            return acc;
-        }, new Map());
-    const pointsForWeek = allPossibleMatches.reduce((acc, [teamA, teamB]) => {
-        const teamATotal = acc.get(teamA) ?? 0;
-        const teamBTotal = acc.get(teamB) ?? 0;
-        const teamAPoints = gameWeekScores.get(teamA) ?? 0;
-        const teamBPoints = gameWeekScores.get(teamB) ?? 0;
-        if (teamAPoints > teamBPoints) {
-            acc.set(teamA, teamATotal + 3);
-        } else if (teamBPoints > teamAPoints) {
-            acc.set(teamB, teamBTotal + 3);
-        } else {
-            acc.set(teamA, teamATotal + 1);
-            acc.set(teamB, teamBTotal + 1);
-        }
-        return acc;
-    }, new Map());
-    return teamIds.reduce((acc, teamId) => {
-        const expectedPoints =
-            (pointsForWeek.get(teamId) ?? 0) / (teamIds.length - 1);
-        acc.set(teamId, expectedPoints);
-        return acc;
-    }, new Map());
-};
-
-const getAllUniquePairs = (ids: number[]): [number, number][] => {
-    const allPossibleMatches: [number, number][] = [];
-    for (let i = 0; i < ids.length; i++) {
-        const team = ids[i];
-        for (let j = i + 1; j < ids.length; j++) {
-            const opponent = ids[j];
-            const game = [team, opponent] as [number, number];
-            allPossibleMatches.push(game);
-        }
-    }
-    return allPossibleMatches;
-};
-
-export const calculateExpectedPoints = (
-    teamIds: number[],
-    matches: FPLMatch[]
-): Map<number, number> => {
-    const allPossibleMatches = getAllUniquePairs(teamIds);
-    const finishedMatches = matches.filter((m) => m.finished);
-    const lastCompletedGameWeek = Math.max(
-        ...finishedMatches.map((m) => m.event)
-    );
-    const matchesByGameWeek = finishedMatches.reduce((acc, match) => {
-        const { event } = match;
-        const matches = acc.get(event) ?? [];
-        acc.set(event, [...matches, match]);
-        return acc;
-    }, new Map());
-    return [...Array(lastCompletedGameWeek).keys()]
-        .map((idx) => {
-            const gameWeek = idx + 1;
-            const matches = matchesByGameWeek.get(gameWeek) ?? [];
-            return calculateExpectedPointsForGameWeek(
-                matches,
-                gameWeek,
-                allPossibleMatches,
-                teamIds
-            );
-        })
-        .reduce((acc, gameWeekExpectedPoints) => {
-            for (const [teamId, points] of gameWeekExpectedPoints) {
-                const currentPoints = acc.get(teamId) ?? 0;
-                acc.set(teamId, currentPoints + points);
-            }
-            return acc;
-        }, new Map());
-};
-
-export interface SeasonRecord {
-    entryId: number;
-    managerId: number;
-    teamName: string;
-    wins: number; //TODO should this be an array of matches instead? Same for draws and losses
-    draws: number;
-    losses: number;
-    scoreFor: number;
-    scoreAgainst: number;
-    points: number;
-    expectedPoints: number;
-    matches: Match[];
-}
-
-export interface TableRow {
-    id: number;
-    position: number;
-    previousPosition: number | undefined;
-    team: string;
-    manager: Manager;
-    wins: number;
-    draws: number;
-    losses: number;
-    scoreFor: number;
-    scoreAgainst: number;
-    points: number;
-    fairPoints: number;
-    fairPosition: number;
-    matches: Match[];
-    waiverPick: number | undefined;
-}
-//TODO change this to take an object instead so the DX is nicer
-export const buildTableRow = (
-    manager: Manager,
-    position: number,
-    previousPosition: number | undefined,
-    expectedPosition: number,
-    {
-        entryId,
-        wins,
-        draws,
-        losses,
-        scoreFor,
-        scoreAgainst,
-        points,
-        expectedPoints,
-        matches,
-        teamName,
-    }: SeasonRecord
-): TableRow => ({
-    id: entryId,
-    position,
-    previousPosition,
-    manager,
-    wins,
-    losses,
-    draws,
-    scoreFor,
-    scoreAgainst,
-    points,
-    fairPoints: expectedPoints,
-    fairPosition: expectedPosition,
-    matches,
-    team: teamName,
-    waiverPick: 0,
-});
-
-export const buildSeasonRecords = (
-    { league_entries, standings, matches }: LeagueDetails,
-    season: Season
-): SeasonRecord[] => {
-    const managers = Manager.getManagersForSeason(season);
-    const standingsByTeamId = indexBy(standings, (s) => s.league_entry);
-
-    const matchesByTeam = matches.reduce((acc, match) => {
-        const teamA = match.league_entry_1;
-        const teamB = match.league_entry_2;
-        const teamAMatches = acc.get(teamA) ?? [];
-        const teamBMatches = acc.get(teamB) ?? [];
-        acc.set(teamA, [...teamAMatches, match]);
-        acc.set(teamB, [...teamBMatches, match]);
-        return acc;
-    }, new Map<number, FPLMatch[]>());
-    const teams = indexBy(league_entries, (le) => le.id);
-    const teamIds = league_entries.map((le) => le.id);
-    const expectedPointsByTeamId = calculateExpectedPoints(teamIds, matches);
-    return league_entries.reduce<SeasonRecord[]>((acc, entry) => {
-        const { id, entry_name } = entry;
-        const manager = managers.get(id);
-        const standing = standingsByTeamId.get(id);
-        const expectedPoints = expectedPointsByTeamId.get(id) ?? 0;
-        const fplMatches = matchesByTeam.get(id) ?? [];
-        const matches = fplMatches
-            .map((m) => Match.from(m, season, teams))
-            .filter((m): m is Match => m !== undefined);
-        if (standing && manager) {
-            acc.push({
-                entryId: id,
-                teamName: entry_name,
-                managerId: manager.id,
-                wins: standing.matches_won,
-                draws: standing.matches_drawn,
-                losses: standing.matches_lost,
-                scoreFor: standing.points_for,
-                scoreAgainst: standing.points_against,
-                points: standing.total,
-                expectedPoints: expectedPoints,
-                matches: matches,
-            });
-        }
-        return acc;
-    }, []);
-};
-
-export const buildTable = (
-    leagueDetails: [Season, LeagueDetails][]
-): TableRow[] => {
-    const seasonRecordsBySeason: SeasonRecord[][] = leagueDetails.map(
-        ([season, leagueDetails]) => buildSeasonRecords(leagueDetails, season)
-    );
-    const seasonRecordsByManager: Map<number, SeasonRecord[]> =
-        seasonRecordsBySeason.reduce((acc, records) => {
-            records.forEach((record) => {
-                const existingRecords = acc.get(record.managerId) ?? [];
-                acc.set(record.managerId, [...existingRecords, record]);
-            });
-            return acc;
-        }, new Map());
-    const mergedRecords: SeasonRecord[] = [
-        ...seasonRecordsByManager.values(),
-    ].map((records) =>
-        records.reduce((a, b) => ({
-            entryId: a.entryId, //TODO how to handle
-            managerId: a.managerId,
-            teamName: `${a.teamName}, ${b.teamName}`, //TODO can merge here maybe
-            wins: a.wins + b.wins,
-            draws: a.draws + b.draws,
-            losses: a.losses + b.losses,
-            scoreFor: a.scoreFor + b.scoreFor,
-            scoreAgainst: a.scoreAgainst + b.scoreAgainst,
-            points: a.points + b.points,
-            expectedPoints: a.expectedPoints + b.expectedPoints,
-            matches: [...a.matches, ...b.matches],
-        }))
-    );
-    const pointsPositionByManagerId = rankBy(
-        mergedRecords,
-        (a, b) => b.points - a.points || b.scoreFor - a.scoreFor,
-        (row) => row.managerId
-    );
-    const expectedPointsPositionByManagerId = rankBy(
-        mergedRecords,
-        (a, b) => b.expectedPoints - a.expectedPoints,
-        (row) => row.managerId
-    );
-    const tableRows: TableRow[] = mergedRecords
-        .map((sr) => {
-            const { managerId } = sr;
-            const position = pointsPositionByManagerId.get(managerId) ?? 0;
-            const previousPosition = undefined;
-            const expectedRank =
-                expectedPointsPositionByManagerId.get(managerId) ?? 0;
-            const manager = Manager.byId.get(managerId);
-            if (manager) {
-                return buildTableRow(
-                    manager,
-                    position,
-                    previousPosition,
-                    expectedRank,
-                    sr
-                );
-            } else {
-                return undefined;
-            }
-        })
-        .filter((tr): tr is TableRow => tr !== undefined);
-    return tableRows;
+    isFinished: ({ status }: Match) => status === "finished",
 };
 
 export const SEASON_NOTES: Partial<
@@ -569,5 +328,62 @@ export const SEASON_NOTES: Partial<
                 url: "https://twitter.com/OfficialFPL/status/1568210457286086661",
             },
         },
+    },
+};
+
+export interface Entry {
+    id: number;
+    name: string;
+    manager: Manager;
+}
+
+export interface LeagueDetails {
+    league: {
+        id: number;
+        name: string;
+        transactionMode: string;
+        season: Season;
+    };
+    entries: Entry[];
+    matches: Match[];
+}
+export const LeagueDetails = {
+    build: (
+        {
+            league: { id, name, transaction_mode },
+            league_entries,
+            matches: fplMatches,
+        }: FplLeagueDetails,
+        season: Season
+    ): LeagueDetails => {
+        const managers = Manager.bySeason[season];
+        const entries = league_entries
+            .map((le) => {
+                const manager = managers?.[le.id];
+                if (manager) {
+                    return {
+                        id: le.id,
+                        name: le.entry_name,
+                        manager,
+                    };
+                } else {
+                    return undefined;
+                }
+            })
+            .filter((e): e is Entry => e !== undefined);
+        const entriesById = indexBy(entries, (e) => e.id);
+        const matches = fplMatches
+            .map((m) => Match.from({ fplMatch: m, season, teams: entriesById }))
+            .filter((m): m is Match => m !== undefined);
+        return {
+            league: {
+                id: id,
+                name: name,
+                transactionMode: transaction_mode,
+                season: season,
+            },
+            entries,
+            matches,
+        };
     },
 };

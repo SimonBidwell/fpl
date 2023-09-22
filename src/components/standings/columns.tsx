@@ -1,8 +1,6 @@
 import { ReactNode } from "react";
-import {
-    TableRow as LeagueTableRow,
-    Match,
-} from "../../domain";
+import { Match } from "../../domain";
+import { StandingsRow } from "./domain";
 import { MovementIcon } from "./MovementIcon";
 import { Manager } from "../Manager";
 import { ResultsListHover } from "./ResultsListHover";
@@ -13,16 +11,17 @@ export interface Column {
     key: string;
     abbr?: string;
     description?: string;
-    render: (row: LeagueTableRow) => ReactNode;
-    sort?: (a: LeagueTableRow, b: LeagueTableRow) => number;
+    render: (row: StandingsRow) => ReactNode;
+    sort?: (a: StandingsRow, b: StandingsRow) => number;
     isVisibleByDefault?: boolean;
+    specificMode?: "single" | "multi"
 }
 
 export const COLUMNS: readonly Column[] = [
     {
         key: "Position",
         abbr: "Pos",
-        render: ({ position, previousPosition }: LeagueTableRow): ReactNode => (
+        render: ({ position, previousPosition }: StandingsRow): ReactNode => (
             <div className="flex items-center gap-1">
                 {position}
                 {previousPosition !== undefined ? (
@@ -33,117 +32,97 @@ export const COLUMNS: readonly Column[] = [
                 ) : null}
             </div>
         ),
-        sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
-            a.position - b.position,
+        sort: (a, b) => a.position - b.position,
         isVisibleByDefault: true,
     },
     {
         key: "Team & Manager",
-        render: ({ manager, team }: LeagueTableRow): ReactNode => (
-            <Manager manager={manager} teamName={team} />
+        render: ({ entry }) => (
+            <Manager manager={entry.manager} teamName={entry.name} />
         ),
         isVisibleByDefault: true,
     },
     {
+        key: "Season",
+        render: ({season}) => season,
+        sort: (a, b) => a.season.localeCompare(b.season),
+        specificMode: "multi"
+    },
+    {
         key: "Played",
         abbr: "P",
-        render: ({ matches }: LeagueTableRow) =>
-            matches.filter((m) => m.status === "finished").length,
-        sort: (a: LeagueTableRow, b: LeagueTableRow) =>
-            a.matches.filter((m) => m.status === "finished").length -
-            b.matches.filter((m) => m.status === "finished").length,
+        render: ({ played }: StandingsRow) => played.length,
+        sort: (a, b) => a.played.length - b.played.length,
     },
     {
         key: "Won",
         abbr: "W",
-        render: ({ id, matches, manager, team }: LeagueTableRow): ReactNode => {
-            const matchesWon = matches.filter((m) => Match.isWinner(m, id));
-            return (
-                <ResultsListHover
-                    teamId={id}
-                    managerId={manager.id}
-                    teamName={team}
-                    matches={matchesWon}
-                    result="won"
-                />
-            );
-        },
-        sort: (a: LeagueTableRow, b: LeagueTableRow): number => a.wins - b.wins,
+        render: ({ entry, wins }) => (
+            <ResultsListHover
+                entry={entry}
+                matches={wins}
+                result="won"
+            />
+        ),
+        sort: (a, b) => a.wins.length - b.wins.length,
         isVisibleByDefault: true,
     },
     {
         key: "Drawn",
         abbr: "D",
-        render: ({ id, matches, manager, team }: LeagueTableRow): ReactNode => {
-            const matchesDrawn = matches.filter(Match.isDraw);
-            return (
-                <ResultsListHover
-                    teamId={id}
-                    managerId={manager.id}
-                    teamName={team}
-                    matches={matchesDrawn}
-                    result="drawn"
-                />
-            );
-        },
-        sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
-            a.draws - b.draws,
+        render: ({ entry, draws }) => (
+            <ResultsListHover
+                entry={entry}
+                matches={draws}
+                result="drawn"
+            />
+        ),
+        sort: (a, b) => a.draws.length - b.draws.length,
         isVisibleByDefault: true,
     },
     {
         key: "Lost",
         abbr: "L",
-        render: ({ id, matches, manager, team }: LeagueTableRow): ReactNode => {
-            const matchesLost = matches.filter((m) => Match.isLoser(m, id));
-            return (
-                <ResultsListHover
-                    teamId={id}
-                    managerId={manager.id}
-                    teamName={team}
-                    matches={matchesLost}
-                    result="lost"
-                />
-            );
-        },
-        sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
-            a.losses - b.losses,
+        render: ({ entry, losses }) => (
+            <ResultsListHover
+                entry={entry}
+                matches={losses}
+                result="lost"
+            />
+        ),
+        sort: (a, b) => a.losses.length - b.losses.length,
         isVisibleByDefault: true,
     },
     {
         key: "Points Scored",
         abbr: "+",
-        render: ({ id, matches }: LeagueTableRow): ReactNode =>
-            matches
-                .map((x) => Match.getTeam(x, id))
-                .reduce((a, b) => a + (b?.points ?? 0), 0),
-        sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
-            a.scoreFor - b.scoreFor,
+        render: ({ pointsScoreFor }) => pointsScoreFor,
+        sort: (a, b) => a.pointsScoreFor - b.pointsScoreFor,
         isVisibleByDefault: true,
     },
     {
         key: "Points Against",
         abbr: "-",
-        render: ({ scoreAgainst }: LeagueTableRow): ReactNode => scoreAgainst,
-        sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
-            a.scoreAgainst - b.scoreAgainst,
+        render: ({ pointsScoreAgainst }) => pointsScoreAgainst,
+        sort: (a, b) => a.pointsScoreAgainst - b.pointsScoreAgainst,
         isVisibleByDefault: true,
     },
     {
         key: "Points Score Difference",
         abbr: "+/-",
-        render: ({ scoreFor, scoreAgainst }: LeagueTableRow): ReactNode => (
-            <>{scoreFor - scoreAgainst}</>
-        ),
-        sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
-            a.scoreFor - a.scoreAgainst - (b.scoreFor - b.scoreAgainst),
+        render: ({ pointsScoreFor, pointsScoreAgainst }) =>
+            pointsScoreFor - pointsScoreAgainst,
+        sort: (a, b) =>
+            a.pointsScoreFor -
+            a.pointsScoreAgainst -
+            (b.pointsScoreFor - b.pointsScoreAgainst),
         isVisibleByDefault: true,
     },
     {
         key: "Points",
         abbr: "Pts",
-        render: ({ points }: LeagueTableRow): ReactNode => points,
-        sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
-            a.points - b.points,
+        render: ({ points }) => points,
+        sort: (a, b) => a.points - b.points,
         isVisibleByDefault: true,
     },
     {
@@ -151,9 +130,8 @@ export const COLUMNS: readonly Column[] = [
         abbr: "fPts",
         description: `The Fair Points for a gameweek are calculated by taking the average points a manager would have scored if they played every other manager for that week. 
         Fair Points can then be used to see how (un)lucky a manager has been due to their assigned matchups.`,
-        render: ({ fairPoints: expectedPoints }: LeagueTableRow): ReactNode =>
-            expectedPoints.toFixed(3),
-        sort: (a: LeagueTableRow, b: LeagueTableRow): number => a.fairPoints,
+        render: ({ fairPoints }) => fairPoints.toFixed(3),
+        sort: (a, b) => a.fairPoints - b.fairPoints,
         isVisibleByDefault: true,
     },
     {
@@ -161,11 +139,8 @@ export const COLUMNS: readonly Column[] = [
         abbr: "Pts - fPts",
         description: `Shows how much a manager is over or underperforming their fair points. 
         A manager with a positive value is overperforming i.e their actual points are higher than their weekly points would imply. A negative value is the opposite.`,
-        render: ({
-            points,
-            fairPoints: expectedPoints,
-        }: LeagueTableRow): ReactNode => {
-            const diff = points - expectedPoints;
+        render: ({ points, fairPoints }) => {
+            const diff = points - fairPoints;
             return (
                 <span
                     className={
@@ -181,19 +156,15 @@ export const COLUMNS: readonly Column[] = [
                 </span>
             );
         },
-        sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
-            a.points - a.fairPoints - (b.points - b.fairPoints),
+        sort: (a, b) => a.points - a.fairPoints - (b.points - b.fairPoints),
         isVisibleByDefault: true,
     },
     {
         key: "Fair Position",
         abbr: "fPos",
         description: `Where the manager would be ranked if the table was ordered by fair points rather than actual points.`,
-        render: ({
-            fairPosition: expectedPosition,
-        }: LeagueTableRow): ReactNode => expectedPosition,
-        sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
-            a.fairPosition - b.fairPosition,
+        render: ({ fairPosition }) => fairPosition,
+        sort: (a, b) => a.fairPosition - b.fairPosition,
         isVisibleByDefault: true,
     },
     {
@@ -201,11 +172,8 @@ export const COLUMNS: readonly Column[] = [
         abbr: "Pos - fPos",
         description: `Shows how much a manager is over or underperforming their fair position. 
         A manager with a positive value is overperforming i.e their actual position is higher than their fair points would imply. A negative value is the opposite.`,
-        render: ({
-            position,
-            fairPosition: expectedPosition,
-        }: LeagueTableRow): ReactNode => {
-            const diff = position - expectedPosition;
+        render: ({ position, fairPosition }) => {
+            const diff = position - fairPosition;
             return (
                 <span
                     className={
@@ -221,25 +189,23 @@ export const COLUMNS: readonly Column[] = [
                 </span>
             );
         },
-        sort: (a: LeagueTableRow, b: LeagueTableRow): number =>
+        sort: (a, b) =>
             a.position - a.fairPosition - (b.position - b.fairPosition),
         isVisibleByDefault: true,
     },
     {
         key: "Form",
         //TODO tidy up duplication etc, can possibly add some weighting for more recent games?
-        //TODO disable for all time table/when there are more than 2 leagues selected
-        render: ({ id, matches }: LeagueTableRow) => {
-            const mostRecent = matches
-                .filter((m) => m.status === "finished")
+        render: ({ entry, played }: StandingsRow) => {
+            const mostRecent = played
                 .sort(Match.sort)
                 .slice(-4);
             return (
                 <div className="flex gap-[0.1rem]">
                     {mostRecent.map((match, i) => {
-                        const thisTeam = Match.getTeam(match, id);
-                        const opposition = Match.getOpposition(match, id);
-                        if (thisTeam && opposition) {
+                        const alignment = Match.getAlignment(match, entry.id);
+                        if (alignment) {
+                            const { team, opposition } = alignment;
                             return (
                                 <Tooltip
                                     key={i}
@@ -249,7 +215,7 @@ export const COLUMNS: readonly Column[] = [
                                                 Gameweek {match.gameWeek}
                                             </div>
                                             <div className="flex gap-2 items-center">
-                                                {thisTeam.points}-
+                                                {team.points}-
                                                 {opposition.points}
                                                 <Manager
                                                     manager={opposition.manager}
@@ -263,7 +229,7 @@ export const COLUMNS: readonly Column[] = [
                                         <Result
                                             result={Match.resultForTeam(
                                                 match,
-                                                id
+                                                entry.id
                                             )}
                                         />
                                     </div>
@@ -276,7 +242,7 @@ export const COLUMNS: readonly Column[] = [
                 </div>
             );
         },
-        sort: (a: LeagueTableRow, b: LeagueTableRow) => {
+        sort: (a, b) => {
             const formSum = (id: number, matches: Match[]): number => {
                 return matches.reduce((a, b) => {
                     const resultForTeam = Match.resultForTeam(b, id);
@@ -295,20 +261,25 @@ export const COLUMNS: readonly Column[] = [
                     .sort(Match.sort)
                     .slice(-4);
             return (
-                formSum(a.id, mostRecent(a.matches)) -
-                formSum(b.id, mostRecent(b.matches))
+                formSum(
+                    a.entry.id,
+                    mostRecent([...a.wins, ...a.draws, ...a.losses])
+                ) -
+                formSum(
+                    b.entry.id,
+                    mostRecent([...b.wins, ...b.draws, ...b.losses])
+                )
             );
         },
         isVisibleByDefault: true,
+        specificMode: "single",
     },
     {
         key: "Up next",
-        render: ({ id, matches }: LeagueTableRow) => {
-            const nextMatch = matches
-                .filter((m) => m.status !== "finished")
-                .sort(Match.sort)[0];
+        render: ({ entry, upcoming }) => {
+            const nextMatch = upcoming.sort(Match.sort)[0];
             const opposition = nextMatch
-                ? Match.getOpposition(nextMatch, id)
+                ? Match.getOpposition(nextMatch, entry.id)
                 : undefined;
             if (opposition === undefined) {
                 return (
@@ -326,48 +297,45 @@ export const COLUMNS: readonly Column[] = [
             }
         },
         isVisibleByDefault: true,
+        specificMode: "single"
     },
     {
         key: "Average Points Score For",
         abbr: "Avg. +",
-        render: (row: LeagueTableRow) =>
-            row.scoreFor /
-            row.matches.filter((m) => m.status === "finished").length,
-        sort: () => 0,
+        render: ({ pointsScoreFor, played }) => (pointsScoreFor / played.length).toFixed(3),
+        sort: (a, b) =>
+            a.pointsScoreFor / a.played.length -
+            b.pointsScoreFor / b.played.length,
     },
     {
         key: "Average Score Against",
         abbr: "Avg. -",
-        render: (row: LeagueTableRow) =>
-            row.scoreAgainst /
-            row.matches.filter((m) => m.status === "finished").length,
-        sort: () => 0,
+        render: ({ pointsScoreAgainst, played }) =>
+            (pointsScoreAgainst / played.length).toFixed(3),
+        sort: (a, b) =>
+            a.pointsScoreAgainst / a.played.length -
+            b.pointsScoreAgainst / b.played.length,
     },
     {
         key: "Average Points",
         abbr: "Avg. Pts",
-        render: (row: LeagueTableRow) =>
-            row.points /
-            row.matches.filter((m) => m.status === "finished").length,
-        sort: () => 0,
+        render: ({ points, played }) => (points / played.length).toFixed(3),
+        sort: (a, b) => a.points / a.played.length - b.points / b.played.length,
     },
     {
         key: "Average Fair Points",
         abbr: "Avg. fPts",
-        render: (row: LeagueTableRow) =>
-            (
-                row.fairPoints /
-                row.matches.filter((m) => m.status === "finished").length
-            ).toFixed(3),
-        sort: () => 0,
+        render: ({ played, fairPoints }) =>
+            (fairPoints / played.length).toFixed(3),
+        sort: (a, b) =>
+            a.fairPoints / a.played.length - b.fairPoints / b.played.length,
     },
-    //TODO reinstate when I make things selectable
-    // "Waiver": {
-    // key: "",
-    // renderLabel: () => <></>,
-    //     render: ({waiverPick}: LeagueTableRow) => waiverPick,
-    //     sort: (a: LeagueTableRow, b: LeagueTableRow) => (a.waiverPick ?? 0) - (b.waiverPick ?? 0)
-    // }
+    {
+        key: "Waiver",
+        render: ({waiverPick}) => waiverPick ?? "-",
+        sort: (a, b) => (a.waiverPick ?? 0) - (b.waiverPick ?? 0),
+        specificMode: "single"
+    }
 ];
 
 export const COLUMN_KEYS: readonly string[] = COLUMNS.map((col) => col.key);

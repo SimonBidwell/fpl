@@ -11,13 +11,13 @@ import {
 import { useState, useMemo, useCallback, Key } from "react";
 import { Header } from "./Header";
 import { COLUMNS, INITIAL_COLUMNS } from "./columns";
-import { TableRow as LeagueTableRow, buildTable } from "../../domain";
-import { Season, LeagueDetails } from "../../api/domain";
+import { LeagueDetails } from "../../domain";
+import { buildStandingsTable, StandingsRow } from "./domain";
 import { ColumnHeader } from "./ColumnHeader";
-import { getSeasons } from "./helpers";
+import { getMode, getSeasons } from "./helpers";
 
 export interface Props {
-    data: [Season, LeagueDetails][];
+    data: LeagueDetails[];
 }
 
 export const Standings = ({ data }: Props) => {
@@ -35,23 +35,24 @@ export const Standings = ({ data }: Props) => {
     );
 
     const columns = useMemo(() => {
-        if (visibleColumns === "all") return [...COLUMNS];
-        return COLUMNS.filter((col) =>
-            Array.from(visibleColumns).includes(col.key)
-        );
-    }, [visibleColumns]);
+        const mode = getMode(seasonSelection);
+        const cols = visibleColumns === "all" ? [...COLUMNS] : COLUMNS.filter((col) =>
+        Array.from(visibleColumns).includes(col.key)
+        )
+        return cols.filter(col => col.specificMode === undefined ? true : col.specificMode === mode)
+    }, [visibleColumns, seasonSelection]);
 
     const renderCell = useCallback(
-        (row: LeagueTableRow, key: Key) =>
+        (row: StandingsRow, key: Key) =>
             COLUMNS.find((col) => col.key === key)?.render(row),
         []
     );
 
     const sortedItems = useMemo(() => {
-        return buildTable(
+        return buildStandingsTable(
             data.filter(
-                ([season]) =>
-                    seasonSelection === "all" || seasonSelection.has(season)
+                (ld) =>
+                    seasonSelection === "all" || seasonSelection.has(ld.league.season)
             )
         ).sort((a, b) => {
             const { direction, column } = sortDescriptor;
@@ -64,6 +65,8 @@ export const Standings = ({ data }: Props) => {
             }
         });
     }, [sortDescriptor, seasonSelection, data]);
+
+    
 
     return (
         <Table
@@ -101,7 +104,7 @@ export const Standings = ({ data }: Props) => {
             </TableHeader>
             <TableBody items={sortedItems}>
                 {(item) => (
-                    <TableRow key={item.manager.id}>
+                    <TableRow key={`${item.season}-${item.entry.id}`}>
                         {(columnKey) => (
                             <TableCell>{renderCell(item, columnKey)}</TableCell>
                         )}

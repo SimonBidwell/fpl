@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { getAllLeagueDetails } from "./api/requests";
+import { getAllLeagueDetails } from "./requests";
 import { Standings } from "./components/standings/Standings";
 
 export const App = () => {

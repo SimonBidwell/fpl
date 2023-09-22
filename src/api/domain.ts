@@ -1,12 +1,5 @@
 import { z } from "zod";
 
-export const SEASONS = ["2020/21", "2021/22", "2022/23", "2023/24"] as const;
-export type Season = (typeof SEASONS)[number];
-export const Season = {
-    isSeason: (s: unknown): s is Season  => SEASONS.includes(s as Season),
-    sort: (a: Season, b: Season) => a.localeCompare(b),
-};
-
 export const leagueSchema = z.object({
     id: z.number(),
     name: z.string(),

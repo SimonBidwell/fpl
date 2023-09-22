@@ -1,4 +1,3 @@
-import { SEASONS, Season } from "../../api/domain";
 import {
     Button,
     DropdownTrigger,
@@ -9,8 +8,8 @@ import {
 } from "@nextui-org/react";
 import { ChevronDownIcon } from "../ChevronDownIcon";
 import { COLUMNS } from "./columns";
-import { SEASON_NOTES } from "../../domain";
-import { isAllSeasons, getSeasons } from "./helpers";
+import { SEASONS, SEASON_NOTES } from "../../domain";
+import { isAllSeasons, getSeasons, getMode } from "./helpers";
 
 export interface Props {
     seasonSelection: Selection;
@@ -19,8 +18,8 @@ export interface Props {
     setVisibleColumns: (selection: Selection) => void;
 }
 
-const Warning = ({ warning }: { warning: string }) => (
-    <div className="bg-yellow-50 p-2 rounded-medium shadow-sm text-tiny flex items-center max-w-[2.25rem] group hover:max-w-full transition-[max-width] duration-1000" 
+const Warning = ({ warnings }: { warnings: string[] }) => (
+    <div className="bg-yellow-50 p-2 rounded-medium shadow-sm text-tiny flex max-h-[2.25rem] max-w-[2.25rem] group hover:max-w-full hover:max-h-full transition-[max-width,max-height] duration-1000 items-center hover:items-start" 
     >
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +37,9 @@ const Warning = ({ warning }: { warning: string }) => (
         <div
             className="text-no-wrap text-yellow-700 inline-block max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-full transition-[max-width] duration-1000"
         >
-            {warning}
+            <ul className="list-disc pl-5">
+                {warnings.map(warning => <li>{warning}</li>)}
+            </ul>
         </div>
     </div>
 );
@@ -51,14 +52,15 @@ export const Header = ({
 }: Props) => {
     const isAll = isAllSeasons(seasonSelection)
     const seasons = getSeasons(seasonSelection)
-    const seasonNotes = seasons.map((s) => SEASON_NOTES[s]?.general).join(". ");
+    const mode = getMode(seasonSelection)
+    const seasonNotes = seasons.map((s) => SEASON_NOTES[s]?.general).filter((note): note is string => note !== undefined);
     return (
         <div className="flex justify-between gap-3 items-end">
             <div className="flex items-center">
                 <h1 className="text-3xl font-semibold p-2">
                     A Real Sport ({isAll ? "All time" : seasons.join(", ")})
                 </h1>
-                {seasonNotes ? <Warning warning={seasonNotes} /> : null}
+                {seasonNotes.length > 0 ? <Warning warnings={seasonNotes} /> : null}
             </div>
             <div className="flex gap-3">
                 <Dropdown>
@@ -80,7 +82,7 @@ export const Header = ({
                         selectionMode="multiple"
                         onSelectionChange={setVisibleColumns}
                     >
-                        {COLUMNS.map(({ key, abbr }) => (
+                        {COLUMNS.filter(col => col.specificMode === undefined ? true : col.specificMode === mode).map(({ key, abbr }) => (
                             <DropdownItem key={key}>
                                 {key} {abbr ? `(${abbr})` : ""}
                             </DropdownItem>
@@ -101,9 +103,9 @@ export const Header = ({
                     <DropdownMenu
                         disallowEmptySelection
                         aria-label="Seasons"
-                        closeOnSelect={true}
+                        closeOnSelect={false}
                         selectedKeys={seasonSelection}
-                        selectionMode="single"
+                        selectionMode="multiple"
                         onSelectionChange={setSeasonSelection}
                     >
                         {SEASONS.map((season) => (

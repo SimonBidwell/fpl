@@ -8,23 +8,19 @@ import {
     Divider,
     Tooltip,
 } from "@nextui-org/react";
-import { Match } from "../../domain";
+import { Entry, Match } from "../../domain";
 import { Manager } from "../Manager";
 
 export interface Props {
-    teamId: number;
-    managerId: number;
-    teamName: string;
+    entry: Entry;
     matches: Match[];
     result: "won" | "lost" | "drawn";
 }
 
 export const ResultsListHover = ({
-    teamId,
-    managerId,
+    entry: {id, name, manager },
     matches,
     result,
-    teamName,
 }: Props) => {
     const { length } = matches;
     const description = `${length} match${length !== 1 ? "es" : ""} ${result}`;
@@ -34,9 +30,9 @@ export const ResultsListHover = ({
             content={
                 <div className="pt-2">
                     <Manager
-                        id={managerId}
+                        id={manager.id}
                         description={description}
-                        teamName={teamName}
+                        teamName={name}
                     />
                     {length > 0 ? (
                         <>
@@ -53,15 +49,9 @@ export const ResultsListHover = ({
                                 </TableHeader>
                                 <TableBody>
                                     {sortedMatches.map((match) => {
-                                        const thisTeam = Match.getTeam(
-                                            match,
-                                            teamId
-                                        );
-                                        const opposition = Match.getOpposition(
-                                            match,
-                                            teamId
-                                        );
-                                        if (thisTeam && opposition) {
+                                        const alignment = Match.getAlignment(match, id)
+                                        if (alignment !== undefined) {
+                                            const { team, opposition } = alignment;
                                             return (
                                                 <TableRow
                                                     key={`${match.season}-${match.gameWeek}`}
@@ -73,7 +63,7 @@ export const ResultsListHover = ({
                                                     </TableCell>
                                                     <TableCell>
                                                         <span>
-                                                            {thisTeam.points} -{" "}
+                                                            {team.points} -{" "}
                                                             {opposition.points}
                                                         </span>
                                                     </TableCell>
