@@ -6,5 +6,3 @@ export const isAllSeasons = (selection: Selection) =>
 
 export const getSeasons = (selection: Selection) =>
         isAllSeasons(selection) ? SEASONS : [...selection].filter(Season.isSeason);
-
-export const getMode = (selection: Selection) => getSeasons(selection).length === 1 ? "single" : "multi"

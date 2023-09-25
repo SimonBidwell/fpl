@@ -14,7 +14,11 @@ export interface Column {
     render: (row: StandingsRow) => ReactNode;
     sort?: (a: StandingsRow, b: StandingsRow) => number;
     isVisibleByDefault?: boolean;
-    specificMode?: "single" | "multi"
+    specificMode?: "single" | "multi";
+    serialise: {
+        header: string | string[];
+        data: (row: StandingsRow) => string | number | (string | number)[];
+    };
 }
 
 export const COLUMNS: readonly Column[] = [
@@ -34,6 +38,10 @@ export const COLUMNS: readonly Column[] = [
         ),
         sort: (a, b) => a.position - b.position,
         isVisibleByDefault: true,
+        serialise: {
+            header: "Position",
+            data: ({ position }) => position,
+        },
     },
     {
         key: "Team & Manager",
@@ -41,57 +49,74 @@ export const COLUMNS: readonly Column[] = [
             <Manager manager={entry.manager} teamName={entry.name} />
         ),
         isVisibleByDefault: true,
+        serialise: {
+            header: ["Entry id", "Team name", "Manager id", "Manager name"],
+            data: ({ entry }) => [
+                entry.id,
+                entry.name,
+                entry.manager.id,
+                entry.manager.name,
+            ],
+        },
     },
     {
         key: "Season",
-        render: ({season}) => season,
+        render: ({ season }) => season,
         sort: (a, b) => a.season.localeCompare(b.season),
-        specificMode: "multi"
+        specificMode: "multi",
+        serialise: {
+            header: "Season",
+            data: ({ season }) => season,
+        },
     },
     {
         key: "Played",
         abbr: "P",
         render: ({ played }: StandingsRow) => played.length,
         sort: (a, b) => a.played.length - b.played.length,
+        serialise: {
+            header: "Played",
+            data: ({ played }) => played.length,
+        },
     },
     {
         key: "Won",
         abbr: "W",
         render: ({ entry, wins }) => (
-            <ResultsListHover
-                entry={entry}
-                matches={wins}
-                result="won"
-            />
+            <ResultsListHover entry={entry} matches={wins} result="won" />
         ),
         sort: (a, b) => a.wins.length - b.wins.length,
         isVisibleByDefault: true,
+        serialise: {
+            header: "Won",
+            data: ({ wins }) => wins.length,
+        },
     },
     {
         key: "Drawn",
         abbr: "D",
         render: ({ entry, draws }) => (
-            <ResultsListHover
-                entry={entry}
-                matches={draws}
-                result="drawn"
-            />
+            <ResultsListHover entry={entry} matches={draws} result="drawn" />
         ),
         sort: (a, b) => a.draws.length - b.draws.length,
         isVisibleByDefault: true,
+        serialise: {
+            header: "Drawn",
+            data: ({ draws }) => draws.length,
+        },
     },
     {
         key: "Lost",
         abbr: "L",
         render: ({ entry, losses }) => (
-            <ResultsListHover
-                entry={entry}
-                matches={losses}
-                result="lost"
-            />
+            <ResultsListHover entry={entry} matches={losses} result="lost" />
         ),
         sort: (a, b) => a.losses.length - b.losses.length,
         isVisibleByDefault: true,
+        serialise: {
+            header: "Lost",
+            data: ({ losses }) => losses.length,
+        },
     },
     {
         key: "Points Scored",
@@ -99,6 +124,10 @@ export const COLUMNS: readonly Column[] = [
         render: ({ pointsScoreFor }) => pointsScoreFor,
         sort: (a, b) => a.pointsScoreFor - b.pointsScoreFor,
         isVisibleByDefault: true,
+        serialise: {
+            header: "Points Scored",
+            data: ({ pointsScoreFor }) => pointsScoreFor,
+        },
     },
     {
         key: "Points Against",
@@ -106,6 +135,10 @@ export const COLUMNS: readonly Column[] = [
         render: ({ pointsScoreAgainst }) => pointsScoreAgainst,
         sort: (a, b) => a.pointsScoreAgainst - b.pointsScoreAgainst,
         isVisibleByDefault: true,
+        serialise: {
+            header: "Points Against",
+            data: ({ pointsScoreAgainst }) => pointsScoreAgainst,
+        },
     },
     {
         key: "Points Score Difference",
@@ -117,6 +150,11 @@ export const COLUMNS: readonly Column[] = [
             a.pointsScoreAgainst -
             (b.pointsScoreFor - b.pointsScoreAgainst),
         isVisibleByDefault: true,
+        serialise: {
+            header: "Points Score Difference",
+            data: ({ pointsScoreFor, pointsScoreAgainst }) =>
+                pointsScoreFor - pointsScoreAgainst,
+        },
     },
     {
         key: "Points",
@@ -124,6 +162,10 @@ export const COLUMNS: readonly Column[] = [
         render: ({ points }) => points,
         sort: (a, b) => a.points - b.points,
         isVisibleByDefault: true,
+        serialise: {
+            header: "Points",
+            data: ({ points }) => points,
+        },
     },
     {
         key: "Fair Points",
@@ -133,6 +175,10 @@ export const COLUMNS: readonly Column[] = [
         render: ({ fairPoints }) => fairPoints.toFixed(3),
         sort: (a, b) => a.fairPoints - b.fairPoints,
         isVisibleByDefault: true,
+        serialise: {
+            header: "Fair Points",
+            data: ({ fairPoints }) => fairPoints,
+        },
     },
     {
         key: "Points - Fair Points",
@@ -158,6 +204,10 @@ export const COLUMNS: readonly Column[] = [
         },
         sort: (a, b) => a.points - a.fairPoints - (b.points - b.fairPoints),
         isVisibleByDefault: true,
+        serialise: {
+            header: "Points - Fair Points",
+            data: ({ points, fairPoints }) => points - fairPoints,
+        },
     },
     {
         key: "Fair Position",
@@ -166,6 +216,10 @@ export const COLUMNS: readonly Column[] = [
         render: ({ fairPosition }) => fairPosition,
         sort: (a, b) => a.fairPosition - b.fairPosition,
         isVisibleByDefault: true,
+        serialise: {
+            header: "Fair Position",
+            data: ({ fairPosition }) => fairPosition,
+        },
     },
     {
         key: "Position - Fair Position",
@@ -192,14 +246,16 @@ export const COLUMNS: readonly Column[] = [
         sort: (a, b) =>
             a.position - a.fairPosition - (b.position - b.fairPosition),
         isVisibleByDefault: true,
+        serialise: {
+            header: "Position - Fair Poisition",
+            data: ({ position, fairPosition }) => position - fairPosition,
+        },
     },
     {
         key: "Form",
         //TODO tidy up duplication etc, can possibly add some weighting for more recent games?
         render: ({ entry, played }: StandingsRow) => {
-            const mostRecent = played
-                .sort(Match.sort)
-                .slice(-4);
+            const mostRecent = played.sort(Match.sort).slice(-4);
             return (
                 <div className="flex gap-[0.1rem]">
                     {mostRecent.map((match, i) => {
@@ -273,6 +329,16 @@ export const COLUMNS: readonly Column[] = [
         },
         isVisibleByDefault: true,
         specificMode: "single",
+        serialise: {
+            header: "Form",
+            data: ({ entry, played }) => {
+                const mostRecent = played.sort(Match.sort).slice(-4);
+                return mostRecent
+                    .map((m) => Match.resultForTeam(m, entry.id))
+                    .map((r) => r?.charAt(0).toUpperCase() ?? "")
+                    .join("");
+            },
+        },
     },
     {
         key: "Up next",
@@ -297,15 +363,41 @@ export const COLUMNS: readonly Column[] = [
             }
         },
         isVisibleByDefault: true,
-        specificMode: "single"
+        specificMode: "single",
+        serialise: {
+            header: [
+                "Up next entry id",
+                "Up next team name",
+                "Up next manager id",
+                "Up next manager name",
+            ],
+            data: ({ entry, upcoming }) => {
+                const nextMatch = upcoming.sort(Match.sort)[0];
+                const opposition = nextMatch
+                    ? Match.getOpposition(nextMatch, entry.id)
+                    : undefined;
+                return [
+                    opposition?.id ?? "",
+                    opposition?.name ?? "",
+                    opposition?.manager.id ?? "",
+                    opposition?.manager.name ?? "",
+                ];
+            },
+        },
     },
     {
         key: "Average Points Score For",
         abbr: "Avg. +",
-        render: ({ pointsScoreFor, played }) => (pointsScoreFor / played.length).toFixed(3),
+        render: ({ pointsScoreFor, played }) =>
+            (pointsScoreFor / played.length).toFixed(3),
         sort: (a, b) =>
             a.pointsScoreFor / a.played.length -
             b.pointsScoreFor / b.played.length,
+        serialise: {
+            header: "Average Points Score For",
+            data: ({ pointsScoreFor, played }) =>
+                pointsScoreFor / played.length,
+        },
     },
     {
         key: "Average Score Against",
@@ -315,12 +407,21 @@ export const COLUMNS: readonly Column[] = [
         sort: (a, b) =>
             a.pointsScoreAgainst / a.played.length -
             b.pointsScoreAgainst / b.played.length,
+        serialise: {
+            header: "Average Score Against",
+            data: ({ pointsScoreAgainst, played }) =>
+                pointsScoreAgainst / played.length,
+        },
     },
     {
         key: "Average Points",
         abbr: "Avg. Pts",
         render: ({ points, played }) => (points / played.length).toFixed(3),
         sort: (a, b) => a.points / a.played.length - b.points / b.played.length,
+        serialise: {
+            header: "Average Points",
+            data: ({ points, played }) => points / played.length,
+        },
     },
     {
         key: "Average Fair Points",
@@ -329,13 +430,11 @@ export const COLUMNS: readonly Column[] = [
             (fairPoints / played.length).toFixed(3),
         sort: (a, b) =>
             a.fairPoints / a.played.length - b.fairPoints / b.played.length,
+        serialise: {
+            header: "Average Fair Points",
+            data: ({ fairPoints, played }) => fairPoints / played.length,
+        },
     },
-    {
-        key: "Waiver",
-        render: ({waiverPick}) => waiverPick ?? "-",
-        sort: (a, b) => (a.waiverPick ?? 0) - (b.waiverPick ?? 0),
-        specificMode: "single"
-    }
 ];
 
 export const COLUMN_KEYS: readonly string[] = COLUMNS.map((col) => col.key);

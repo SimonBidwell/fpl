@@ -7,24 +7,25 @@ import {
     TableCell,
     SortDescriptor,
     Selection,
+    Dropdown,
+    DropdownTrigger,
+    Button,
+    DropdownMenu,
+    DropdownItem,
 } from "@nextui-org/react";
 import { useState, useMemo, useCallback, Key } from "react";
-import { Header } from "./Header";
 import { COLUMNS, INITIAL_COLUMNS } from "./columns";
 import { LeagueDetails } from "../../domain";
 import { buildStandingsTable, StandingsRow } from "./domain";
 import { ColumnHeader } from "./ColumnHeader";
-import { getMode, getSeasons } from "./helpers";
+import { ChevronDownIcon } from "../ChevronDownIcon";
+import { DownloadCSV, buildStandingsSerialiser } from "../DownloadCSV";
 
 export interface Props {
     data: LeagueDetails[];
 }
 
 export const Standings = ({ data }: Props) => {
-    const [seasonSelection, setSeasonSelection] = useState<Selection>(
-        new Set(["2023/24"])
-    );
-
     const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
         column: "Position",
         direction: "ascending",
@@ -34,13 +35,18 @@ export const Standings = ({ data }: Props) => {
         new Set(INITIAL_COLUMNS)
     );
 
+    const mode = data.length === 1 ? "single" : "multi";
     const columns = useMemo(() => {
-        const mode = getMode(seasonSelection);
-        const cols = visibleColumns === "all" ? [...COLUMNS] : COLUMNS.filter((col) =>
-        Array.from(visibleColumns).includes(col.key)
-        )
-        return cols.filter(col => col.specificMode === undefined ? true : col.specificMode === mode)
-    }, [visibleColumns, seasonSelection]);
+        const cols =
+            visibleColumns === "all"
+                ? [...COLUMNS]
+                : COLUMNS.filter((col) =>
+                      Array.from(visibleColumns).includes(col.key)
+                  );
+        return cols.filter((col) =>
+            col.specificMode === undefined ? true : col.specificMode === mode
+        );
+    }, [visibleColumns]);
 
     const renderCell = useCallback(
         (row: StandingsRow, key: Key) =>
@@ -49,12 +55,7 @@ export const Standings = ({ data }: Props) => {
     );
 
     const sortedItems = useMemo(() => {
-        return buildStandingsTable(
-            data.filter(
-                (ld) =>
-                    seasonSelection === "all" || seasonSelection.has(ld.league.season)
-            )
-        ).sort((a, b) => {
+        return buildStandingsTable(data).sort((a, b) => {
             const { direction, column } = sortDescriptor;
             const col = COLUMNS.find((col) => col.key === column);
             if (col && col.sort !== undefined) {
@@ -64,30 +65,59 @@ export const Standings = ({ data }: Props) => {
                 return 0;
             }
         });
-    }, [sortDescriptor, seasonSelection, data]);
+    }, [sortDescriptor, data]);
 
-    
+    const topContent = useMemo(
+        () => (
+            <div className="flex gap-3 justify-end">
+                <Dropdown>
+                    <DropdownTrigger className="hidden sm:flex">
+                        <Button
+                            endContent={
+                                <ChevronDownIcon className="text-small" />
+                            }
+                            variant="flat"
+                        >
+                            Columns
+                        </Button>
+                    </DropdownTrigger>
+                    <DropdownMenu
+                        disallowEmptySelection
+                        aria-label="Columns"
+                        closeOnSelect={false}
+                        selectedKeys={visibleColumns}
+                        selectionMode="multiple"
+                        onSelectionChange={setVisibleColumns}
+                    >
+                        {COLUMNS.filter((col) =>
+                            col.specificMode === undefined
+                                ? true
+                                : col.specificMode === mode
+                        ).map(({ key, abbr }) => (
+                            <DropdownItem key={key}>
+                                {key} {abbr ? `(${abbr})` : ""}
+                            </DropdownItem>
+                        ))}
+                    </DropdownMenu>
+                </Dropdown>
+                <DownloadCSV
+                    serialiser={buildStandingsSerialiser(columns)}
+                    data={sortedItems}
+                    filename="standings"
+                />
+            </div>
+        ),
+        [visibleColumns, mode, sortedItems]
+    );
 
     return (
         <Table
-            aria-label={`League Standings for ${getSeasons(seasonSelection).join(", ")}`}
+            aria-label="League Standings"
             isHeaderSticky
             sortDescriptor={sortDescriptor}
             onSortChange={setSortDescriptor}
-            topContent={
-                <Header
-                    visibleColumns={visibleColumns}
-                    setVisibleColumns={setVisibleColumns}
-                    seasonSelection={seasonSelection}
-                    setSeasonSelection={setSeasonSelection}
-                />
-            }
+            topContent={topContent}
             topContentPlacement="outside"
-            classNames={{
-                base: "max-h-full",
-                wrapper:
-                    "overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-default-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-default-300 scrollbar-track:!rounded",
-            }}
         >
             <TableHeader columns={columns}>
                 {({ key, abbr, sort, description }) => (
@@ -97,7 +127,11 @@ export const Standings = ({ data }: Props) => {
                             name={key}
                             abbr={abbr}
                             description={description}
-                            setSortDescriptor={sort!== undefined ? setSortDescriptor : undefined}
+                            setSortDescriptor={
+                                sort !== undefined
+                                    ? setSortDescriptor
+                                    : undefined
+                            }
                         />
                     </TableColumn>
                 )}
