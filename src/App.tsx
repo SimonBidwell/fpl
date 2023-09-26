@@ -106,10 +106,11 @@ export const App = () => {
                     </CardBody>
                 </Card>
                 {tab === "Standings" ? (
-                    <Standings data={leagueDetails} />
+                    <Standings key={leagueDetails.league.season} data={leagueDetails} />
                 ) : null}
                 {tab === "Results" ? (
                     <MatchList
+                        key={leagueDetails.league.season}
                         matches={leagueDetails.matches
                             .filter(Match.isFinished)
                             .reverse()}
@@ -117,6 +118,7 @@ export const App = () => {
                 ) : null}
                 {tab === "Fixtures" ? (
                     <MatchList
+                        key={leagueDetails.league.season}
                         matches={leagueDetails.matches.filter(
                             (m) => !Match.isFinished(m)
                         )}

@@ -186,6 +186,8 @@ export const COLUMNS: readonly Column[] = [
         description: `Shows how much a manager is over or underperforming their fair points. 
         A manager with a positive value is overperforming i.e their actual points are higher than their weekly points would imply. A negative value is the opposite.`,
         render: ({ points, fairPoints }) => {
+            //TODO on small values e.g 0.001 we get +0 displaying
+            //TODO extract toFixed out into a const and reuse. Maybe change to 2.
             const diff = points - fairPoints;
             return (
                 <span
