@@ -13,9 +13,9 @@ import {
     Card,
     CardBody,
     Tabs,
-    Tab
+    Tab,
 } from "@nextui-org/react";
-import { ChevronDownIcon } from "./components/ChevronDownIcon";
+import { Chevron } from "./components/Chevron";
 import { useState } from "react";
 import { getSeasons } from "./components/standings/helpers";
 import { MatchList } from "./components/MatchList";
@@ -28,7 +28,7 @@ export const App = () => {
         new Set(["2023/24"])
     );
 
-    const [tab, setTab] = useState<string>("Standings")
+    const [tab, setTab] = useState<string>("Standings");
 
     const seasons = getSeasons(seasonSelection);
     const seasonNotes = seasons
@@ -43,7 +43,7 @@ export const App = () => {
         return "Error";
     }
 
-    const leagueDetails = seasonData[0]
+    const leagueDetails = seasonData[0];
     const title = `A Real Sport (${leagueDetails.league.season})`;
 
     return (
@@ -66,7 +66,7 @@ export const App = () => {
                                 <DropdownTrigger className="hidden sm:flex">
                                     <Button
                                         endContent={
-                                            <ChevronDownIcon className="text-small" />
+                                            <Chevron orientation="down" />
                                         }
                                         variant="flat"
                                     >
@@ -92,16 +92,36 @@ export const App = () => {
                                 </DropdownMenu>
                             </Dropdown>
                         </div>
-                        <Tabs selectedKey={tab} className="pt-2" onSelectionChange={(x) => typeof x === 'string' ? setTab(x) : undefined}>
-                            <Tab key="Standings" title="Standings"/>
-                            <Tab key="Results" title="Results"/>
-                            <Tab key="Fixtures" title="Fixtures"/>
+                        <Tabs
+                            selectedKey={tab}
+                            className="pt-2"
+                            onSelectionChange={(x) =>
+                                typeof x === "string" ? setTab(x) : undefined
+                            }
+                        >
+                            <Tab key="Standings" title="Standings" />
+                            <Tab key="Results" title="Results" />
+                            <Tab key="Fixtures" title="Fixtures" />
                         </Tabs>
                     </CardBody>
                 </Card>
-                {tab === "Standings" ? <Standings data={leagueDetails} /> : null}
-                {tab === "Results" ? <MatchList matches={leagueDetails.matches.filter(Match.isFinished).reverse()} /> : null}
-                {tab === "Fixtures" ? <MatchList matches={leagueDetails.matches.filter(m => !Match.isFinished(m))} /> : null}                
+                {tab === "Standings" ? (
+                    <Standings data={leagueDetails} />
+                ) : null}
+                {tab === "Results" ? (
+                    <MatchList
+                        matches={leagueDetails.matches
+                            .filter(Match.isFinished)
+                            .reverse()}
+                    />
+                ) : null}
+                {tab === "Fixtures" ? (
+                    <MatchList
+                        matches={leagueDetails.matches.filter(
+                            (m) => !Match.isFinished(m)
+                        )}
+                    />
+                ) : null}
             </div>
         </main>
     );

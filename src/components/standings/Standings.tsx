@@ -18,7 +18,7 @@ import { COLUMNS, INITIAL_COLUMNS } from "./columns";
 import { LeagueDetails, Match } from "../../domain";
 import { buildStandingsTable, StandingsRow } from "./domain";
 import { ColumnHeader } from "./ColumnHeader";
-import { ChevronDownIcon } from "../ChevronDownIcon";
+import { Chevron } from "../Chevron";
 import { DownloadCSV, buildStandingsSerialiser } from "../DownloadCSV";
 import { GameWeekSelector } from "../GameweekSelector";
 
@@ -40,9 +40,7 @@ export const Standings = ({ data }: Props) => {
         () =>
             [
                 ...new Set(
-                    data.matches
-                        .filter(Match.isFinished)
-                        .map((m) => m.gameWeek)
+                    data.matches.filter(Match.isFinished).map((m) => m.gameWeek)
                 ),
             ].sort((a, b) => b - a),
         [data]
@@ -51,12 +49,15 @@ export const Standings = ({ data }: Props) => {
         finishedGameWeeks[0]
     );
 
-    const columns = useMemo(() => visibleColumns === "all"
+    const columns = useMemo(
+        () =>
+            visibleColumns === "all"
                 ? [...COLUMNS]
                 : COLUMNS.filter((col) =>
                       Array.from(visibleColumns).includes(col.key)
-                  )
-    , [visibleColumns]);
+                  ),
+        [visibleColumns]
+    );
 
     const renderCell = useCallback(
         (row: StandingsRow, key: Key) =>
@@ -90,7 +91,7 @@ export const Standings = ({ data }: Props) => {
                         <DropdownTrigger className="hidden sm:flex">
                             <Button
                                 endContent={
-                                    <ChevronDownIcon className="text-small" />
+                                    <Chevron orientation="down" />
                                 }
                                 variant="flat"
                             >
@@ -138,7 +139,8 @@ export const Standings = ({ data }: Props) => {
             topContent={topContent}
             topContentPlacement="outside"
             classNames={{
-                "wrapper": "overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-default-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-default-300 scrollbar-track:!rounded"
+                wrapper:
+                    "overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-default-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-default-300 scrollbar-track:!rounded",
             }}
         >
             <TableHeader columns={columns}>

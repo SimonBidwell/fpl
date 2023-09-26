@@ -1,10 +1,12 @@
 import { SVGProps } from "react";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
-    size?: number;
+    orientation: "up" | "down" | "left" | "right";
 };
-export const ChevronDownIcon = ({
+export const Chevron = ({
     strokeWidth = 1.5,
+    className,
+    orientation,
     ...otherProps
 }: IconSvgProps) => (
     <svg
@@ -15,6 +17,7 @@ export const ChevronDownIcon = ({
         role="presentation"
         viewBox="0 0 24 24"
         width="1em"
+        className={`${orientation === "up" ? "rotate-180" : orientation === "left" ? "rotate-90" : orientation === "right" ? "-rotate-90" : ""} ${className ?? ""}`.trim()}
         {...otherProps}
     >
         <path

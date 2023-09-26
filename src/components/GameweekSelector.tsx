@@ -7,7 +7,7 @@ import {
     Selection,
 } from "@nextui-org/react";
 import { Dispatch, SetStateAction, useMemo, useCallback } from "react";
-import { ChevronDownIcon } from "./ChevronDownIcon";
+import { Chevron } from "./Chevron";
 import { clamp } from "../helpers";
 
 export interface Props {
@@ -52,12 +52,12 @@ export const GameWeekSelector = ({
     return (
         <div className="flex gap-1">
             <Button isIconOnly onClick={goToPrevious} variant="flat">
-                <ChevronDownIcon className="text-small rotate-90" />
+                <Chevron orientation="left" />
             </Button>
             <Dropdown>
                 <DropdownTrigger className="hidden sm:flex">
                     <Button
-                        endContent={<ChevronDownIcon className="text-small" />}
+                        endContent={<Chevron orientation="down" />}
                         variant="flat"
                     >
                         {selectedGameWeek === gameWeeks[0]
@@ -84,7 +84,7 @@ export const GameWeekSelector = ({
                 </DropdownMenu>
             </Dropdown>
             <Button isIconOnly onClick={goToNext} variant="flat">
-                <ChevronDownIcon className="text-small rotate-[270deg]" />
+                <Chevron orientation="right" />
             </Button>
         </div>
     );
