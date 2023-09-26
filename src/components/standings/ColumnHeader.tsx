@@ -54,7 +54,8 @@ export const ColumnHeader = ({
                     )
                 }
             >
-                <span onClick={onClick}>{abbr ?? name}</span>
+                {/* TODO decoration colour here should be using a next-ui class but can't get it to work */}
+                <span onClick={onClick} className={description === undefined ? undefined : "underline decoration-dotted underline-offset-2 decoration-[#a1a1aa]"}>{abbr ?? name}</span>
             </Tooltip>
         );
     } else {
