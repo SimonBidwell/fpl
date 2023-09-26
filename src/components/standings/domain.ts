@@ -189,9 +189,10 @@ const buildResults = (
 }
 
 export const buildStandingsTable = (
-    leagueDetails: LeagueDetails[],
+    ld: LeagueDetails,
     gameWeek: number
 ): StandingsRow[] => {
+    const leagueDetails = [ld];
     const results = leagueDetails.flatMap(({league, entries, matches}) => {
         const teamIds = entries.map(e => e.id)
         const resultsByTeam = buildResults(teamIds, matches, gameWeek);

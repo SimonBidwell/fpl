@@ -23,7 +23,7 @@ import { DownloadCSV, buildStandingsSerialiser } from "../DownloadCSV";
 import { GameWeekSelector } from "../GameweekSelector";
 
 export interface Props {
-    data: LeagueDetails[];
+    data: LeagueDetails;
 }
 
 export const Standings = ({ data }: Props) => {
@@ -40,8 +40,7 @@ export const Standings = ({ data }: Props) => {
         () =>
             [
                 ...new Set(
-                    data
-                        .flatMap((d) => d.matches)
+                    data.matches
                         .filter(Match.isFinished)
                         .map((m) => m.gameWeek)
                 ),
@@ -52,18 +51,12 @@ export const Standings = ({ data }: Props) => {
         finishedGameWeeks[0]
     );
 
-    const mode = data.length === 1 ? "single" : "multi";
-    const columns = useMemo(() => {
-        const cols =
-            visibleColumns === "all"
+    const columns = useMemo(() => visibleColumns === "all"
                 ? [...COLUMNS]
                 : COLUMNS.filter((col) =>
                       Array.from(visibleColumns).includes(col.key)
-                  );
-        return cols.filter((col) =>
-            col.specificMode === undefined ? true : col.specificMode === mode
-        );
-    }, [visibleColumns, mode]);
+                  )
+    , [visibleColumns]);
 
     const renderCell = useCallback(
         (row: StandingsRow, key: Key) =>
@@ -86,7 +79,7 @@ export const Standings = ({ data }: Props) => {
 
     const topContent = useMemo(
         () => (
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center px-4 pt-4">
                 <GameWeekSelector
                     gameWeeks={finishedGameWeeks}
                     selectedGameWeek={selectedGameWeek}
@@ -112,11 +105,7 @@ export const Standings = ({ data }: Props) => {
                             selectionMode="multiple"
                             onSelectionChange={setVisibleColumns}
                         >
-                            {COLUMNS.filter((col) =>
-                                col.specificMode === undefined
-                                    ? true
-                                    : col.specificMode === mode
-                            ).map(({ key, abbr }) => (
+                            {COLUMNS.map(({ key, abbr }) => (
                                 <DropdownItem key={key}>
                                     {key} {abbr ? `(${abbr})` : ""}
                                 </DropdownItem>
@@ -133,7 +122,6 @@ export const Standings = ({ data }: Props) => {
         ),
         [
             visibleColumns,
-            mode,
             sortedItems,
             finishedGameWeeks,
             selectedGameWeek,
@@ -149,6 +137,9 @@ export const Standings = ({ data }: Props) => {
             onSortChange={setSortDescriptor}
             topContent={topContent}
             topContentPlacement="outside"
+            classNames={{
+                "wrapper": "overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-default-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-default-300 scrollbar-track:!rounded"
+            }}
         >
             <TableHeader columns={columns}>
                 {({ key, abbr, sort, description }) => (

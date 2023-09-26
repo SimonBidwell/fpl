@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { getAllLeagueDetails } from "./requests";
 import { Standings } from "./components/standings/Standings";
 import { Warning } from "./components/Warning";
-import { SEASON_NOTES, SEASONS } from "./domain";
+import { Match, SEASON_NOTES, SEASONS } from "./domain";
 import {
     Selection,
     Dropdown,
@@ -10,10 +10,15 @@ import {
     Button,
     DropdownMenu,
     DropdownItem,
+    Card,
+    CardBody,
+    Tabs,
+    Tab
 } from "@nextui-org/react";
 import { ChevronDownIcon } from "./components/ChevronDownIcon";
 import { useState } from "react";
 import { getSeasons } from "./components/standings/helpers";
+import { MatchList } from "./components/MatchList";
 
 export const App = () => {
     const { isLoading, error, data } = useQuery("leagueDetails", () =>
@@ -23,6 +28,8 @@ export const App = () => {
         new Set(["2023/24"])
     );
 
+    const [tab, setTab] = useState<string>("Standings")
+
     const seasons = getSeasons(seasonSelection);
     const seasonNotes = seasons
         .map((s) => SEASON_NOTES[s]?.general)
@@ -30,54 +37,71 @@ export const App = () => {
     const seasonData = (data ?? []).filter((s) =>
         seasons.includes(s.league.season)
     );
-    const title = `A Real Sport (${seasons.join(", ")})`;
 
     if (isLoading) return "Loading...";
     if (error || data === undefined) {
         return "Error";
     }
 
+    const leagueDetails = seasonData[0]
+    const title = `A Real Sport (${leagueDetails.league.season})`;
+
     return (
-        <main className="max-h-screen max-w-screen h-screen w-screen flex items-center justify-center">
-            <div className="w-4/5 h-[90%] px-2 pb-2 overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-default-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-default-300 scrollbar-track:!rounded">
-                <div className="flex items-center justify-between pb-4">
-                    <div className="flex items-center gap-2">
-                        <h1 className="text-3xl font-semibold">{title}</h1>
-                        {seasonNotes.length > 0 ? (
-                            <Warning warnings={seasonNotes} />
-                        ) : null}
-                    </div>
-                    <Dropdown>
-                        <DropdownTrigger className="hidden sm:flex">
-                            <Button
-                                endContent={
-                                    <ChevronDownIcon className="text-small" />
-                                }
-                                variant="flat"
-                            >
-                                Season
-                            </Button>
-                        </DropdownTrigger>
-                        <DropdownMenu
-                            disallowEmptySelection
-                            aria-label="Seasons"
-                            closeOnSelect={false}
-                            selectedKeys={seasonSelection}
-                            selectionMode="multiple"
-                            onSelectionChange={setSeasonSelection}
-                        >
-                            {SEASONS.map((season) => (
-                                <DropdownItem
-                                    key={season}
-                                    className="capitalize"
+        <main className="max-h-screen max-w-screen h-screen w-screen overflow-x-hidden flex items-center justify-center p-2">
+            {/* TODO on small screens padding at the bottom gets lost */}
+            <div className="w-4/5 h-full">
+                <Card shadow="sm">
+                    <CardBody>
+                        {/* TODO not sure I need another container here */}
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <h1 className="text-3xl font-semibold">
+                                    {title}
+                                </h1>
+                                {seasonNotes.length > 0 ? (
+                                    <Warning warnings={seasonNotes} />
+                                ) : null}
+                            </div>
+                            <Dropdown>
+                                <DropdownTrigger className="hidden sm:flex">
+                                    <Button
+                                        endContent={
+                                            <ChevronDownIcon className="text-small" />
+                                        }
+                                        variant="flat"
+                                    >
+                                        Season
+                                    </Button>
+                                </DropdownTrigger>
+                                <DropdownMenu
+                                    disallowEmptySelection
+                                    aria-label="Seasons"
+                                    closeOnSelect={true}
+                                    selectedKeys={seasonSelection}
+                                    selectionMode="single"
+                                    onSelectionChange={setSeasonSelection}
                                 >
-                                    {season}
-                                </DropdownItem>
-                            ))}
-                        </DropdownMenu>
-                    </Dropdown>
-                </div>
-                <Standings data={seasonData}/>
+                                    {SEASONS.map((season) => (
+                                        <DropdownItem
+                                            key={season}
+                                            className="capitalize"
+                                        >
+                                            {season}
+                                        </DropdownItem>
+                                    ))}
+                                </DropdownMenu>
+                            </Dropdown>
+                        </div>
+                        <Tabs selectedKey={tab} className="pt-2" onSelectionChange={(x) => typeof x === 'string' ? setTab(x) : undefined}>
+                            <Tab key="Standings" title="Standings"/>
+                            <Tab key="Results" title="Results"/>
+                            <Tab key="Fixtures" title="Fixtures"/>
+                        </Tabs>
+                    </CardBody>
+                </Card>
+                {tab === "Standings" ? <Standings data={leagueDetails} /> : null}
+                {tab === "Results" ? <MatchList matches={leagueDetails.matches.filter(Match.isFinished).reverse()} /> : null}
+                {tab === "Fixtures" ? <MatchList matches={leagueDetails.matches.filter(m => !Match.isFinished(m))} /> : null}                
             </div>
         </main>
     );

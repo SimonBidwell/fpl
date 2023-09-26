@@ -6,7 +6,7 @@ import {
     CardBody,
 } from "@nextui-org/react";
 import { useState, useMemo } from "react";
-import { DownloadCSV } from "./DownloadCSV";
+import { DownloadCSV, MATCH_SERIALISER } from "./DownloadCSV";
 import { GameWeekSelector } from "./GameweekSelector";
 
 export interface Props {
@@ -26,13 +26,13 @@ export const MatchList = ({ matches }: Props) => {
     const selectedGameWeeks = [selectedGameWeek]
     return (
         <>
-            <div className="flex justify-between items-center pb-4">
+            <div className="flex justify-between items-center p-4">
                 <GameWeekSelector gameWeeks={gameWeeks} selectedGameWeek={selectedGameWeek} setSelectedGameWeek={setSelectedGameWeek}/>
                 <div>
                     <DownloadCSV
-                        filename=""
-                        data={[]}
-                        serialiser={{ headers: [], serialise: () => [] }}
+                        filename="matches" //TODO get this from some context
+                        data={matches}
+                        serialiser={MATCH_SERIALISER}
                     />
                 </div>
             </div>
