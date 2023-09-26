@@ -10,7 +10,7 @@ export interface StandingsRow {
     wins: Match[];
     draws: Match[];
     losses: Match[];
-    upcoming: Match[];
+    upcoming: Match | undefined;
     pointsScoreFor: number;
     pointsScoreAgainst: number;
     points: number;
@@ -107,7 +107,7 @@ interface Results {
     wins: Match[],
     draws: Match[],
     losses: Match[],
-    upcoming: Match[],
+    upcoming: Match | undefined,
     pointsScoreFor: number,
     pointsScoreAgainst: number,
     points: number,
@@ -118,16 +118,16 @@ const EMPTY_RESULTS: Results = {
     wins: [],
     draws: [],
     losses: [],
-    upcoming: [],
+    upcoming: undefined,
     pointsScoreFor: 0,
     pointsScoreAgainst: 0,
     points: 0,
     fairPoints: 0
 }
-const addToResults = (teamId: number, match: Match, results: Results = EMPTY_RESULTS, fairPoints: number): Results => {
+const addToResults = (teamId: number, match: Match, gameWeek: number, results: Results = EMPTY_RESULTS, fairPoints: number): Results => {
     const alignment = Match.getAlignment(match, teamId);
     const { played, wins, draws, losses, upcoming, pointsScoreFor, pointsScoreAgainst, points} = results
-    if (alignment !== undefined && match.status === "finished") {
+    if (alignment !== undefined && match.status === "finished" && match.gameWeek <= gameWeek) {
         const {team, opposition} = alignment;
         const isWinner = Match.isWinner(match, teamId);
         const isDraw = Match.isDraw(match);
@@ -143,8 +143,8 @@ const addToResults = (teamId: number, match: Match, results: Results = EMPTY_RES
             points: points + (isWinner ? 3 : isDraw ? 1 : 0),
             fairPoints: fairPoints
         }
-    } else if (alignment !== undefined)  {
-        return {...results, upcoming: [...upcoming, match]}
+    } else if (alignment !== undefined && match.gameWeek === gameWeek + 1)  {
+        return {...results, upcoming: match}
     } else {
         return results
     }
@@ -152,25 +152,31 @@ const addToResults = (teamId: number, match: Match, results: Results = EMPTY_RES
 
 const buildResults = (
     teamIds: number[],
-    matches: Match[]
+    matches: Match[],
+    gameWeek: number
 ): Map<number, Results> => {
-    //TODO this should be moved into the reduce eventually
+    // + 1 to ensure that the "upcoming" game is populated
+    const filteredMatches = matches.filter(m => m.gameWeek <= gameWeek + 1)
+
     const fairPointsByTeamId = calculateFairPoints(
         teamIds,
-        matches
+        // for fair points we only need up to gameweek
+        filteredMatches.filter(m => m.gameWeek <= gameWeek)
     )
 
-    return matches.reduce(
+    return filteredMatches.reduce(
         (acc, match) => {
             const teamOneSummary = addToResults(
                 match.teamOne.id,
                 match,
+                gameWeek,
                 acc.get(match.teamOne.id),
                 fairPointsByTeamId.get(match.teamOne.id) ?? 0
             )
             const teamTwoSummary = addToResults(
                 match.teamTwo.id,
                 match,
+                gameWeek,
                 acc.get(match.teamTwo.id),
                 fairPointsByTeamId.get(match.teamTwo.id) ?? 0
             )
@@ -182,28 +188,28 @@ const buildResults = (
     )
 }
 
-//TODO tidy this function as naming etc is a mess
 export const buildStandingsTable = (
-    leagueDetails: LeagueDetails[]
+    leagueDetails: LeagueDetails[],
+    gameWeek: number
 ): StandingsRow[] => {
-    const x = leagueDetails.flatMap(({league, entries, matches}) => {
+    const results = leagueDetails.flatMap(({league, entries, matches}) => {
         const teamIds = entries.map(e => e.id)
-        const resultsByTeam = buildResults(teamIds, matches);
+        const resultsByTeam = buildResults(teamIds, matches, gameWeek);
         return [...resultsByTeam.entries()].map(([id, results]) => [id, results, league.season] as const);
     })
 
     const resultsByTeam = indexBy(
-        x,
+        results,
         ([teamId, results, season]) => `${teamId}-${season}`,
     )
 
     const pointsPositionByTeamId = rankBy(
-        x,
+        results,
         ([,a], [,b]) => b.points - a.points || b.pointsScoreFor - a.pointsScoreFor,
         ([teamId,,season]) => `${teamId}-${season}`
     )
     const fairPositionByTeamId = rankBy(
-        x,
+        results,
         ([, a], [, b]) => b.fairPoints - a.fairPoints,
         ([teamId,,season]) => `${teamId}-${season}`
     )

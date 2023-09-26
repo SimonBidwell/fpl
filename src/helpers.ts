@@ -25,3 +25,6 @@ export const groupBy = <T, U>(
         acc.set(key, [...existingItemsForKey, item]);
         return acc;
     }, new Map());
+
+export const clamp = (num: number, min: number, max: number): number =>
+    Math.min(Math.max(num, min), max);

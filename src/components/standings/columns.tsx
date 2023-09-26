@@ -343,9 +343,8 @@ export const COLUMNS: readonly Column[] = [
     {
         key: "Up next",
         render: ({ entry, upcoming }) => {
-            const nextMatch = upcoming.sort(Match.sort)[0];
-            const opposition = nextMatch
-                ? Match.getOpposition(nextMatch, entry.id)
+            const opposition = upcoming
+                ? Match.getOpposition(upcoming, entry.id)
                 : undefined;
             if (opposition === undefined) {
                 return (
@@ -372,9 +371,8 @@ export const COLUMNS: readonly Column[] = [
                 "Up next manager name",
             ],
             data: ({ entry, upcoming }) => {
-                const nextMatch = upcoming.sort(Match.sort)[0];
-                const opposition = nextMatch
-                    ? Match.getOpposition(nextMatch, entry.id)
+                const opposition = upcoming
+                    ? Match.getOpposition(upcoming, entry.id)
                     : undefined;
                 return [
                     opposition?.id ?? "",

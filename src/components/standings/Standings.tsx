@@ -15,11 +15,12 @@ import {
 } from "@nextui-org/react";
 import { useState, useMemo, useCallback, Key } from "react";
 import { COLUMNS, INITIAL_COLUMNS } from "./columns";
-import { LeagueDetails } from "../../domain";
+import { LeagueDetails, Match } from "../../domain";
 import { buildStandingsTable, StandingsRow } from "./domain";
 import { ColumnHeader } from "./ColumnHeader";
 import { ChevronDownIcon } from "../ChevronDownIcon";
 import { DownloadCSV, buildStandingsSerialiser } from "../DownloadCSV";
+import { GameWeekSelector } from "../GameweekSelector";
 
 export interface Props {
     data: LeagueDetails[];
@@ -35,6 +36,22 @@ export const Standings = ({ data }: Props) => {
         new Set(INITIAL_COLUMNS)
     );
 
+    const finishedGameWeeks = useMemo(
+        () =>
+            [
+                ...new Set(
+                    data
+                        .flatMap((d) => d.matches)
+                        .filter(Match.isFinished)
+                        .map((m) => m.gameWeek)
+                ),
+            ].sort((a, b) => b - a),
+        [data]
+    );
+    const [selectedGameWeek, setSelectedGameWeek] = useState<number>(
+        finishedGameWeeks[0]
+    );
+
     const mode = data.length === 1 ? "single" : "multi";
     const columns = useMemo(() => {
         const cols =
@@ -46,7 +63,7 @@ export const Standings = ({ data }: Props) => {
         return cols.filter((col) =>
             col.specificMode === undefined ? true : col.specificMode === mode
         );
-    }, [visibleColumns]);
+    }, [visibleColumns, mode]);
 
     const renderCell = useCallback(
         (row: StandingsRow, key: Key) =>
@@ -55,7 +72,7 @@ export const Standings = ({ data }: Props) => {
     );
 
     const sortedItems = useMemo(() => {
-        return buildStandingsTable(data).sort((a, b) => {
+        return buildStandingsTable(data, selectedGameWeek).sort((a, b) => {
             const { direction, column } = sortDescriptor;
             const col = COLUMNS.find((col) => col.key === column);
             if (col && col.sort !== undefined) {
@@ -65,49 +82,63 @@ export const Standings = ({ data }: Props) => {
                 return 0;
             }
         });
-    }, [sortDescriptor, data]);
+    }, [sortDescriptor, data, selectedGameWeek]);
 
     const topContent = useMemo(
         () => (
-            <div className="flex gap-3 justify-end">
-                <Dropdown>
-                    <DropdownTrigger className="hidden sm:flex">
-                        <Button
-                            endContent={
-                                <ChevronDownIcon className="text-small" />
-                            }
-                            variant="flat"
-                        >
-                            Columns
-                        </Button>
-                    </DropdownTrigger>
-                    <DropdownMenu
-                        disallowEmptySelection
-                        aria-label="Columns"
-                        closeOnSelect={false}
-                        selectedKeys={visibleColumns}
-                        selectionMode="multiple"
-                        onSelectionChange={setVisibleColumns}
-                    >
-                        {COLUMNS.filter((col) =>
-                            col.specificMode === undefined
-                                ? true
-                                : col.specificMode === mode
-                        ).map(({ key, abbr }) => (
-                            <DropdownItem key={key}>
-                                {key} {abbr ? `(${abbr})` : ""}
-                            </DropdownItem>
-                        ))}
-                    </DropdownMenu>
-                </Dropdown>
-                <DownloadCSV
-                    serialiser={buildStandingsSerialiser(columns)}
-                    data={sortedItems}
-                    filename="standings"
+            <div className="flex justify-between items-center">
+                <GameWeekSelector
+                    gameWeeks={finishedGameWeeks}
+                    selectedGameWeek={selectedGameWeek}
+                    setSelectedGameWeek={setSelectedGameWeek}
                 />
+                <div className="flex gap-3 justify-end">
+                    <Dropdown>
+                        <DropdownTrigger className="hidden sm:flex">
+                            <Button
+                                endContent={
+                                    <ChevronDownIcon className="text-small" />
+                                }
+                                variant="flat"
+                            >
+                                Columns
+                            </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu
+                            disallowEmptySelection
+                            aria-label="Columns"
+                            closeOnSelect={false}
+                            selectedKeys={visibleColumns}
+                            selectionMode="multiple"
+                            onSelectionChange={setVisibleColumns}
+                        >
+                            {COLUMNS.filter((col) =>
+                                col.specificMode === undefined
+                                    ? true
+                                    : col.specificMode === mode
+                            ).map(({ key, abbr }) => (
+                                <DropdownItem key={key}>
+                                    {key} {abbr ? `(${abbr})` : ""}
+                                </DropdownItem>
+                            ))}
+                        </DropdownMenu>
+                    </Dropdown>
+                    <DownloadCSV
+                        serialiser={buildStandingsSerialiser(columns)}
+                        data={sortedItems}
+                        filename="standings"
+                    />
+                </div>
             </div>
         ),
-        [visibleColumns, mode, sortedItems]
+        [
+            visibleColumns,
+            mode,
+            sortedItems,
+            finishedGameWeeks,
+            selectedGameWeek,
+            setSelectedGameWeek,
+        ]
     );
 
     return (
