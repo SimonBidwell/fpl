@@ -19,7 +19,7 @@ export interface StandingsRow {
     waiverPick: number | undefined;
 }
 
-const getUniquePairs = (ids: number[]): [number, number][] => {
+export const getUniquePairs = (ids: number[]): [number, number][] => {
     const allPossibleMatches: [number, number][] = [];
     for (let i = 0; i < ids.length; i++) {
         const team = ids[i];
@@ -32,7 +32,7 @@ const getUniquePairs = (ids: number[]): [number, number][] => {
     return allPossibleMatches;
 };
 
-const calculateExpectedPointsForGameWeek = (
+export const calculateExpectedPointsForGameWeek = (
     matches: Match[],
     gameWeek: number,
     allPossibleMatches: [number, number][],

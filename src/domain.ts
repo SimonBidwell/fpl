@@ -3,7 +3,6 @@ import {
     LeagueDetails as FplLeagueDetails,
     Match as FplMatch,
 } from "./api/domain";
-import { getLeagueDetails } from "./api/requests";
 
 export const SEASONS = ["2020/21", "2021/22", "2022/23", "2023/24"] as const;
 export type Season = (typeof SEASONS)[number];
@@ -166,7 +165,10 @@ export const Manager = {
         (acc, season) => ({
             ...acc,
             [season]: MANAGERS.reduce(
-                (acc, manager) => ({ ...acc, [manager.teams[season]]: manager }),
+                (acc, manager) => ({
+                    ...acc,
+                    [manager.teams[season]]: manager,
+                }),
                 {}
             ),
         }),
@@ -293,6 +295,15 @@ export const Match = {
             ? { team: teamTwo, opposition: teamOne }
             : undefined,
     isFinished: ({ status }: Match) => status === "finished",
+    getMaxPoints: ({ teamOne, teamTwo }: Match) =>
+        Math.max(teamOne.points, teamTwo.points),
+    getMinPoints: ({ teamOne, teamTwo }: Match) =>
+        Math.min(teamOne.points, teamTwo.points),
+    getWinningRatio: ({ teamOne, teamTwo }: Match) =>
+        Math.max(
+            teamOne.points / teamTwo.points,
+            teamTwo.points / teamOne.points
+        ),
 };
 
 export const SEASON_NOTES: Partial<

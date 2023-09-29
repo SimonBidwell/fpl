@@ -78,6 +78,7 @@ export const Standings = ({ data }: Props) => {
         });
     }, [sortDescriptor, data, selectedGameWeek]);
 
+    //TODO add some height and scroll to the dropdown
     const topContent = useMemo(
         () => (
             <div className="flex justify-between items-center px-4 pt-4">
@@ -88,7 +89,7 @@ export const Standings = ({ data }: Props) => {
                 />
                 <div className="flex gap-3 justify-end">
                     <Dropdown>
-                        <DropdownTrigger className="hidden sm:flex">
+                        <DropdownTrigger>
                             <Button
                                 endContent={
                                     <Chevron orientation="down" />

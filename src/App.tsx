@@ -18,7 +18,8 @@ import {
 import { Chevron } from "./components/Chevron";
 import { useState } from "react";
 import { getSeasons } from "./components/standings/helpers";
-import { MatchList } from "./components/MatchList";
+import { Fixtures } from "./components/Fixtures";
+import { Results } from "./components/Results";
 
 export const App = () => {
     const { isLoading, error, data } = useQuery("leagueDetails", () =>
@@ -49,7 +50,7 @@ export const App = () => {
     return (
         <main className="max-h-screen max-w-screen h-screen w-screen overflow-x-hidden flex items-center justify-center p-2">
             {/* TODO on small screens padding at the bottom gets lost */}
-            <div className="w-4/5 h-full">
+            <div className="w-full h-full md:w-4/5">
                 <Card shadow="sm">
                     <CardBody>
                         {/* TODO not sure I need another container here */}
@@ -63,7 +64,7 @@ export const App = () => {
                                 ) : null}
                             </div>
                             <Dropdown>
-                                <DropdownTrigger className="hidden sm:flex">
+                                <DropdownTrigger className="flex">
                                     <Button
                                         endContent={
                                             <Chevron orientation="down" />
@@ -106,19 +107,22 @@ export const App = () => {
                     </CardBody>
                 </Card>
                 {tab === "Standings" ? (
-                    <Standings key={leagueDetails.league.season} data={leagueDetails} />
-                ) : null}
-                {tab === "Results" ? (
-                    <MatchList
-                        key={leagueDetails.league.season}
-                        matches={leagueDetails.matches
-                            .filter(Match.isFinished)
-                            .reverse()}
+                    <Standings
+                        key={`standings-${leagueDetails.league.season}`}
+                        data={leagueDetails}
                     />
                 ) : null}
+                {tab === "Results" ? (
+                            <Results
+                                key={`results-${leagueDetails.league.season}`}
+                                matches={leagueDetails.matches
+                                    .filter(Match.isFinished)
+                                    .reverse()}
+                            />
+                ) : null}
                 {tab === "Fixtures" ? (
-                    <MatchList
-                        key={leagueDetails.league.season}
+                    <Fixtures
+                        key={`fixtures-${leagueDetails.league.season}`}
                         matches={leagueDetails.matches.filter(
                             (m) => !Match.isFinished(m)
                         )}
