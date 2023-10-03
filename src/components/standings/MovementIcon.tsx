@@ -33,7 +33,7 @@ export const MovementIcon = ({ previousPosition, currentPosition }: Props) => {
     return (
         <Tooltip content={tooltipContent} placement="right">
             <div
-                className={`rounded-full flex items-center w-3 h-3 ${
+                className={`rounded flex items-center h-3 w-3 ${
                     noMovement
                         ? "bg-default-500"
                         : movedDown
@@ -44,8 +44,6 @@ export const MovementIcon = ({ previousPosition, currentPosition }: Props) => {
                 {noMovement ? null : (
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
                         viewBox="0 0 16 16"
                         className={`fill-white ${
                             movedDown ? "rotate-180" : ""

@@ -34,7 +34,7 @@ export const Manager = (props: Props) => {
     return (
         <User
             avatarProps={{
-                radius: "lg",
+                radius: "md",
                 src: `./${id}.jpg`,
             }}
             description={description}

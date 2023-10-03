@@ -109,7 +109,7 @@ export const App = () => {
                 {tab === "Standings" ? (
                     <Standings
                         key={`standings-${leagueDetails.league.season}`}
-                        data={leagueDetails}
+                        leagueDetails={leagueDetails}
                     />
                 ) : null}
                 {tab === "Results" ? (

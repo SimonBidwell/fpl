@@ -1,8 +1,6 @@
 import { Match, Manager } from "../../domain";
-import {
-    getUniquePairs,
-    calculateExpectedPointsForGameWeek,
-} from "../standings/domain";
+import { getUniquePairs, calculateFairPoints } from "../standings/domain";
+
 
 //TODO rewrite this as it's really badly done
 export interface Report {
@@ -39,13 +37,10 @@ export const buildReport = (matches: Match[]): Report => {
         match.teamTwo.id,
     ]);
     const allPossibleMatches = getUniquePairs(teamIds);
-    const expectedPoints = calculateExpectedPointsForGameWeek(
+    const expectedPoints = calculateFairPoints(
         matches,
-        matches[0].gameWeek,
-        allPossibleMatches,
-        teamIds
+        allPossibleMatches
     );
-    console.log("expected points", expectedPoints)
     return matches.reduce((report, match) => {
         const maxPoints = Match.getMaxPoints(match);
         const hasHighestScore = maxPoints > (report.highestScorer?.points ?? 0);
