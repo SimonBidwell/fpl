@@ -1,6 +1,8 @@
 import { Match, Entry, LeagueDetails, Season } from "../../domain";
 import { groupBy, indexBy, rankBy } from "../../helpers";
 import { Key } from "react";
+import { calculateElo } from "./elo";
+
 
 export interface StandingsRow {
     key: Key;
@@ -18,6 +20,7 @@ export interface StandingsRow {
     points: number;
     fairPoints: number;
     fairPosition: number;
+    elo: number;
 }
 
 //TODO move to helpers?
@@ -78,6 +81,7 @@ interface TeamRecord {
     pointsScoreAgainst: number;
     points: number;
     fairPoints: number;
+    elo: number;
 }
 const EMPTY_RECORD: TeamRecord = {
     played: [],
@@ -88,16 +92,20 @@ const EMPTY_RECORD: TeamRecord = {
     pointsScoreAgainst: 0,
     points: 0,
     fairPoints: 0,
+    elo: 1500
 };
 
+//TODO adding ELO here makes me think that how this is structured can probably use a rework. 
 const addToRecords = ({
     teamId,
     match,
+    oppositionElo,
     records = new Map(),
     fairPoints = 0,
 }: {
     teamId: number;
     match: Match;
+    oppositionElo: number;
     records?: Map<number, TeamRecord>;
     fairPoints?: number;
 }): Map<number, TeamRecord> => {
@@ -114,6 +122,7 @@ const addToRecords = ({
             pointsScoreAgainst,
             points,
             fairPoints: existingFairPoints,
+            elo
         } = previousRecord;
         const isWinner = Match.isWinner(match, teamId);
         const isDraw = Match.isDraw(match);
@@ -127,6 +136,7 @@ const addToRecords = ({
             pointsScoreAgainst: pointsScoreAgainst + opposition.points,
             points: points + (isWinner ? 3 : isDraw ? 1 : 0),
             fairPoints: fairPoints + existingFairPoints,
+            elo: calculateElo(elo, oppositionElo, Match.resultForTeam(match, teamId) ?? "win") //TODO defaulting this to win is probably dumb
         };
         records.set(match.gameWeek, record);
         return records;
@@ -162,6 +172,7 @@ const buildTeamRecords = (
                 teamId: teamOne.id,
                 match: match,
                 records: acc.get(teamOne.id),
+                oppositionElo: (acc.get(teamTwo.id)?.get(match.gameWeek - 1) ?? EMPTY_RECORD).elo,
                 fairPoints: fairPointsByGameWeekAndTeamId
                     .get(match.gameWeek)
                     ?.get(teamOne.id),
@@ -170,6 +181,7 @@ const buildTeamRecords = (
                 teamId: teamTwo.id,
                 match: match,
                 records: acc.get(teamTwo.id),
+                oppositionElo: (acc.get(teamOne.id)?.get(match.gameWeek - 1) ?? EMPTY_RECORD).elo,
                 fairPoints: fairPointsByGameWeekAndTeamId
                     .get(match.gameWeek)
                     ?.get(teamTwo.id),
@@ -239,6 +251,7 @@ export const buildStandings = (
                 pointsScoreAgainst,
                 points,
                 fairPoints,
+                elo
             } = records.get(id)?.get(gameweek) ?? EMPTY_RECORD;
             return {
                 key: `${league.season}-${gameweek}-${id}`,
@@ -256,6 +269,7 @@ export const buildStandings = (
                 fairPosition,
                 season: league.season,
                 previousPosition: previousStanding?.position,
+                elo
             };
         });
 

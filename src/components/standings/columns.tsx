@@ -435,6 +435,15 @@ export const COLUMNS: readonly Column[] = [
             data: ({ fairPoints, played }) => fairPoints / played.length,
         },
     },
+    {
+        key: "ELO",
+        render: ({elo}) => Math.round(elo),
+        sort: (a, b) => a.elo - b.elo,
+        serialise: {
+            header: "ELO",
+            data: ({ elo }) => elo
+        }
+    }
 ];
 
 export const COLUMN_KEYS: readonly string[] = COLUMNS.map((col) => col.key);
