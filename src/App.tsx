@@ -113,12 +113,12 @@ export const App = () => {
                     />
                 ) : null}
                 {tab === "Results" ? (
-                            <Results
-                                key={`results-${leagueDetails.league.season}`}
-                                matches={leagueDetails.matches
-                                    .filter(Match.isFinished)
-                                    .reverse()}
-                            />
+                    <Results
+                        key={`results-${leagueDetails.league.season}`}
+                        matches={leagueDetails.matches
+                            .filter(Match.isFinished)
+                            .reverse()}
+                    />
                 ) : null}
                 {tab === "Fixtures" ? (
                     <Fixtures

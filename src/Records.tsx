@@ -22,7 +22,7 @@ const Record = ({ record }: { record: NotablePlacement }) => {
             : { tooltip: undefined, content: undefined };
     if (content && tooltip) {
         return (
-            <Tooltip content={tooltip}>
+            <Tooltip content={tooltip} delay={1000}>
                 <span>{content}</span>
             </Tooltip>
         );

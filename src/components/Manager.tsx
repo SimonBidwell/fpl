@@ -1,25 +1,27 @@
 import { User } from "@nextui-org/react";
 import { Records } from "../Records";
 import { Manager as ManagerType } from "../domain";
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 
 export type Props = ManagerProps | DescriptionProps;
 interface ManagerProps {
     manager: ManagerType;
     teamName: ReactNode;
     align?: "left" | "right";
+    border?: string
 }
 interface DescriptionProps {
     id: number;
     teamName: ReactNode;
     description: ReactNode;
     align?: "left" | "right";
+    border?: string;
 }
 const isManagerProps = (props: Props): props is ManagerProps =>
     Reflect.has(props, "manager");
 
 export const Manager = (props: Props) => {
-    const { teamName, align } = props;
+    const { teamName, align, border } = props;
     const { id, description } = isManagerProps(props)
         ? {
               id: props.manager.id,
@@ -36,6 +38,10 @@ export const Manager = (props: Props) => {
             avatarProps={{
                 radius: "md",
                 src: `./${id}.jpg`,
+                isBordered: !!border,
+                style: border ? {
+                    "--tw-ring-color": border
+                } as CSSProperties : undefined
             }}
             description={description}
             name={teamName}

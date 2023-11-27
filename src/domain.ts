@@ -21,6 +21,7 @@ export interface Manager {
     name: string;
     teams: Record<Season, number>;
     notablePlacements: NotablePlacement[];
+    color: string;
 }
 export const MANAGERS = [
     {
@@ -33,6 +34,7 @@ export const MANAGERS = [
             "2023/24": 115199,
         },
         notablePlacements: [],
+        color: "#ef4444"
     },
     {
         id: 2,
@@ -44,6 +46,7 @@ export const MANAGERS = [
             "2023/24": 115222,
         },
         notablePlacements: [{ season: "2021/22", position: 1 }],
+        color: "#f59e0b"
     },
     {
         id: 3,
@@ -55,6 +58,7 @@ export const MANAGERS = [
             "2023/24": 116308,
         },
         notablePlacements: [],
+        color: "#fde047"
     },
     {
         id: 4,
@@ -66,6 +70,7 @@ export const MANAGERS = [
             "2023/24": 118328,
         },
         notablePlacements: [{ season: "2022/23", position: 1 }],
+        color: "#22c55e"
     },
     {
         id: 5,
@@ -77,6 +82,7 @@ export const MANAGERS = [
             "2023/24": 123888,
         },
         notablePlacements: [{ season: "2019/20", position: 1 }],
+        color: "#670E36"
     },
     {
         id: 6,
@@ -88,6 +94,7 @@ export const MANAGERS = [
             "2023/24": 139985,
         },
         notablePlacements: [{ season: "2020/21", position: 1 }],
+        color: "#059669"
     },
     {
         id: 7,
@@ -99,6 +106,7 @@ export const MANAGERS = [
             "2023/24": 140440,
         },
         notablePlacements: [{ season: "2021/22", position: 12 }],
+        color: "#06b6d4"
     },
     {
         id: 8,
@@ -110,6 +118,7 @@ export const MANAGERS = [
             "2023/24": 142413,
         },
         notablePlacements: [],
+        color: "#a855f7",
     },
     {
         id: 9,
@@ -121,6 +130,7 @@ export const MANAGERS = [
             "2023/24": 142602,
         },
         notablePlacements: [],
+        color: "#ec4899"
     },
     {
         id: 10,
@@ -135,6 +145,7 @@ export const MANAGERS = [
             { season: "2020/21", position: 12 },
             { season: "2022/23", position: 12 },
         ],
+        color: "#f43f5e"
     },
     {
         id: 11,
@@ -146,6 +157,7 @@ export const MANAGERS = [
             "2023/24": 150040,
         },
         notablePlacements: [],
+        color: "#0f766e"
     },
     {
         id: 12,
@@ -157,6 +169,7 @@ export const MANAGERS = [
             "2023/24": 169965,
         },
         notablePlacements: [],
+        color: "#404040"
     },
 ];
 

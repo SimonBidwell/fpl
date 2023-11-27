@@ -3,7 +3,6 @@ import { groupBy, indexBy, rankBy } from "../../helpers";
 import { Key } from "react";
 import { calculateElo } from "./elo";
 
-
 export interface StandingsRow {
     key: Key;
     season: Season;
@@ -92,10 +91,10 @@ const EMPTY_RECORD: TeamRecord = {
     pointsScoreAgainst: 0,
     points: 0,
     fairPoints: 0,
-    elo: 1500
+    elo: 1500,
 };
 
-//TODO adding ELO here makes me think that how this is structured can probably use a rework. 
+//TODO adding ELO here makes me think that how this is structured can probably use a rework.
 const addToRecords = ({
     teamId,
     match,
@@ -122,7 +121,7 @@ const addToRecords = ({
             pointsScoreAgainst,
             points,
             fairPoints: existingFairPoints,
-            elo
+            elo,
         } = previousRecord;
         const isWinner = Match.isWinner(match, teamId);
         const isDraw = Match.isDraw(match);
@@ -136,7 +135,11 @@ const addToRecords = ({
             pointsScoreAgainst: pointsScoreAgainst + opposition.points,
             points: points + (isWinner ? 3 : isDraw ? 1 : 0),
             fairPoints: fairPoints + existingFairPoints,
-            elo: calculateElo(elo, oppositionElo, Match.resultForTeam(match, teamId) ?? "win") //TODO defaulting this to win is probably dumb
+            elo: calculateElo(
+                elo,
+                oppositionElo,
+                Match.resultForTeam(match, teamId) ?? "win"
+            ), //TODO defaulting this to win is probably dumb
         };
         records.set(match.gameWeek, record);
         return records;
@@ -166,13 +169,15 @@ const buildTeamRecords = (
     return matches
         .sort((a, b) => a.gameWeek - b.gameWeek)
         .reduce((acc, match) => {
-            const {teamOne, teamTwo} = match;
+            const { teamOne, teamTwo } = match;
 
             const recordsOne = addToRecords({
                 teamId: teamOne.id,
                 match: match,
                 records: acc.get(teamOne.id),
-                oppositionElo: (acc.get(teamTwo.id)?.get(match.gameWeek - 1) ?? EMPTY_RECORD).elo,
+                oppositionElo: (
+                    acc.get(teamTwo.id)?.get(match.gameWeek - 1) ?? EMPTY_RECORD
+                ).elo,
                 fairPoints: fairPointsByGameWeekAndTeamId
                     .get(match.gameWeek)
                     ?.get(teamOne.id),
@@ -181,7 +186,9 @@ const buildTeamRecords = (
                 teamId: teamTwo.id,
                 match: match,
                 records: acc.get(teamTwo.id),
-                oppositionElo: (acc.get(teamOne.id)?.get(match.gameWeek - 1) ?? EMPTY_RECORD).elo,
+                oppositionElo: (
+                    acc.get(teamOne.id)?.get(match.gameWeek - 1) ?? EMPTY_RECORD
+                ).elo,
                 fairPoints: fairPointsByGameWeekAndTeamId
                     .get(match.gameWeek)
                     ?.get(teamTwo.id),
@@ -193,36 +200,34 @@ const buildTeamRecords = (
         }, new Map());
 };
 
-export const buildStandings = (
-    {league, matches, entries}: LeagueDetails
-): Map<number, Map<number, StandingsRow>> => {
+export const buildStandings = ({
+    league,
+    matches,
+    entries,
+}: LeagueDetails): Map<number, Map<number, StandingsRow>> => {
     const teamIds = entries.map((e) => e.id);
     const allPossibleMatches = getUniquePairs(teamIds);
-    const matchesByTeam = matches.reduce(
-        (acc, match) => {
-            const {teamOne, teamTwo, gameWeek} = match;
-            const teamOneMatches = acc.get(teamOne.id) ?? new Map();
-            teamOneMatches.set(gameWeek, match)
-            acc.set(teamOne.id, teamOneMatches)
-            const teamTwoMatches = acc.get(teamTwo.id) ?? new Map();
-            teamTwoMatches.set(gameWeek, match)
-            acc.set(teamTwo.id, teamTwoMatches)
-            return acc
-        },
-        new Map()
-    )
+    const matchesByTeam = matches.reduce((acc, match) => {
+        const { teamOne, teamTwo, gameWeek } = match;
+        const teamOneMatches = acc.get(teamOne.id) ?? new Map();
+        teamOneMatches.set(gameWeek, match);
+        acc.set(teamOne.id, teamOneMatches);
+        const teamTwoMatches = acc.get(teamTwo.id) ?? new Map();
+        teamTwoMatches.set(gameWeek, match);
+        acc.set(teamTwo.id, teamTwoMatches);
+        return acc;
+    }, new Map());
     const finishedMatches = matches.filter(Match.isFinished);
     const finishedGameweeks = [
         ...new Set(finishedMatches.map((m) => m.gameWeek)),
-    ].sort((a, b) => a - b)
-    const records = buildTeamRecords(
-        finishedMatches,
-        allPossibleMatches
-    );
+    ].sort((a, b) => a - b);
+    const records = buildTeamRecords(finishedMatches, allPossibleMatches);
 
     return finishedGameweeks.reduce((acc, gameweek) => {
-        const results: [number, TeamRecord][] = teamIds
-            .map((teamId) => [teamId, (records.get(teamId)?.get(gameweek) ?? EMPTY_RECORD)]);
+        const results: [number, TeamRecord][] = teamIds.map((teamId) => [
+            teamId,
+            records.get(teamId)?.get(gameweek) ?? EMPTY_RECORD,
+        ]);
 
         const pointsPositionByTeamId = rankBy(
             results,
@@ -251,7 +256,7 @@ export const buildStandings = (
                 pointsScoreAgainst,
                 points,
                 fairPoints,
-                elo
+                elo,
             } = records.get(id)?.get(gameweek) ?? EMPTY_RECORD;
             return {
                 key: `${league.season}-${gameweek}-${id}`,
@@ -269,7 +274,7 @@ export const buildStandings = (
                 fairPosition,
                 season: league.season,
                 previousPosition: previousStanding?.position,
-                elo
+                elo,
             };
         });
 

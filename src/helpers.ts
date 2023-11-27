@@ -28,3 +28,8 @@ export const groupBy = <T, U>(
 
 export const clamp = (num: number, min: number, max: number): number =>
     Math.min(Math.max(num, min), max);
+
+    //TODO make this better inclusive/exclusive. start from etc. 
+export const range = (size: number): number[] => {
+    return [...Array(size).keys()]
+}
