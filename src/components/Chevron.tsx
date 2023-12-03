@@ -1,5 +1,6 @@
 import { SVGProps } from "react";
 
+//TODO why does this disappear on the season dropdown.
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
     orientation: "up" | "down" | "left" | "right";
 };

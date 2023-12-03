@@ -95,7 +95,10 @@ export const App = () => {
                         </div>
                         <Tabs
                             selectedKey={tab}
-                            className="pt-2"
+                            classNames={{
+                                "base": "pt-2",
+                                "tabList": "w-full sm:w-fit"
+                            }}
                             onSelectionChange={(x) =>
                                 typeof x === "string" ? setTab(x) : undefined
                             }

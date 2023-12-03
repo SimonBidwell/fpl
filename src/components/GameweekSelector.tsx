@@ -57,6 +57,7 @@ export const GameWeekSelector = ({
             <Dropdown>
                 <DropdownTrigger>
                     <Button
+                        className="w-full sm:w-fit"
                         endContent={<Chevron orientation="down" />}
                         variant="flat"
                     >

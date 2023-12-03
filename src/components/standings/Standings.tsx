@@ -104,17 +104,18 @@ export const Standings = ({ leagueDetails }: Props) => {
     //TODO add some height and scroll to the dropdown
     const topContent = useMemo(
         () => (
-            <div className="flex justify-between items-center p-4">
+            <div className="sm:flex sm:justify-between sm:items-center p-4 grid grid-rows-2 gap-2">
                 <GameWeekSelector
                     gameWeeks={finishedGameWeeks}
                     selectedGameWeek={selectedGameWeek}
                     setSelectedGameWeek={setSelectedGameWeek}
                 />
-                <div className="flex gap-3 justify-end">
+                <div className="w-full flex gap-3 justify-end">
                     {mode === "table" ? (
                         <Dropdown>
                             <DropdownTrigger>
                                 <Button
+                                    className="w-full sm:w-fit"
                                     endContent={<Chevron orientation="down" />}
                                     variant="flat"
                                 >
@@ -141,6 +142,7 @@ export const Standings = ({ leagueDetails }: Props) => {
                         <Dropdown>
                             <DropdownTrigger>
                                 <Button
+                                    className="w-full sm:w-fit"
                                     endContent={<Chevron orientation="down" />}
                                     variant="flat"
                                 >
