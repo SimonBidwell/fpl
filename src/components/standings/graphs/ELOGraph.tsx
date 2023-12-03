@@ -77,7 +77,7 @@ export const ELOGraph = ({ entries, standings, gameweek }: Props) => {
                     ticks: 10,
                 }}
             />
-            <div className="flex flex-wrap gap-4 p-2 bg-default/20 rounded-medium">
+            <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap p-2 bg-default/20 rounded-medium">
                 {entries.map((entry) => (
                     <div
                         className="cursor-pointer"
