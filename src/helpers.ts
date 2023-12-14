@@ -29,7 +29,23 @@ export const groupBy = <T, U>(
 export const clamp = (num: number, min: number, max: number): number =>
     Math.min(Math.max(num, min), max);
 
-    //TODO make this better inclusive/exclusive. start from etc. 
-export const range = (size: number): number[] => {
-    return [...Array(size).keys()]
-}
+
+export const range = (
+    num: number,
+    maybeEnd: number | undefined = undefined,
+    config: {
+        start: "inclusive" | "exclusive",
+        end: "inclusive" | "exclusive"
+    } = { start: "inclusive", end: "exclusive" }
+): number[] => {
+    const [start, end] = maybeEnd === undefined ? [0, num] : [num, maybeEnd]
+    const startVal = config.start == "inclusive" ? start : start + 1
+    const endVal = config.end == "inclusive" ? end + 1 : end
+    if (startVal >= endVal) {
+        return []
+    }
+    const size = endVal - startVal;
+    return [...Array(size).keys()].map((x) => x + startVal);
+};
+
+console.log(range(-5, 1))
