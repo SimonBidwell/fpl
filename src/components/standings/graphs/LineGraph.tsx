@@ -1,7 +1,12 @@
-import { CSSProperties, Fragment } from "react";
+import { useState } from "react";
 import * as d3 from "d3";
+import { Graph } from "./Graph";
+import { StandingsRow } from "../domain";
+import { Entry, MANAGERS } from "../../../domain";
+import { range } from "../../../helpers";
+import { Manager } from "../../Manager";
 
-interface Point {
+export interface Point {
     x: number;
     y: number;
 }
@@ -21,21 +26,95 @@ interface AxisConfig {
 }
 
 export interface Props {
-    data: Data[];
+    standings: Map<number, Map<number, StandingsRow>>;
+    gameweek: number;
+    entries: Entry[];
+    getY: (row: StandingsRow) => number;
+    initialPoint?: Point;
     xConfig: AxisConfig;
     yConfig: AxisConfig;
     title: string;
 }
+
+const buildData = (
+    standings: Map<number, Map<number, StandingsRow>>,
+    gameweek: number,
+    entries: number[],
+    getY: (row: StandingsRow) => number,
+    initialPoint?: Point,
+    color?: string
+): Data[] => {
+    const gameweeks = range(gameweek + 1);
+
+    //TODO rename foo
+    const foo: Record<number, { x: number; y: number }[]> = {};
+    gameweeks.map((gameweek) => {
+        const standingsForWeek = standings.get(gameweek) ?? new Map();
+        for (const [teamId, standing] of standingsForWeek) {
+            if (entries.includes(teamId)) {
+                const point = { x: gameweek, y: getY(standing) };
+                const existingPoints = foo[teamId];
+                if (existingPoints) {
+                    existingPoints.push(point);
+                } else {
+                    foo[teamId] = initialPoint
+                        ? [initialPoint, point]
+                        : [point];
+                }
+            }
+        }
+    });
+
+    return Object.entries(foo).map(([id, points], idx) => ({
+        //TODO generate a proper index
+        id: "foo",
+        color:
+            color ??
+            MANAGERS.find((m) => Object.values(m.teams).includes(+id))?.color ??
+            "#000",
+        points,
+    }));
+};
 
 const calculateXMax = (points: Point[]): number =>
     Math.max(...points.map((p) => p.x));
 const calculateYMax = (points: Point[]): number =>
     Math.max(...points.map((p) => p.y));
 
-const calculateYMin = (points: Point[]): number => 
-    Math.min(...points.map((p) => p.y))
+const calculateYMin = (points: Point[]): number =>
+    Math.min(...points.map((p) => p.y));
 
-export const LineGraph = ({ data, xConfig, yConfig, title }: Props) => {
+export const LineGraph = ({
+    standings,
+    gameweek,
+    entries,
+    xConfig,
+    yConfig,
+    title,
+    getY,
+    initialPoint,
+}: Props) => {
+    const [selectedEntries, setSelectedEntries] = useState<number[]>([]);
+    const [hovered, setHovered] = useState<number | undefined>(undefined);
+
+    const data = [
+        ...buildData(
+            standings,
+            gameweek,
+            entries.map((e) => e.id),
+            getY,
+            initialPoint,
+            "#e5e7eb"
+        ),
+        ...buildData(
+            standings,
+            gameweek,
+            selectedEntries.concat(hovered !== undefined ? [hovered] : []),
+            getY,
+            initialPoint
+        ),
+    ];
+
     const allPoints = data.flatMap((d) => d.points);
 
     const xMax = xConfig?.max ?? calculateXMax(allPoints);
@@ -59,30 +138,12 @@ export const LineGraph = ({ data, xConfig, yConfig, title }: Props) => {
         .y((d) => yScale(d.y));
 
     return (
-        <div>
-            <h2 className="text-xl font-semibold mb-4">{title}</h2>
-            <div className="h-[30rem]">
-                <div
-                    className="relative h-full w-full overflow-hidden"
-                    style={
-                        {
-                            "--marginTop": "5px",
-                            "--marginRight": "10px",
-                            "--marginBottom": "40px",
-                            "--marginLeft": "40px",
-                        } as CSSProperties
-                    }
-                >
-                    {/* X axis */}
-                    <svg
-                        className="absolute inset-0 
-                top-[calc(100%-var(--marginBottom))]
-                left-[var(--marginLeft)]
-                h-[var(--marginBottom)]
-                w-[calc(100%-var(--marginLeft)-var(--marginRight))]
-                overflow-visible
-                "
-                    >
+        <>
+            <Graph
+                title={title}
+                margins={{ top: 5, right: 10, bottom: 40, left: 40 }}
+                xAxis={
+                    <>
                         {xTicks.map((tick, i) => (
                             <text
                                 key={i}
@@ -105,16 +166,10 @@ export const LineGraph = ({ data, xConfig, yConfig, title }: Props) => {
                         >
                             {xConfig.title}
                         </text>
-                    </svg>
-                    {/* Y axis */}
-                    <svg
-                        className="absolute inset-0
-                h-[calc(100%-var(--marginTop)-var(--marginBottom))]
-                w-[var(--marginLeft)]
-                translate-y-[var(--marginTop)]
-                overflow-visible
-                "
-                    >
+                    </>
+                }
+                yAxis={
+                    <>
                         {yTicks.map((tick, i) => (
                             <text
                                 key={i}
@@ -138,77 +193,95 @@ export const LineGraph = ({ data, xConfig, yConfig, title }: Props) => {
                         >
                             {yConfig.title}
                         </text>
-                    </svg>
-                    {/* Chart area */}
-                    <svg
-                        className="absolute inset-0
-                h-[calc(100%-var(--marginTop)-var(--marginBottom))]
-                w-[calc(100%-var(--marginLeft)-var(--marginRight))]
-                translate-x-[var(--marginLeft)]
-                translate-y-[var(--marginTop)]
-                overflow-visible 
-                "
-                    >
-                        <svg
-                            viewBox="0 0 100 100"
-                            className="overflow-visible"
-                            preserveAspectRatio="none"
-                        >
-                            {/* Grid lines */}
-                            {yTicks.map((tick, i) => (
-                                <g
-                                    transform={`translate(0,${yScale(tick)})`}
-                                    className="text-gray-300"
-                                    key={i}
-                                >
-                                    <line
-                                        x1={0}
-                                        x2={100}
-                                        stroke="currentColor"
-                                        strokeDasharray="6,5"
-                                        strokeWidth={0.5}
-                                        vectorEffect="non-scaling-stroke"
-                                    />
-                                </g>
-                            ))}
+                    </>
+                }
+                body={
+                    <>
+                        {/* Grid lines */}
+                        {yTicks.map((tick, i) => (
+                            <g
+                                transform={`translate(0,${yScale(tick)})`}
+                                className="text-gray-300"
+                                key={i}
+                            >
+                                <line
+                                    x1={0}
+                                    x2={100}
+                                    stroke="currentColor"
+                                    strokeDasharray="6,5"
+                                    strokeWidth={0.5}
+                                    vectorEffect="non-scaling-stroke"
+                                />
+                            </g>
+                        ))}
 
-                            {/* Lines */}
-                            {data.map(({ points, color }) => {
-                                const toDraw = line(points);
-                                if (toDraw) {
-                                    return (
-                                        <g>
-                                            {/* Line */}
+                        {/* Lines */}
+                        {data.map(({ points, color }) => {
+                            const toDraw = line(points);
+                            if (toDraw) {
+                                return (
+                                    <g>
+                                        {/* Line */}
+                                        <path
+                                            d={toDraw}
+                                            fill="none"
+                                            style={{ color }}
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            vectorEffect="non-scaling-stroke"
+                                        />
+                                        {/* Point Markers */}
+                                        {points.map(({ x, y }) => (
                                             <path
-                                                d={toDraw}
-                                                fill="none"
-                                                style={{ color }}
-                                                stroke="currentColor"
-                                                strokeWidth="2"
+                                                d={`M ${xScale(x)} ${yScale(
+                                                    y
+                                                )} l 0.0001 0`}
                                                 vectorEffect="non-scaling-stroke"
+                                                strokeWidth="6"
+                                                strokeLinecap="round"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                style={{ color }}
                                             />
-                                            {/* Point Markers */}
-                                            {points.map(({ x, y }) => (
-                                                <path
-                                                    d={`M ${xScale(x)} ${yScale(
-                                                        y
-                                                    )} l 0.0001 0`}
-                                                    vectorEffect="non-scaling-stroke"
-                                                    strokeWidth="6"
-                                                    strokeLinecap="round"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    style={{ color }}
-                                                />
-                                            ))}
-                                        </g>
+                                        ))}
+                                    </g>
+                                );
+                            }
+                        })}
+                    </>
+                }
+            />
+            <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap p-2 bg-default/20 rounded-medium">
+                {entries.map((entry) => (
+                    <div
+                        className="cursor-pointer"
+                        onClick={() =>
+                            setSelectedEntries((entries) => {
+                                if (entries.includes(entry.id)) {
+                                    return entries.filter(
+                                        (e) => e !== entry.id
                                     );
+                                } else {
+                                    return [...entries, entry.id];
                                 }
-                            })}
-                        </svg>
-                    </svg>
-                </div>
+                            })
+                        }
+                        onMouseEnter={() => setHovered(entry.id)}
+                        onMouseLeave={() => setHovered(undefined)}
+                    >
+                        <Manager
+                            manager={entry.manager}
+                            teamName={entry.name}
+                            border={
+                                selectedEntries.includes(entry.id) ||
+                                hovered === entry.id
+                                    ? entry.manager.color
+                                    : undefined
+                            }
+                        />
+                    </div>
+                ))}
             </div>
-        </div>
+        </>
     );
 };
