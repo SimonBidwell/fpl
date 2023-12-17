@@ -12,6 +12,7 @@ export interface Props {
     xAxis?: React.ReactNode;
     yAxis?: React.ReactNode;
     body: React.ReactNode;
+    labels?: React.ReactNode;
 }
 
 export const Graph = ({
@@ -20,11 +21,12 @@ export const Graph = ({
     xAxis,
     yAxis,
     body,
+    labels,
 }: Props) => {
     return (
         <div>
             <h2 className="text-xl font-semibold mb-4">{title}</h2>
-            <div className="h-[30rem]">
+            <div className={`h-[30rem]`}>
                 <div
                     className="relative h-full w-full overflow-hidden"
                     style={
@@ -77,6 +79,7 @@ export const Graph = ({
                         >
                             {body}
                         </svg>
+                        {labels}
                     </svg>
                 </div>
             </div>

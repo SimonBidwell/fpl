@@ -104,7 +104,7 @@ export const LineGraph = ({
             entries.map((e) => e.id),
             getY,
             initialPoint,
-            "#e5e7eb"
+            "#e5e7eb" //this is gray-200
         ),
         ...buildData(
             standings,

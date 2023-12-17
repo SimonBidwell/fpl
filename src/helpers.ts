@@ -47,5 +47,3 @@ export const range = (
     const size = endVal - startVal;
     return [...Array(size).keys()].map((x) => x + startVal);
 };
-
-console.log(range(-5, 1))

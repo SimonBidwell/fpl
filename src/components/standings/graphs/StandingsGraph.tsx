@@ -1,7 +1,6 @@
 import { Entry } from "../../../domain";
 import { StandingsRow } from "../domain";
-import { FairPointsDifference } from "./FairPointsDifference";
-import { FairPositionDifference } from "./FairPositionDifference";
+import { ForAgainstAndDifferenceBarChart } from "./ForAgainstAndDifferenceBarChart";
 import { LineGraph } from "./LineGraph";
 
 export const GRAPHS = [
@@ -10,6 +9,7 @@ export const GRAPHS = [
     "Fair Points Difference by Gameweek",
     "Fair Position Difference by Gameweek",
     "ELO",
+    "Points Difference",
 ];
 export type Graph = (typeof GRAPHS)[number];
 
@@ -125,6 +125,20 @@ export const StandingsGraph = ({
                         direction: "ASC",
                         ticks: 10,
                     }}
+                />
+            );
+        case "Points Difference":
+            return (
+                <ForAgainstAndDifferenceBarChart
+                    title={graph}
+                    data={[
+                        ...(standings.get(gameweek) ?? new Map()).values(),
+                    ].map((r) => ({
+                        scoreFor: r.pointsScoreFor,
+                        scoreAgainst: r.pointsScoreAgainst,
+                        difference: r.pointsScoreFor - r.pointsScoreAgainst,
+                        entry: r.entry,
+                    }))}
                 />
             );
     }
