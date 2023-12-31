@@ -21,7 +21,7 @@ import {
     Redirect,
 } from "wouter";
 import { partition } from "../helpers";
-import { WithDefaultGameWeek } from "./WithDefaultGameweek";
+import { WithDefaultGameWeek } from "./WithDefaultGameWeek";
 import { useReplaceNavigate } from "../useReplaceNavigate";
 
 export interface Props {
