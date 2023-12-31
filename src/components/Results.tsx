@@ -1,17 +1,21 @@
 import { Match } from "../domain";
 import { groupBy } from "../helpers";
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { DownloadCSV, MATCH_SERIALISER } from "./DownloadCSV";
 import { GameWeekSelector } from "./GameweekSelector";
 import { MatchList } from "./MatchList";
 import { GameweekReport } from "./gameweekreport/GameweekReport";
+import { useLocation, useParams } from "wouter";
 
 export interface Props {
     matches: Match[];
 }
 
-export const Results = ({ matches }: Props) => {
-    //TODO extract this state out into a hook so it can be reused across results and fixtures
+export const Results = ({
+    matches,
+}: Props) => {
+    const { gameWeek } = useParams();
+    const [, navigate] = useLocation();
     const byGameWeek = useMemo(
         () => groupBy(matches, (m) => m.gameWeek),
         [matches]
@@ -20,17 +24,14 @@ export const Results = ({ matches }: Props) => {
         () => [...new Set(byGameWeek.keys())],
         [byGameWeek]
     );
-    const [selectedGameWeek, setSelectedGameWeek] = useState<number>(
-        gameWeeks[0]
-    );
-    const selectedGameWeeks = [selectedGameWeek];
+
     return (
         <>
             <div className="flex justify-between items-center p-4">
                 <GameWeekSelector
                     gameWeeks={gameWeeks}
-                    selectedGameWeek={selectedGameWeek}
-                    setSelectedGameWeek={setSelectedGameWeek}
+                    selectedGameWeek={Number(gameWeek)}
+                    setSelectedGameWeek={(gameWeek) => navigate(`/${gameWeek}`)}
                 />
                 <div>
                     <DownloadCSV
@@ -41,17 +42,15 @@ export const Results = ({ matches }: Props) => {
                 </div>
             </div>
             <div className="flex flex-col gap-4">
-                {selectedGameWeeks.map((gameweek) => (
-                    <div className="flex flex-col gap-4 md:h-[27rem] md:flex-row">
-                        <MatchList
-                            gameweek={gameweek}
-                            matches={byGameWeek.get(gameweek) ?? []}
-                        />
-                        <GameweekReport
-                            matches={byGameWeek.get(gameweek) ?? []}
-                        />
-                    </div>
-                ))}
+                <div className="flex flex-col gap-4 md:h-[27rem] md:flex-row">
+                    <MatchList
+                        gameweek={Number(gameWeek)}
+                        matches={byGameWeek.get(Number(gameWeek)) ?? []}
+                    />
+                    <GameweekReport
+                        matches={byGameWeek.get(Number(gameWeek)) ?? []}
+                    />
+                </div>
             </div>
         </>
     );

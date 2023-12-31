@@ -4,11 +4,19 @@ import {
     Match as FplMatch,
 } from "./api/domain";
 
-export const SEASONS = ["2020/21", "2021/22", "2022/23", "2023/24"] as const;
+export const SEASONS = ["2020-21", "2021-22", "2022-23", "2023-24"] as const;
+export const DEFAULT_SEASON = SEASONS[SEASONS.length - 1];
 export type Season = (typeof SEASONS)[number];
 export const Season = {
     isSeason: (s: unknown): s is Season => SEASONS.includes(s as Season),
     sort: (a: Season, b: Season) => a.localeCompare(b),
+    getSeason: (s: unknown): Season | undefined => {
+        if (typeof s === "string") {
+            return SEASONS.find(season => season === s)
+        }
+        return undefined
+    },
+    toDisplayFormat: (s: Season): string => s.replaceAll("-", "/")
 };
 
 export interface NotablePlacement {
@@ -28,10 +36,10 @@ export const MANAGERS = [
         id: 1,
         name: "Ed Brett",
         teams: {
-            "2020/21": 1,
-            "2021/22": 154306,
-            "2022/23": 1,
-            "2023/24": 115199,
+            "2020-21": 1,
+            "2021-22": 154306,
+            "2022-23": 1,
+            "2023-24": 115199,
         },
         notablePlacements: [],
         color: "#ef4444"
@@ -40,22 +48,22 @@ export const MANAGERS = [
         id: 2,
         name: "Alex Harrison",
         teams: {
-            "2020/21": 3,
-            "2021/22": 154519,
-            "2022/23": 3,
-            "2023/24": 115222,
+            "2020-21": 3,
+            "2021-22": 154519,
+            "2022-23": 3,
+            "2023-24": 115222,
         },
-        notablePlacements: [{ season: "2021/22", position: 1 }],
+        notablePlacements: [{ season: "2021-22", position: 1 }],
         color: "#f59e0b"
     },
     {
         id: 3,
         name: "Ollie Craig",
         teams: {
-            "2020/21": 4,
-            "2021/22": 154677,
-            "2022/23": 4,
-            "2023/24": 116308,
+            "2020-21": 4,
+            "2021-22": 154677,
+            "2022-23": 4,
+            "2023-24": 116308,
         },
         notablePlacements: [],
         color: "#fde047"
@@ -64,58 +72,58 @@ export const MANAGERS = [
         id: 4,
         name: "Charlie Schofield",
         teams: {
-            "2020/21": 6,
-            "2021/22": 201935,
-            "2022/23": 6,
-            "2023/24": 118328,
+            "2020-21": 6,
+            "2021-22": 201935,
+            "2022-23": 6,
+            "2023-24": 118328,
         },
-        notablePlacements: [{ season: "2022/23", position: 1 }],
+        notablePlacements: [{ season: "2022-23", position: 1 }],
         color: "#22c55e"
     },
     {
         id: 5,
         name: "Simon Bidwell",
         teams: {
-            "2020/21": 12,
-            "2021/22": 208300,
-            "2022/23": 12,
-            "2023/24": 123888,
+            "2020-21": 12,
+            "2021-22": 208300,
+            "2022-23": 12,
+            "2023-24": 123888,
         },
-        notablePlacements: [{ season: "2019/20", position: 1 }],
+        notablePlacements: [{ season: "2019-20", position: 1 }],
         color: "#670E36"
     },
     {
         id: 6,
         name: "Anjit Aulakh",
         teams: {
-            "2020/21": 5,
-            "2021/22": 154909,
-            "2022/23": 5,
-            "2023/24": 139985,
+            "2020-21": 5,
+            "2021-22": 154909,
+            "2022-23": 5,
+            "2023-24": 139985,
         },
-        notablePlacements: [{ season: "2020/21", position: 1 }],
+        notablePlacements: [{ season: "2020-21", position: 1 }],
         color: "#059669"
     },
     {
         id: 7,
         name: "Aaron Veale",
         teams: {
-            "2020/21": 2,
-            "2021/22": 154352,
-            "2022/23": 2,
-            "2023/24": 140440,
+            "2020-21": 2,
+            "2021-22": 154352,
+            "2022-23": 2,
+            "2023-24": 140440,
         },
-        notablePlacements: [{ season: "2021/22", position: 12 }],
+        notablePlacements: [{ season: "2021-22", position: 12 }],
         color: "#06b6d4"
     },
     {
         id: 8,
         name: "Sebastian Waters",
         teams: {
-            "2020/21": 9,
-            "2021/22": 206495,
-            "2022/23": 9,
-            "2023/24": 142413,
+            "2020-21": 9,
+            "2021-22": 206495,
+            "2022-23": 9,
+            "2023-24": 142413,
         },
         notablePlacements: [],
         color: "#a855f7",
@@ -124,10 +132,10 @@ export const MANAGERS = [
         id: 9,
         name: "Alexander Greenhalgh",
         teams: {
-            "2020/21": 7,
-            "2021/22": 205525,
-            "2022/23": 7,
-            "2023/24": 142602,
+            "2020-21": 7,
+            "2021-22": 205525,
+            "2022-23": 7,
+            "2023-24": 142602,
         },
         notablePlacements: [],
         color: "#ec4899"
@@ -136,14 +144,14 @@ export const MANAGERS = [
         id: 10,
         name: "Sam Senior",
         teams: {
-            "2020/21": 10,
-            "2021/22": 207042,
-            "2022/23": 10,
-            "2023/24": 147306,
+            "2020-21": 10,
+            "2021-22": 207042,
+            "2022-23": 10,
+            "2023-24": 147306,
         },
         notablePlacements: [
-            { season: "2020/21", position: 12 },
-            { season: "2022/23", position: 12 },
+            { season: "2020-21", position: 12 },
+            { season: "2022-23", position: 12 },
         ],
         color: "#f43f5e"
     },
@@ -151,10 +159,10 @@ export const MANAGERS = [
         id: 11,
         name: "Ben Malpass",
         teams: {
-            "2020/21": 8,
-            "2021/22": 206241,
-            "2022/23": 8,
-            "2023/24": 150040,
+            "2020-21": 8,
+            "2021-22": 206241,
+            "2022-23": 8,
+            "2023-24": 150040,
         },
         notablePlacements: [],
         color: "#0f766e"
@@ -163,10 +171,10 @@ export const MANAGERS = [
         id: 12,
         name: "Luke Trevett",
         teams: {
-            "2020/21": 11,
-            "2021/22": 208287,
-            "2022/23": 11,
-            "2023/24": 169965,
+            "2020-21": 11,
+            "2021-22": 208287,
+            "2022-23": 11,
+            "2023-24": 169965,
         },
         notablePlacements: [],
         color: "#404040"
@@ -328,7 +336,7 @@ export const SEASON_NOTES: Partial<
         }
     >
 > = {
-    "2020/21": {
+    "2020-21": {
         general:
             "The data for the 2020/21 season was manually reconstructed. It could contain mistakes/inaccuracies.",
         gameweeks: {
@@ -342,7 +350,7 @@ export const SEASON_NOTES: Partial<
             },
         },
     },
-    "2022/23": {
+    "2022-23": {
         general:
             "The data for the 2022/23 season was manually reconstructed. It could contain mistakes/inaccuracies.",
         gameweeks: {
@@ -409,5 +417,5 @@ export const LeagueDetails = {
             entries,
             matches,
         };
-    },
+    }
 };

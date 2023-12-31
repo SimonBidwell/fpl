@@ -79,7 +79,6 @@ const MatchSummary = ({ match, highlight = "winner" }: { match: Match, highlight
 
 export const GameweekReport = ({ matches }: Props) => {
     const report = useMemo(() => buildReport(matches), [matches]);
-    console.log(report)
     return (
         <Card shadow="sm" className="w-full h-64 md:h-full md:w-fit">
             <CardBody className="overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-default-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-default-300 scrollbar-track:!rounded">

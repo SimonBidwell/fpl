@@ -1,15 +1,21 @@
 import { Match } from "../domain";
 import { groupBy } from "../helpers";
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { DownloadCSV, MATCH_SERIALISER } from "./DownloadCSV";
 import { GameWeekSelector } from "./GameweekSelector";
 import { MatchList } from "./MatchList";
+import { useLocation, useParams } from "wouter";
 
 export interface Props {
     matches: Match[];
 }
 
-export const Fixtures = ({ matches }: Props) => {
+export const Fixtures = ({
+    matches,
+}: Props) => {
+
+    const { gameWeek } = useParams();
+    const [, navigate] = useLocation();
     const byGameWeek = useMemo(
         () => groupBy(matches, (m) => m.gameWeek),
         [matches]
@@ -18,17 +24,14 @@ export const Fixtures = ({ matches }: Props) => {
         () => [...new Set(byGameWeek.keys())],
         [byGameWeek]
     );
-    const [selectedGameWeek, setSelectedGameWeek] = useState<number>(
-        gameWeeks[0]
-    );
-    const selectedGameWeeks = [selectedGameWeek];
+
     return (
         <>
             <div className="flex justify-between items-center p-4">
                 <GameWeekSelector
                     gameWeeks={gameWeeks}
-                    selectedGameWeek={selectedGameWeek}
-                    setSelectedGameWeek={setSelectedGameWeek}
+                    selectedGameWeek={Number(gameWeek)}
+                    setSelectedGameWeek={(gameWeek) => navigate(`/${gameWeek}`)}
                 />
                 <div>
                     <DownloadCSV
@@ -39,7 +42,10 @@ export const Fixtures = ({ matches }: Props) => {
                 </div>
             </div>
             <div className="flex flex-col gap-4">
-                {selectedGameWeeks.map(gameweek => <MatchList gameweek={gameweek} matches={byGameWeek.get(gameweek) ?? []}/>)}
+                    <MatchList
+                        gameweek={Number(gameWeek)}
+                        matches={byGameWeek.get(Number(gameWeek)) ?? []}
+                    />
             </div>
         </>
     );

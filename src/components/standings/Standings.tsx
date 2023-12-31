@@ -25,12 +25,29 @@ import { Chevron } from "../Chevron";
 import { DownloadCSV, buildStandingsSerialiser } from "../DownloadCSV";
 import { GameWeekSelector } from "../GameweekSelector";
 import { GRAPHS, Graph, StandingsGraph } from "./graphs/StandingsGraph";
+import { useLocation, useParams } from "wouter";
 
 export interface Props {
     leagueDetails: LeagueDetails;
 }
 
-export const Standings = ({ leagueDetails }: Props) => {
+export const Standings = ({
+    leagueDetails
+}: Props) => {
+    const { gameWeek } = useParams();
+    const [, navigate] = useLocation();
+    const finishedGameWeeks = useMemo(
+        () =>
+            [
+                ...new Set(
+                    leagueDetails.matches
+                        .filter(Match.isFinished)
+                        .map((m) => m.gameWeek)
+                ),
+            ].sort((a, b) => b - a),
+        [leagueDetails]
+    );
+
     const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
         column: "Position",
         direction: "ascending",
@@ -43,21 +60,6 @@ export const Standings = ({ leagueDetails }: Props) => {
     const [graph, setGraph] = useState<Selection>(new Set([GRAPHS[0]]));
 
     const [mode, setMode] = useState<"table" | "graph">("table");
-
-    const finishedGameWeeks = useMemo(
-        () =>
-            [
-                ...new Set(
-                    leagueDetails.matches
-                        .filter(Match.isFinished)
-                        .map((m) => m.gameWeek)
-                ),
-            ].sort((a, b) => b - a),
-        [leagueDetails]
-    );
-    const [selectedGameWeek, setSelectedGameWeek] = useState<number>(
-        finishedGameWeeks[0]
-    );
 
     const columns = useMemo(
         () =>
@@ -81,9 +83,9 @@ export const Standings = ({ leagueDetails }: Props) => {
     );
     const selectedStandings = useMemo(() => {
         const selected =
-            standings.get(selectedGameWeek) ?? new Map<number, StandingsRow>();
+            standings.get(Number(gameWeek)) ?? new Map<number, StandingsRow>();
         return [...selected.values()];
-    }, [selectedGameWeek]);
+    }, [gameWeek]);
     const sortedStandings = useMemo(
         () =>
             selectedStandings.sort((a, b) => {
@@ -107,8 +109,8 @@ export const Standings = ({ leagueDetails }: Props) => {
             <div className="sm:flex sm:justify-between sm:items-center p-4 grid grid-rows-2 gap-2">
                 <GameWeekSelector
                     gameWeeks={finishedGameWeeks}
-                    selectedGameWeek={selectedGameWeek}
-                    setSelectedGameWeek={setSelectedGameWeek}
+                    selectedGameWeek={Number(gameWeek)}
+                    setSelectedGameWeek={(gameWeek) => navigate(`/${gameWeek}`)}
                 />
                 <div className="w-full flex gap-3 justify-end">
                     {mode === "table" ? (
@@ -165,11 +167,13 @@ export const Standings = ({ leagueDetails }: Props) => {
                             </DropdownMenu>
                         </Dropdown>
                     ) : null}
-                    {mode === "table" ? <DownloadCSV
-                        serialiser={buildStandingsSerialiser(columns)}
-                        data={sortedStandings}
-                        filename="standings"
-                    /> : null}
+                    {mode === "table" ? (
+                        <DownloadCSV
+                            serialiser={buildStandingsSerialiser(columns)}
+                            data={sortedStandings}
+                            filename="standings"
+                        />
+                    ) : null}
                     <ButtonGroup>
                         <Button
                             variant={mode === "table" ? undefined : "flat"}
@@ -234,8 +238,7 @@ export const Standings = ({ leagueDetails }: Props) => {
             visibleColumns,
             sortedStandings,
             finishedGameWeeks,
-            selectedGameWeek,
-            setSelectedGameWeek,
+            gameWeek
         ]
     );
 
@@ -248,7 +251,7 @@ export const Standings = ({ leagueDetails }: Props) => {
                         <StandingsGraph
                             graph={Array.from(graph)[0] as Graph}
                             standings={standings}
-                            gameweek={selectedGameWeek}
+                            gameweek={Number(gameWeek)}
                             entries={leagueDetails.entries}
                         />
                     </CardBody>

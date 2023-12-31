@@ -6,14 +6,14 @@ import {
     DropdownMenu,
     Selection,
 } from "@nextui-org/react";
-import { Dispatch, SetStateAction, useMemo, useCallback } from "react";
+import { useMemo, useCallback } from "react";
 import { Chevron } from "./Chevron";
 import { clamp } from "../helpers";
 
 export interface Props {
     gameWeeks: number[];
     selectedGameWeek: number;
-    setSelectedGameWeek: Dispatch<SetStateAction<number>>;
+    setSelectedGameWeek: (gameweek: number) => void;
 }
 
 export const GameWeekSelector = ({
@@ -28,14 +28,8 @@ export const GameWeekSelector = ({
         [selectedGameWeek]
     );
 
-    const goToPrevious = useCallback(
-        () => setSelectedGameWeek((gameWeek) => clamp(gameWeek - 1, min, max)),
-        [setSelectedGameWeek, min, max]
-    );
-    const goToNext = useCallback(
-        () => setSelectedGameWeek((gameWeek) => clamp(gameWeek + 1, min, max)),
-        [setSelectedGameWeek, min, max]
-    );
+    const goToPrevious = () => setSelectedGameWeek(clamp(selectedGameWeek - 1, min, max));
+    const goToNext = () => setSelectedGameWeek(clamp(selectedGameWeek + 1, min, max));
 
     const onSelectionChange = useCallback(
         (selection: Selection) => {

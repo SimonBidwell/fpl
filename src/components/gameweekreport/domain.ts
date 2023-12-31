@@ -73,9 +73,6 @@ export const buildReport = (matches: Match[]): Report => {
             result === "draw" || result === undefined
                 ? undefined
                 : expectedPoints.get(result.loser.id) ?? 0;
-        if (result !== "draw" && result !== undefined) {
-            console.log(expectedPoints.get(result.loser.id));
-        }
         const hasCharmedLife =
             winnerFair !== undefined &&
             winnerFair < (report.charmedLife?.fairPoints ?? 9999);

@@ -29,21 +29,39 @@ export const groupBy = <T, U>(
 export const clamp = (num: number, min: number, max: number): number =>
     Math.min(Math.max(num, min), max);
 
-
 export const range = (
     num: number,
     maybeEnd: number | undefined = undefined,
     config: {
-        start: "inclusive" | "exclusive",
-        end: "inclusive" | "exclusive"
+        start: "inclusive" | "exclusive";
+        end: "inclusive" | "exclusive";
     } = { start: "inclusive", end: "exclusive" }
 ): number[] => {
-    const [start, end] = maybeEnd === undefined ? [0, num] : [num, maybeEnd]
-    const startVal = config.start == "inclusive" ? start : start + 1
-    const endVal = config.end == "inclusive" ? end + 1 : end
+    const [start, end] = maybeEnd === undefined ? [0, num] : [num, maybeEnd];
+    const startVal = config.start == "inclusive" ? start : start + 1;
+    const endVal = config.end == "inclusive" ? end + 1 : end;
     if (startVal >= endVal) {
-        return []
+        return [];
     }
     const size = endVal - startVal;
     return [...Array(size).keys()].map((x) => x + startVal);
 };
+
+export const capitalizeFirstLetter = (string: string) =>
+    string.charAt(0).toUpperCase() + string.slice(1);
+
+export const partition = <T>(
+    items: T[],
+    cond: (t: T) => boolean
+): [T[], T[]] => {
+    const truthy = []
+    const falsey = []
+    for (const item of items) {
+        if (cond(item)) {
+            truthy.push(item)
+        } else {
+            falsey.push(item)
+        }
+    }
+    return [truthy, falsey]
+}
