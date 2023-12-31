@@ -8,7 +8,7 @@ interface ManagerProps {
     manager: ManagerType;
     teamName: ReactNode;
     align?: "left" | "right";
-    border?: string
+    border?: string;
 }
 interface DescriptionProps {
     id: number;
@@ -37,21 +37,25 @@ export const Manager = (props: Props) => {
         <User
             avatarProps={{
                 radius: "md",
-                src: `/${
-                    import.meta.env.PROD ? import.meta.env.BASE_URL + "/" : ""
-                }${id}.jpg`,
+                src: `${import.meta.env.BASE_URL}/${id}.jpg`,
                 isBordered: !!border,
-                style: border ? {
-                    "--tw-ring-color": border
-                } as CSSProperties : undefined
+                style: border
+                    ? ({
+                          "--tw-ring-color": border,
+                      } as CSSProperties)
+                    : undefined,
             }}
             description={description}
             name={teamName}
-            classNames={align === "right" ? {
-                "base": "flex-row-reverse",
-                "description": "flex-row-reverse",
-                "wrapper": "items-end"
-            }: undefined}
+            classNames={
+                align === "right"
+                    ? {
+                          base: "flex-row-reverse",
+                          description: "flex-row-reverse",
+                          wrapper: "items-end",
+                      }
+                    : undefined
+            }
         />
     );
 };
