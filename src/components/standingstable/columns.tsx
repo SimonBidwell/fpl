@@ -59,7 +59,8 @@ export const SeasonCol: Column = {
     render: ({ season }) => (
         <Link
             className="hover:text-foreground-400"
-            to={`~/fpl/league/1/${season}/`}
+            //TODO work out why this doesn't work without the /standings
+            to={`~/fpl/league/1/season/${season}/standings`}
         >
             {season}
         </Link>
