@@ -1,26 +1,7 @@
-import { Match, Entry, LeagueDetails, Season } from "../../domain";
+import { Match, LeagueDetails } from "../../domain";
 import { groupBy, indexBy, rankBy } from "../../helpers";
-import { Key } from "react";
+import { StandingsRow } from "../standingstable/StandingsTable";
 import { calculateElo } from "./elo";
-
-export interface StandingsRow {
-    key: Key;
-    season: Season;
-    entry: Entry;
-    position: number;
-    previousPosition: number | undefined;
-    played: Match[];
-    wins: Match[];
-    draws: Match[];
-    losses: Match[];
-    upcoming: Match | undefined;
-    pointsScoreFor: number;
-    pointsScoreAgainst: number;
-    points: number;
-    fairPoints: number;
-    fairPosition: number;
-    elo: number;
-}
 
 //TODO move to helpers?
 export const getUniquePairs = (ids: number[]): [number, number][] => {

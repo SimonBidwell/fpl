@@ -8,12 +8,10 @@ export interface Props {
 }
 
 export const WithDefaultGameWeek = ({defaultGameWeek, children, isValidGameWeek}: Props) => {
-    console.log("foo");
     const { gameWeek } = useParams();
-    console.log("gameweek", gameWeek)
     if (gameWeek !== undefined && isValidGameWeek(Number(gameWeek), defaultGameWeek)) {
         return children
     } else {
-        return <Redirect to={`/${defaultGameWeek}`}/>
+        return <Redirect to={`/${defaultGameWeek}`} replace/>
     }
 }

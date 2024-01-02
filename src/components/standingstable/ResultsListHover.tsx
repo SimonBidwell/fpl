@@ -18,7 +18,7 @@ export interface Props {
 }
 
 export const ResultsListHover = ({
-    entry: {id, name, manager },
+    entry: { id, name, manager },
     matches,
     result,
 }: Props) => {
@@ -27,6 +27,7 @@ export const ResultsListHover = ({
     const sortedMatches = matches.sort(Match.sort).reverse();
     return (
         <Tooltip
+            delay={600}
             content={
                 <div className="pt-2">
                     <Manager
@@ -49,9 +50,13 @@ export const ResultsListHover = ({
                                 </TableHeader>
                                 <TableBody>
                                     {sortedMatches.map((match) => {
-                                        const alignment = Match.getAlignment(match, id)
+                                        const alignment = Match.getAlignment(
+                                            match,
+                                            id
+                                        );
                                         if (alignment !== undefined) {
-                                            const { team, opposition } = alignment;
+                                            const { team, opposition } =
+                                                alignment;
                                             return (
                                                 <TableRow
                                                     key={`${match.season}-${match.gameWeek}`}

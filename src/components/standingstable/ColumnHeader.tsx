@@ -18,14 +18,16 @@ export const ColumnHeader = ({
     tooltipDelayMs = 600,
 }: Props) => {
     // The Tooltip component has a bug where it stops propogation of click events so we work around it by adding our own onClick to the tooltip child
-    const onClick = setSortDescriptor ? () =>
-        setSortDescriptor(({ direction, column }) => ({
-            direction:
-                column === name && direction === "ascending"
-                    ? "descending"
-                    : "ascending",
-            column: name,
-        })) : undefined;
+    const onClick = setSortDescriptor
+        ? () =>
+              setSortDescriptor(({ direction, column }) => ({
+                  direction:
+                      column === name && direction === "ascending"
+                          ? "descending"
+                          : "ascending",
+                  column: name,
+              }))
+        : undefined;
     if (abbr !== undefined || description !== undefined) {
         return (
             <Tooltip
@@ -46,7 +48,9 @@ export const ColumnHeader = ({
                                 {name} {abbr ? `(${abbr})` : ""}
                             </Card>
                             {description.split("\n").map((paragraph, i) => (
-                                <p key={i} className="py-2">{paragraph}</p>
+                                <p key={i} className="py-2">
+                                    {paragraph}
+                                </p>
                             ))}
                         </div>
                     ) : (
@@ -55,7 +59,16 @@ export const ColumnHeader = ({
                 }
             >
                 {/* TODO decoration colour here should be using a next-ui class but can't get it to work */}
-                <span onClick={onClick} className={description === undefined ? undefined : "underline decoration-dotted underline-offset-2 decoration-[#a1a1aa]"}>{abbr ?? name}</span>
+                <span
+                    onClick={onClick}
+                    className={
+                        description === undefined
+                            ? undefined
+                            : "underline decoration-dotted underline-offset-2 decoration-[#a1a1aa]"
+                    }
+                >
+                    {abbr ?? name}
+                </span>
             </Tooltip>
         );
     } else {

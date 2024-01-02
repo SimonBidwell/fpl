@@ -1,11 +1,4 @@
 import {
-    Table,
-    TableHeader,
-    TableColumn,
-    TableBody,
-    TableRow,
-    TableCell,
-    SortDescriptor,
     Selection,
     Dropdown,
     DropdownTrigger,
@@ -16,24 +9,85 @@ import {
     CardBody,
     Card,
 } from "@nextui-org/react";
-import { useState, useMemo, useCallback, Key } from "react";
-import { COLUMNS, INITIAL_COLUMNS } from "./columns";
+import { useState, useMemo } from "react";
 import { LeagueDetails, Match } from "../../domain";
-import { buildStandings, StandingsRow } from "./domain";
-import { ColumnHeader } from "./ColumnHeader";
+import { buildStandings } from "./domain";
 import { Chevron } from "../Chevron";
 import { DownloadCSV, buildStandingsSerialiser } from "../DownloadCSV";
 import { GameWeekSelector } from "../GameweekSelector";
 import { GRAPHS, Graph, StandingsGraph } from "./graphs/StandingsGraph";
 import { useLocation, useParams } from "wouter";
+import { StandingsTable, StandingsRow } from "../standingstable/StandingsTable";
+import {
+    AverageFairPointsCol,
+    AveragePointsAgainstCol,
+    AveragePointsCol,
+    AveragePointsForCol,
+    DrawnCol,
+    ELOCol,
+    FairPointsCol,
+    FairPointsDifferenceCol,
+    FairPositionCol,
+    FairPositionDifferenceCol,
+    FormCol,
+    LostCol,
+    PlayedCol,
+    PointsAgainstCol,
+    PointsCol,
+    PointsDifferenceCol,
+    PointsForCol,
+    PositionCol,
+    TeamAndManagerCol,
+    UpNextCol,
+    WonCol,
+} from "../standingstable/columns";
 
 export interface Props {
     leagueDetails: LeagueDetails;
 }
 
-export const Standings = ({
-    leagueDetails
-}: Props) => {
+const COLUMNS = [
+    PositionCol,
+    TeamAndManagerCol,
+    PlayedCol,
+    WonCol,
+    DrawnCol,
+    LostCol,
+    PointsForCol,
+    PointsAgainstCol,
+    PointsDifferenceCol,
+    PointsCol,
+    FairPointsCol,
+    FairPointsDifferenceCol,
+    FairPositionCol,
+    FairPositionDifferenceCol,
+    AveragePointsForCol,
+    AveragePointsAgainstCol,
+    AveragePointsCol,
+    AverageFairPointsCol,
+    ELOCol,
+    FormCol,
+    UpNextCol,
+];
+const INITIAL_COLUMNS = [
+    PositionCol,
+    TeamAndManagerCol,
+    WonCol,
+    DrawnCol,
+    LostCol,
+    PointsForCol,
+    PointsAgainstCol,
+    PointsDifferenceCol,
+    PointsCol,
+    FairPointsCol,
+    FairPointsDifferenceCol,
+    FairPositionCol,
+    FairPositionDifferenceCol,
+    FormCol,
+    UpNextCol,
+].map((col) => col.key);
+
+export const Standings = ({ leagueDetails }: Props) => {
     const { gameWeek } = useParams();
     const [, navigate] = useLocation();
     const finishedGameWeeks = useMemo(
@@ -47,11 +101,6 @@ export const Standings = ({
             ].sort((a, b) => b - a),
         [leagueDetails]
     );
-
-    const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
-        column: "Position",
-        direction: "ascending",
-    });
 
     const [visibleColumns, setVisibleColumns] = useState<Selection>(
         new Set(INITIAL_COLUMNS)
@@ -71,12 +120,6 @@ export const Standings = ({
         [visibleColumns]
     );
 
-    const renderCell = useCallback(
-        (row: StandingsRow, key: Key) =>
-            COLUMNS.find((col) => col.key === key)?.render(row),
-        []
-    );
-
     const standings = useMemo(
         () => buildStandings(leagueDetails),
         [leagueDetails]
@@ -86,22 +129,6 @@ export const Standings = ({
             standings.get(Number(gameWeek)) ?? new Map<number, StandingsRow>();
         return [...selected.values()];
     }, [gameWeek]);
-    const sortedStandings = useMemo(
-        () =>
-            selectedStandings.sort((a, b) => {
-                const { direction, column } = sortDescriptor;
-                const col = COLUMNS.find((col) => col.key === column);
-                if (col && col.sort !== undefined) {
-                    const comparison = col.sort(a, b);
-                    return direction === "descending"
-                        ? -comparison
-                        : comparison;
-                } else {
-                    return 0;
-                }
-            }),
-        [selectedStandings, sortDescriptor]
-    );
 
     //TODO add some height and scroll to the dropdown
     const topContent = useMemo(
@@ -170,7 +197,7 @@ export const Standings = ({
                     {mode === "table" ? (
                         <DownloadCSV
                             serialiser={buildStandingsSerialiser(columns)}
-                            data={sortedStandings}
+                            data={selectedStandings}
                             filename="standings"
                         />
                     ) : null}
@@ -236,9 +263,9 @@ export const Standings = ({
             graph,
             mode,
             visibleColumns,
-            sortedStandings,
+            selectedStandings,
             finishedGameWeeks,
-            gameWeek
+            gameWeek,
         ]
     );
 
@@ -262,49 +289,14 @@ export const Standings = ({
         return (
             <>
                 {topContent}
-                <Table
-                    aria-label="League Standings"
-                    isHeaderSticky
-                    sortDescriptor={sortDescriptor}
-                    onSortChange={setSortDescriptor}
-                    topContentPlacement="outside"
-                    classNames={{
-                        wrapper:
-                            "overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-default-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-default-300 scrollbar-track:!rounded",
+                <StandingsTable
+                    columns={columns}
+                    standings={selectedStandings}
+                    defaultSortDescriptor={{
+                        column: "Position",
+                        direction: "ascending",
                     }}
-                >
-                    <TableHeader columns={columns}>
-                        {({ key, abbr, sort, description }) => (
-                            <TableColumn
-                                key={key}
-                                allowsSorting={sort !== undefined}
-                            >
-                                <ColumnHeader
-                                    key={key}
-                                    name={key}
-                                    abbr={abbr}
-                                    description={description}
-                                    setSortDescriptor={
-                                        sort !== undefined
-                                            ? setSortDescriptor
-                                            : undefined
-                                    }
-                                />
-                            </TableColumn>
-                        )}
-                    </TableHeader>
-                    <TableBody items={sortedStandings}>
-                        {(item) => (
-                            <TableRow key={item.key}>
-                                {(columnKey) => (
-                                    <TableCell>
-                                        {renderCell(item, columnKey)}
-                                    </TableCell>
-                                )}
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
+                />
             </>
         );
     }

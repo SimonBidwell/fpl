@@ -1,5 +1,5 @@
 import { Entry } from "../../../domain";
-import { StandingsRow } from "../domain";
+import { StandingsRow } from "../../standingstable/StandingsTable";
 import { ForAgainstAndDifferenceBarChart } from "./ForAgainstAndDifferenceBarChart";
 import { LineGraph } from "./LineGraph";
 

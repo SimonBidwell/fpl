@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
                                 </Route>
                                 <Route path="/404">My very own 404</Route>
                                 <Route>
-                                    <Redirect to="/league/1" />
+                                    <Redirect to="/league/1/" />
                                 </Route>
                             </Switch>
                         </Router>

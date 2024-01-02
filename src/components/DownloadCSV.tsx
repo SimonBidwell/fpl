@@ -1,8 +1,8 @@
 import { Button } from "@nextui-org/react";
 import { useMemo } from "react";
 import { Match } from "../domain";
-import { StandingsRow } from "./standings/domain";
-import { Column } from "./standings/columns";
+import { StandingsRow } from "./standingstable/StandingsTable";
+import { Column } from "./standingstable/columns";
 
 export interface Props<T> {
     serialiser: Serialiser<T>;
@@ -56,13 +56,14 @@ export const MATCH_SERIALISER: Serialiser<Match> = {
     ],
 };
 
+//TODO move this out of DownloadCSV
 export const buildStandingsSerialiser = (
     visibleColumns: Column[]
 ): Serialiser<StandingsRow> => ({
-        headers: visibleColumns.flatMap((col) => col.serialise.header),
-        serialise: (row) => visibleColumns.flatMap((col) => col.serialise.data(row)),
-    }
-);
+    headers: visibleColumns.flatMap((col) => col.serialise.header),
+    serialise: (row) =>
+        visibleColumns.flatMap((col) => col.serialise.data(row)),
+});
 
 export const DownloadCSV = <T,>({
     serialiser,

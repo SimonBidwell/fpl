@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as d3 from "d3";
 import { Graph } from "./Graph";
-import { StandingsRow } from "../domain";
+import { StandingsRow } from "../../standingstable/StandingsTable";
 import { Entry, MANAGERS } from "../../../domain";
 import { range } from "../../../helpers";
 import { Manager } from "../../Manager";

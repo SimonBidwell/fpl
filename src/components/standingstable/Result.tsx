@@ -2,6 +2,7 @@ export interface Props {
     result: "win" | "loss" | "draw" | undefined;
 }
 
+//TODO extract this out to be it's own thing independent of standings table
 export const Result = ({ result }: Props) => {
     const bg =
         result === "win"

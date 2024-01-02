@@ -7,6 +7,7 @@ import {
 } from "wouter";
 import { SeasonComponent, DEFAULT_TAB } from "./Season";
 import { DEFAULT_SEASON } from "../domain";
+import { ManagerPage } from "./ManagerPage";
 
 export const League = () => {
     const { isLoading, error, data } = useQuery("leagueDetails", () =>
@@ -23,7 +24,10 @@ export const League = () => {
             <Route path="/season/:season/:tab" nest>
                 <SeasonComponent allLeagueDetails={data} />
             </Route>
-            <Route><Redirect to={`/season/${DEFAULT_SEASON}/${DEFAULT_TAB}`}/></Route>
+            <Route path="/manager/:id">
+                <ManagerPage leagueDetails={data}/>
+            </Route>
+            <Route><Redirect to={`/season/${DEFAULT_SEASON}/${DEFAULT_TAB}`} replace/></Route>
         </Switch>
     );
 };
