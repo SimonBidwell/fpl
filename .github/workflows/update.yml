@@ -1,7 +1,7 @@
 name: Update league json file
 on: 
   schedule:
-    - cron: '0 1 * * *'
+    - cron: '0 1,12,18 * * *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -12,8 +12,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.FPL_UPDATOR_TOKEN }}
-      - name: Create json file
+      - name: Create League Details file
         run: curl https://draft.premierleague.com/api/league/32589/details -o public/2023-24.json
+      - name: Create Element Status file
+        run: curl https://draft.premierleague.com/api/league/32589/element-status -o public/element-status-2023-24.json
+      - name: Create Bootstrap file
+        run: curl https://draft.premierleague.com/api/bootstrap-static -o public/bootstrap-static-2023-24.json
       - name: Commit updated json file
         run: |
           git config user.name github-actions

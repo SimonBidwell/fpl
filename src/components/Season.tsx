@@ -23,12 +23,14 @@ import {
 import { partition } from "../helpers";
 import { WithDefaultGameWeek } from "./WithDefaultGameWeek";
 import { useReplaceNavigate } from "../useReplaceNavigate";
+import { useSeasonContext } from "../SeasonContext";
+import { PlayersTable } from "./playerstable/PlayersTable";
 
 export interface Props {
     allLeagueDetails: LeagueDetails[];
 }
 
-const TABS = ["standings", "results", "fixtures"] as const;
+const TABS = ["standings", "results", "fixtures", "players"] as const;
 export const DEFAULT_TAB = TABS[0];
 type Tab = (typeof TABS)[number];
 const isTab = (s: unknown): s is Tab => TABS.includes(s as Tab);
@@ -37,25 +39,23 @@ const shouldDisplayTab = (tab: Tab, fixtures: Match[]) =>
 const isSeason = (s: unknown): s is Season => SEASONS.includes(s as Season);
 
 //TODO give this a better name
-export const SeasonComponent = ({ allLeagueDetails }: Props) => {
+export const SeasonComponent = () => {
     const { season, tab } = useParams();
     const navigate = useReplaceNavigate();
-    const leagueDetails = allLeagueDetails.find(
-        (l) => l.league.season === season
-    );
+    const { leagueDetails } = useSeasonContext()
 
     if (!isTab(tab) || !isSeason(season) || leagueDetails == undefined) {
         return <Redirect to={`~/404`} />;
     }
 
     const seasonNotes = SEASON_NOTES[season]?.general;
-    const { league, matches } = leagueDetails;
+    const { matches } = leagueDetails;
 
     const title = `A Real Sport (${Season.toDisplayFormat(season)})`;
     const [results, fixtures] = partition(matches, Match.isFinished);
     return (
         <>
-            <Card shadow="sm">
+            <Card shadow="sm" className="shrink-0">
                 <CardBody>
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -155,6 +155,7 @@ export const SeasonComponent = ({ allLeagueDetails }: Props) => {
                         />
                     </WithDefaultGameWeek>
                 ) : null}
+                {tab === "players" ? <PlayersTable /> : null}
             </Route>
         </>
     );

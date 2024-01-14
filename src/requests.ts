@@ -7,6 +7,3 @@ export const getLeagueDetails = async (
     const details = await getFplLeagueDetails(season);
     return LeagueDetails.build(details, season);
 };
-
-export const getAllLeagueDetails = (): Promise<LeagueDetails[]> =>
-    Promise.all(SEASONS.map(getLeagueDetails));

@@ -1,51 +1,50 @@
 import { Card, SortDescriptor, Tooltip } from "@nextui-org/react";
-import { Column } from "./columns";
+import { Column } from "./column";
 import { SetStateAction, Dispatch } from "react";
 
-export interface Props {
-    name: Column["key"];
-    abbr: Column["abbr"];
-    description: Column["description"];
+export interface Props <T>{
+    columnKey: Column<T>["key"];
+    title: Column<T>["title"];
+    abbr: Column<T>["abbr"];
+    description: Column<T>["description"];
     setSortDescriptor?: Dispatch<SetStateAction<SortDescriptor>>;
     tooltipDelayMs?: number;
 }
 
-export const ColumnHeader = ({
-    name,
+export const ColumnHeader = <T,>({
+    columnKey,
+    title,
     abbr,
     description,
     setSortDescriptor,
     tooltipDelayMs = 600,
-}: Props) => {
+}: Props<T>) => {
     // The Tooltip component has a bug where it stops propogation of click events so we work around it by adding our own onClick to the tooltip child
     const onClick = setSortDescriptor
         ? () =>
               setSortDescriptor(({ direction, column }) => ({
                   direction:
-                      column === name && direction === "ascending"
+                      column === columnKey && direction === "ascending"
                           ? "descending"
                           : "ascending",
-                  column: name,
+                  column: columnKey,
               }))
         : undefined;
     if (abbr !== undefined || description !== undefined) {
         return (
             <Tooltip
-                aria-label={name}
+                aria-label={title}
                 delay={tooltipDelayMs}
                 placement="bottom"
                 content={
                     description !== undefined ? (
-                        <div
-                            className="w-52 py-2 text-tiny"
-                            onClick={() => console.log("???")}
-                        >
+                        <div className="w-52 py-2 text-tiny">
                             <Card
                                 className="bg-default-100 p-2 text-tiny text-foreground-500 font-semibold"
                                 radius="sm"
                                 shadow="sm"
                             >
-                                {name} {abbr ? `(${abbr})` : ""}
+                                {title} {abbr ? `(${abbr})` : ""}
                             </Card>
                             {description.split("\n").map((paragraph, i) => (
                                 <p key={i} className="py-2">
@@ -54,7 +53,7 @@ export const ColumnHeader = ({
                             ))}
                         </div>
                     ) : (
-                        <span className="text-tiny">{name}</span>
+                        <span className="text-tiny">{title}</span>
                     )
                 }
             >
@@ -67,11 +66,11 @@ export const ColumnHeader = ({
                             : "underline decoration-dotted underline-offset-2 decoration-[#a1a1aa]"
                     }
                 >
-                    {abbr ?? name}
+                    {abbr ?? title}
                 </span>
             </Tooltip>
         );
     } else {
-        return <span onClick={onClick}>{name}</span>;
+        return <span>{title}</span>;
     }
 };

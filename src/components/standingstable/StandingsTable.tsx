@@ -5,11 +5,11 @@ import {
     TableBody,
     TableRow,
     TableCell,
-    SortDescriptor
+    SortDescriptor,
 } from "@nextui-org/react";
 import { useState, useCallback, useMemo, Key, ReactNode } from "react";
 import { Column } from "./columns";
-import { ColumnHeader } from "./ColumnHeader";
+import { ColumnHeader } from "../table/ColumnHeader";
 import { Entry, Match, Season } from "../../domain";
 
 export interface StandingsRow {
@@ -32,14 +32,21 @@ export interface StandingsRow {
 }
 
 export interface Props {
-    columns: Column[]
-    standings: StandingsRow[]
-    defaultSortDescriptor: SortDescriptor
-    topContent?: ReactNode
+    columns: Column[];
+    standings: StandingsRow[];
+    defaultSortDescriptor: SortDescriptor;
+    topContent?: ReactNode;
 }
 
-export const StandingsTable = ({columns, standings, defaultSortDescriptor, topContent}: Props) => {
-    const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>(defaultSortDescriptor);
+export const StandingsTable = ({
+    columns,
+    standings,
+    defaultSortDescriptor,
+    topContent,
+}: Props) => {
+    const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>(
+        defaultSortDescriptor
+    );
 
     const renderCell = useCallback(
         (row: StandingsRow, key: Key) =>
@@ -77,11 +84,12 @@ export const StandingsTable = ({columns, standings, defaultSortDescriptor, topCo
             }}
         >
             <TableHeader columns={columns}>
-                {({ key, abbr, sort, description }) => (
+                {({ key, title, abbr, sort, description }) => (
                     <TableColumn key={key} allowsSorting={sort !== undefined}>
                         <ColumnHeader
                             key={key}
-                            name={key}
+                            columnKey={key}
+                            title={title}
                             abbr={abbr}
                             description={description}
                             setSortDescriptor={

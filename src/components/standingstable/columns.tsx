@@ -7,13 +7,9 @@ import { ResultsListHover } from "./ResultsListHover";
 import { Result } from "./Result";
 import { Tooltip } from "@nextui-org/react";
 import { Link } from "wouter";
+import { Column as ColumnType } from "../table/column";
 
-export interface Column {
-    key: string;
-    abbr?: string;
-    description?: string;
-    render: (row: StandingsRow) => ReactNode;
-    sort?: (a: StandingsRow, b: StandingsRow) => number;
+export type Column = ColumnType<StandingsRow> & {
     serialise: {
         header: string | string[];
         data: (row: StandingsRow) => string | number | (string | number)[];
@@ -22,6 +18,7 @@ export interface Column {
 
 export const PositionCol: Column = {
     key: "Position",
+    title: "Position",
     abbr: "Pos",
     render: ({ position, previousPosition }: StandingsRow): ReactNode => (
         <div className="flex items-center gap-1">
@@ -45,6 +42,7 @@ export const PositionCol: Column = {
 // for now to hide the movement icon
 export const PositionOnlyCol: Column = {
     key: "Position only",
+    title: "Position only",
     abbr: "Pos",
     render: ({ position }) => position,
     sort: (a, b) => a.position - b.position,
@@ -56,6 +54,7 @@ export const PositionOnlyCol: Column = {
 
 export const SeasonCol: Column = {
     key: "Season",
+    title: "Season",
     render: ({ season }) => (
         <Link
             className="hover:text-foreground-400"
@@ -74,6 +73,7 @@ export const SeasonCol: Column = {
 
 export const TeamCol: Column = {
     key: "Team",
+    title: "Team",
     render: ({ entry }) => entry.name,
     sort: (a, b) => a.entry.name.localeCompare(b.entry.name),
     serialise: {
@@ -84,6 +84,7 @@ export const TeamCol: Column = {
 
 export const TeamAndManagerCol: Column = {
     key: "Team & Manager",
+    title: "Team & Manager",
     render: ({ entry }) => (
         <Link
             className="hover:opacity-60"
@@ -105,6 +106,7 @@ export const TeamAndManagerCol: Column = {
 
 export const PlayedCol: Column = {
     key: "Played",
+    title: "Played",
     abbr: "P",
     render: ({ played }: StandingsRow) => played.length,
     sort: (a, b) => a.played.length - b.played.length,
@@ -116,6 +118,7 @@ export const PlayedCol: Column = {
 
 export const WonCol: Column = {
     key: "Won",
+    title: "Won",
     abbr: "W",
     render: ({ entry, wins }) => (
         <ResultsListHover entry={entry} matches={wins} result="won" />
@@ -129,6 +132,7 @@ export const WonCol: Column = {
 
 export const DrawnCol: Column = {
     key: "Drawn",
+    title: "Drawn",
     abbr: "D",
     render: ({ entry, draws }) => (
         <ResultsListHover entry={entry} matches={draws} result="drawn" />
@@ -142,6 +146,7 @@ export const DrawnCol: Column = {
 
 export const LostCol: Column = {
     key: "Lost",
+    title: "Lost",
     abbr: "L",
     render: ({ entry, losses }) => (
         <ResultsListHover entry={entry} matches={losses} result="lost" />
@@ -155,6 +160,7 @@ export const LostCol: Column = {
 
 export const PointsForCol: Column = {
     key: "Points Scored",
+    title: "Points Scored",
     abbr: "+",
     render: ({ pointsScoreFor }) => pointsScoreFor,
     sort: (a, b) => a.pointsScoreFor - b.pointsScoreFor,
@@ -166,6 +172,7 @@ export const PointsForCol: Column = {
 
 export const PointsAgainstCol: Column = {
     key: "Points Against",
+    title: "Points Against",
     abbr: "-",
     render: ({ pointsScoreAgainst }) => pointsScoreAgainst,
     sort: (a, b) => a.pointsScoreAgainst - b.pointsScoreAgainst,
@@ -177,6 +184,7 @@ export const PointsAgainstCol: Column = {
 
 export const PointsDifferenceCol: Column = {
     key: "Points Score Difference",
+    title: "Points Score Difference",
     abbr: "+/-",
     render: ({ pointsScoreFor, pointsScoreAgainst }) =>
         pointsScoreFor - pointsScoreAgainst,
@@ -193,6 +201,7 @@ export const PointsDifferenceCol: Column = {
 
 export const PointsCol: Column = {
     key: "Points",
+    title: "Points",
     abbr: "Pts",
     render: ({ points }) => points,
     sort: (a, b) => a.points - b.points,
@@ -204,6 +213,7 @@ export const PointsCol: Column = {
 
 export const FairPointsCol: Column = {
     key: "Fair Points",
+    title: "Fair Points",
     abbr: "fPts",
     description: `The Fair Points for a gameweek are calculated by taking the average points a manager would have scored if they played every other manager for that week. 
     Fair Points can then be used to see how (un)lucky a manager has been due to their assigned matchups.`,
@@ -217,6 +227,7 @@ export const FairPointsCol: Column = {
 
 export const FairPointsDifferenceCol: Column = {
     key: "Points - Fair Points",
+    title: "Points - Fair Points",
     abbr: "Pts - fPts",
     description: `Shows how much a manager is over or underperforming their fair points. 
     A manager with a positive value is overperforming i.e their actual points are higher than their weekly points would imply. A negative value is the opposite.`,
@@ -248,6 +259,7 @@ export const FairPointsDifferenceCol: Column = {
 
 export const FairPositionCol: Column = {
     key: "Fair Position",
+    title: "Fair Position",
     abbr: "fPos",
     description: `Where the manager would be ranked if the table was ordered by fair points rather than actual points.`,
     render: ({ fairPosition }) => fairPosition,
@@ -260,6 +272,7 @@ export const FairPositionCol: Column = {
 
 export const FairPositionDifferenceCol: Column = {
     key: "Position - Fair Position",
+    title: "Position - Fair Position",
     abbr: "Pos - fPos",
     description: `Shows how much a manager is over or underperforming their fair position. 
     A manager with a positive value is overperforming i.e their actual position is higher than their fair points would imply. A negative value is the opposite.`,
@@ -289,6 +302,7 @@ export const FairPositionDifferenceCol: Column = {
 
 export const FormCol: Column = {
     key: "Form",
+    title: "Form",
     //TODO tidy up duplication etc, can possibly add some weighting for more recent games?
     render: ({ entry, played }: StandingsRow) => {
         const mostRecent = played.sort(Match.sort).slice(-4);
@@ -377,6 +391,7 @@ export const FormCol: Column = {
 
 export const UpNextCol: Column = {
     key: "Up next",
+    title: "Up next",
     render: ({ entry, upcoming }) => {
         const opposition = upcoming
             ? Match.getOpposition(upcoming, entry.id)
@@ -424,6 +439,7 @@ export const UpNextCol: Column = {
 
 export const AveragePointsForCol: Column = {
     key: "Average Points Score For",
+    title: "Average Points Score For",
     abbr: "Avg. +",
     render: ({ pointsScoreFor, played }) =>
         (pointsScoreFor / played.length).toFixed(3),
@@ -437,6 +453,7 @@ export const AveragePointsForCol: Column = {
 
 export const AveragePointsAgainstCol: Column = {
     key: "Average Score Against",
+    title: "Average Score Against",
     abbr: "Avg. -",
     render: ({ pointsScoreAgainst, played }) =>
         (pointsScoreAgainst / played.length).toFixed(3),
@@ -452,6 +469,7 @@ export const AveragePointsAgainstCol: Column = {
 
 export const AveragePointsCol: Column = {
     key: "Average Points",
+    title: "Average Points",
     abbr: "Avg. Pts",
     render: ({ points, played }) => (points / played.length).toFixed(3),
     sort: (a, b) => a.points / a.played.length - b.points / b.played.length,
@@ -463,6 +481,7 @@ export const AveragePointsCol: Column = {
 
 export const AverageFairPointsCol: Column = {
     key: "Average Fair Points",
+    title: "Average Fair Points",
     abbr: "Avg. fPts",
     render: ({ played, fairPoints }) => (fairPoints / played.length).toFixed(3),
     sort: (a, b) =>
@@ -475,6 +494,7 @@ export const AverageFairPointsCol: Column = {
 
 export const ELOCol: Column = {
     key: "ELO",
+    title: "ELO",
     render: ({ elo }) => Math.round(elo),
     sort: (a, b) => a.elo - b.elo,
     serialise: {
