@@ -4,7 +4,7 @@ import { capitalizeFirstLetter, range } from "../../helpers";
 import { Manager as ManagerComponent } from "../Manager";
 import { WarningIcon } from "../WarningIcon";
 import { Column as ColumnType } from "../table/column";
-import { Fixture } from "../../api/domain";
+import { Choice, Fixture } from "../../api/domain";
 
 type OppositionWithSide = { opposition: Team; side: "home" | "away" };
 type FixturesByGameweek = Record<number, OppositionWithSide[]>;
@@ -29,6 +29,10 @@ export type PlayerRow = Omit<Player, "status" | "team"> & {
     goalInvolvementsMinusExpectedGoalInvolvements: number | undefined;
     draftRankMinusRank: number | undefined;
     fixtures: FixturesByGameweek;
+    draftPickNumber: "Unknown" | number | undefined;
+    draftedBy: Entry | undefined;
+    draftPickMinusTotalPointsRank: number | undefined;
+    draftPickMinusDraftRank: number | undefined;
 };
 
 export type Column = ColumnType<PlayerRow>;
@@ -40,7 +44,8 @@ export const buildPlayerRows = (
     getEntry: (entryId: number) => Entry | undefined,
     getPosition: (id: number) => Position | undefined,
     getStatus: (id: number) => PlayerStatus | undefined,
-    getGames: (gameweek: number, teamId: number) => Fixture[]
+    getGames: (gameweek: number, teamId: number) => Fixture[],
+    getDraftInfo: (playerId: number) => "Unknown" | Choice | undefined
 ): PlayerRow[] => {
     return players
         .map((p) =>
@@ -51,21 +56,42 @@ export const buildPlayerRows = (
                 getEntry,
                 getPosition,
                 getStatus,
-                getGames
+                getGames,
+                getDraftInfo
             )
         )
         .sort((a, b) => b.total_points - a.total_points)
+        .map((p, i) => {
+            const rank = i + 1;
+            return {
+                ...p,
+                totalPointsRank: rank,
+                draftRankMinusRank:
+                    p.draft_rank === undefined
+                        ? undefined
+                        : p.draft_rank - rank,
+                draftPickMinusTotalPointsRank:
+                    p.draftPickNumber === undefined ||
+                    p.draftPickNumber === "Unknown"
+                        ? undefined
+                        : p.draftPickNumber - rank,
+            };
+        })
+        .sort((a, b) => (b.xGp90 ?? 0) - (a.xGp90 ?? 0))
         .map((p, i) => ({
             ...p,
-            totalPointsRank: i + 1,
-            draftRankMinusRank: p.draft_rank === undefined ? undefined : p.draft_rank - i + 1,
+            xGp90Rank: p.xGp90 === undefined ? undefined : i + 1,
         }))
-        .sort((a, b) => (b.xGp90 ?? 0) - (a.xGp90 ?? 0))
-        .map((p, i) => ({ ...p, xGp90Rank: p.xGp90 === undefined ? undefined : i + 1 }))
         .sort((a, b) => (b.xAp90 ?? 0) - (a.xAp90 ?? 0))
-        .map((p, i) => ({ ...p, xAp90Rank: p.xAp90 === undefined ? undefined : i + 1 }))
+        .map((p, i) => ({
+            ...p,
+            xAp90Rank: p.xAp90 === undefined ? undefined : i + 1,
+        }))
         .sort((a, b) => (b.xGIp90 ?? 0) - (a.xGIp90 ?? 0))
-        .map((p, i) => ({ ...p, xGIp90Rank: p.xGIp90 === undefined ? undefined : i + 1 }));
+        .map((p, i) => ({
+            ...p,
+            xGIp90Rank: p.xGIp90 === undefined ? undefined : i + 1,
+        }));
 };
 
 const MINIMUM_MINS_PER_90 = 45;
@@ -124,12 +150,14 @@ export const buildPlayerRow = (
     getEntry: (entryId: number) => Entry | undefined,
     getPosition: (id: number) => Position | undefined,
     getStatus: (id: number) => PlayerStatus | undefined,
-    getGames: (gameweek: number, teamId: number) => Fixture[]
+    getGames: (gameweek: number, teamId: number) => Fixture[],
+    getDraftInfo: (playerId: number) => "Unknown" | Choice | undefined
 ): PlayerRow => {
     const status = getStatus(player.id);
     const owner = getEntry(status?.owner ?? -1);
     const goalInvolvements = player.goals_scored + player.assists;
     const team = getTeam(player.team);
+    const draftInfo = getDraftInfo(player.id);
     return {
         ...player,
         team,
@@ -148,17 +176,34 @@ export const buildPlayerRow = (
         xGIp90Rank: 0,
         nineties: player.minutes === 0 ? 0 : +(player.minutes / 90).toFixed(2),
         goalInvolvements: goalInvolvements,
-        goalsMinusExpectedGoals: player.expected_goals === undefined ? undefined : +(
-            player.goals_scored - player.expected_goals
-        ).toFixed(2),
-        assistsMinusExpectedAssists: player.expected_assists === undefined ? undefined : +(
-            player.assists - player.expected_assists
-        ).toFixed(2),
-        goalInvolvementsMinusExpectedGoalInvolvements: player.expected_goal_involvements === undefined ? undefined : +(
-            goalInvolvements - player.expected_goal_involvements
-        ).toFixed(2),
+        goalsMinusExpectedGoals:
+            player.expected_goals === undefined
+                ? undefined
+                : +(player.goals_scored - player.expected_goals).toFixed(2),
+        assistsMinusExpectedAssists:
+            player.expected_assists === undefined
+                ? undefined
+                : +(player.assists - player.expected_assists).toFixed(2),
+        goalInvolvementsMinusExpectedGoalInvolvements:
+            player.expected_goal_involvements === undefined
+                ? undefined
+                : +(
+                      goalInvolvements - player.expected_goal_involvements
+                  ).toFixed(2),
         draftRankMinusRank: 0,
         fixtures: buildFixtures(gameweek, team, getTeam, getGames),
+        draftPickNumber: draftInfo === "Unknown" ? "Unknown" : draftInfo?.index,
+        draftedBy:
+            draftInfo === "Unknown"
+                ? undefined
+                : getEntry(draftInfo?.entry ?? -1),
+        draftPickMinusTotalPointsRank: 0,
+        draftPickMinusDraftRank:
+            draftInfo !== "Unknown" &&
+            draftInfo !== undefined &&
+            player.draft_rank !== undefined
+                ? draftInfo?.index - player.draft_rank
+                : undefined,
     };
 };
 
@@ -188,7 +233,8 @@ const numberColumn = (
             .join(" "),
     abbr,
     description,
-    render: (row) => row[key] === undefined || row[key] === null ? "-" : row[key],
+    render: (row) =>
+        row[key] === undefined || row[key] === null ? "-" : row[key],
     sort: sort === undefined ? (a, b) => (a[key] ?? 0) - (b[key] ?? 0) : sort,
 });
 const stringColumn = (
@@ -210,7 +256,7 @@ const stringColumn = (
             .join(" "),
     abbr,
     description,
-    render: (row) => !row[key] ? "-" : row[key],
+    render: (row) => (!row[key] ? "-" : row[key]),
     sort: (a, b) => (a[key] ?? "").localeCompare(b[key] ?? ""),
 });
 
@@ -226,7 +272,7 @@ export const PlayerCol: Column = {
             }`}
             avatarProps={{
                 radius: "md",
-                src: `https://resources.premierleague.com/premierleague/photos/players/40x40/p${code}.png`
+                src: `https://resources.premierleague.com/premierleague/photos/players/40x40/p${code}.png`,
             }}
         />
     ),
@@ -331,7 +377,7 @@ export const DraftRankCol = numberColumn("draft_rank", {
 });
 export const DraftRankMinusRankCol = numberColumn("draftRankMinusRank", {
     title: "Draft Rank - Rank",
-    abbr: "#DR - #Pts",
+    abbr: "#DR-#Pts",
     description: `By how many positions is this player over or under performing their projected rank?
     A player with a positive score is above their FPL projection, a player with a negative score is below their FPL projection.`,
 });
@@ -392,7 +438,7 @@ export const ExpectedAssistsCol = numberColumn("expected_assists", {
 });
 export const ExpectedGoalInvolvementsCol = numberColumn(
     "expected_goal_involvements",
-    { abbr: "xG + xA" }
+    { abbr: "xG+xA" }
 );
 export const ExpectedGoalsConcededCol = numberColumn(
     "expected_goals_conceded",
@@ -528,14 +574,14 @@ export const NinetiesCol = numberColumn("nineties", {
 });
 export const GoalInvolvementsCol = numberColumn("goalInvolvements", {
     title: "Goal Involvements",
-    abbr: "G + A",
+    abbr: "G+A",
     description: "Goals plus Assists",
 });
 export const GoalsMinusExpectedGoalsCol = numberColumn(
     "goalsMinusExpectedGoals",
     {
         title: "Goals - Expected Goals",
-        abbr: "G - xG",
+        abbr: "G-xG",
         description: `A positive value means a player is overperforming expectation (i.e scoring more goals than you'd expect given the chances they've had). A negative number means they're underperforming.`,
     }
 );
@@ -543,7 +589,7 @@ export const AssistsMinusExpectedAssistsCol = numberColumn(
     "assistsMinusExpectedAssists",
     {
         title: "Assists - Expected Assists",
-        abbr: "A - xA",
+        abbr: "A-xA",
         description: `A positive value means a player is overperforming expectation (i.e assisting more goals than you'd expect given the chances they've created). A negative number means they're underperforming.`,
     }
 );
@@ -551,7 +597,7 @@ export const GoalInvolvementsMinusExpectedGoalInvolvementsCol = numberColumn(
     "goalInvolvementsMinusExpectedGoalInvolvements",
     {
         title: "Goal Involvements - Expected Goal Involvements",
-        abbr: "(G+A) - (xG+xA)",
+        abbr: "(G+A)-(xG+xA)",
         description: `A positive value means a player is overperforming expectation (i.e scoring and assisting more goals than you'd expect given the chances they're involved with). A negative number means they're underperforming.`,
     }
 );
@@ -586,6 +632,72 @@ export const buildFixturesCol = (
             }
         },
     };
+};
+
+//TODO account for when we just don't have the draft info
+export const DraftPickCol: Column = {
+    key: "draft_pick",
+    title: "Draft Pick",
+    abbr: "Pick #",
+    render: ({ draftPickNumber }) => {
+        if (draftPickNumber === "Unknown") {
+            return "-";
+        } else if (draftPickNumber === undefined) {
+            return "Undrafted";
+        } else {
+            return draftPickNumber;
+        }
+    },
+    sort: (a, b) => {
+        const aVal =
+            a.draftPickNumber === "Unknown" || a.draftPickNumber === undefined
+                ? Infinity
+                : a.draftPickNumber;
+        const bVal =
+            b.draftPickNumber === "Unknown" || b.draftPickNumber === undefined
+                ? Infinity
+                : b.draftPickNumber;
+        return aVal - bVal;
+    },
+};
+export const DraftPickMinusPositionCol = numberColumn(
+    "draftPickMinusTotalPointsRank",
+    {
+        title: "Draft Pick - Rank",
+        abbr: "Pick#-#Pts",
+        description:
+            "A negative value means the player is ranked lower by total points than the position they were picked in the draft. A positive value means they are ranked higher by total points than their draft pick position.",
+    }
+);
+export const DraftPickMinusDraftRankCol = numberColumn(
+    "draftPickMinusDraftRank",
+    {
+        title: "Draft Pick - Draft Rank",
+        abbr: "Pick#-DR",
+        description:
+            "A negative value means the player was picked earlier than their draft rank. A positive value means they were picked later than their draft rank.",
+    }
+);
+export const DraftedByCol: Column = {
+    key: "drafted_by",
+    title: "Drafted By",
+    render: ({ draftedBy }) =>
+        draftedBy === undefined ? (
+            <div>-</div>
+        ) : (
+            <ManagerComponent
+                manager={draftedBy.manager}
+                teamName={draftedBy.name}
+            />
+        ),
+    sort: (a, b) =>
+        (a.draftedBy?.name ?? "").localeCompare(b.draftedBy?.name ?? "") ||
+        (b.draftPickNumber === "Unknown" || b.draftPickNumber === undefined
+            ? 0
+            : b.draftPickNumber) -
+            (a.draftPickNumber === "Unknown" || a.draftPickNumber === undefined
+                ? 0
+                : a.draftPickNumber),
 };
 
 export const buildColumns = (gameweek: number | undefined): Column[] => {
@@ -633,6 +745,10 @@ export const buildColumns = (gameweek: number | undefined): Column[] => {
         GoalInvolvementsMinusExpectedGoalInvolvementsCol,
         DraftRankCol,
         DraftRankMinusRankCol,
+        DraftPickCol,
+        DraftPickMinusPositionCol,
+        DraftPickMinusDraftRankCol,
+        DraftedByCol,
         InfluenceRankCol,
         InfluenceRankTypeCol,
         InfluenceCol,

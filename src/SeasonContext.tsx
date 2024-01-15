@@ -10,7 +10,7 @@ import {
     Entry,
 } from "./domain";
 import { indexBy } from "./helpers";
-import { BootstrapStatic, ElementStatus, ElementStatusResponse, Fixture } from "./api/domain"; //TODO replace this with my own domain object
+import { BootstrapStatic, Choice, ChoicesResponse, ElementStatusResponse, Fixture } from "./api/domain"; //TODO replace this with my own domain object
 
 export interface SeasonContext {
     leagueDetails: LeagueDetails;
@@ -19,12 +19,14 @@ export interface SeasonContext {
     playerStatuses: PlayerStatus[];
     positions: Position[];
     managers: Manager[];
+    draft: Choice[] | "Unknown";
     currentGameweek: number | undefined;
     getTeam: (teamId: number) => Team | undefined;
     getPlayerStatus: (playerId: number) => PlayerStatus | undefined;
     getEntry: (entryId: number) => Entry | undefined;
     getPosition: (id: number) => Position | undefined;
     getGames: (gameweek: number, teamId: number) => Fixture[];
+    getDraftInfo: (playerId: number) => "Unknown" | Choice | undefined;
     //TODO add a getManager onto here too
 }
 
@@ -42,12 +44,14 @@ export const SeasonContextProvider = ({
     children,
     leagueDetails,
     bootstrap, 
-    playerStatus
+    playerStatus,
+    draft
 }: {
     children: ReactNode;
     leagueDetails: LeagueDetails | undefined;
     bootstrap: BootstrapStatic | undefined;
     playerStatus: ElementStatusResponse | undefined;
+    draft: ChoicesResponse | undefined;
 }) => {
     if (
         leagueDetails === undefined ||
@@ -60,6 +64,8 @@ export const SeasonContextProvider = ({
     const teams = indexBy(bootstrap.teams, (t) => t.id);
     const statuses = indexBy(playerStatus.element_status, (e) => e.element);
     const positionsById = indexBy(bootstrap.element_types, (et) => et.id);
+    const draftChoices = draft === undefined ? "Unknown" : draft.choices
+    const draftByPlayerId = indexBy(draftChoices === "Unknown" ? [] : draftChoices, (choice) => choice.element)
 
     const ctx: SeasonContext = {
         leagueDetails: leagueDetails,
@@ -68,6 +74,7 @@ export const SeasonContextProvider = ({
         positions: bootstrap.element_types,
         playerStatuses: playerStatus.element_status,
         managers: MANAGERS,
+        draft: draftChoices,
         currentGameweek:
             bootstrap.events.current === null ? undefined : bootstrap.events.current,
         getTeam: (id) => teams.get(id),
@@ -80,6 +87,7 @@ export const SeasonContextProvider = ({
             bootstrap.fixtures[gameweek]?.filter(
                 (f) => f.team_h === teamId || f.team_a === teamId
             ) ?? [],
+        getDraftInfo: draftChoices === "Unknown" ? () => "Unknown" : (playerId) => draftByPlayerId.get(playerId)
     };
 
     return (

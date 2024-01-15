@@ -290,3 +290,25 @@ export const elementStatusResponseSchema = z.object({
     "element_status": z.array(elementStatusSchema)
 })
 export type ElementStatusResponse = z.infer<typeof elementStatusResponseSchema>;
+
+export const choiceSchema = z.object({
+    "choice_time": z.string(),
+    "element": z.number(),
+    "entry": z.number(),
+    "entry_name": z.string(),
+    "id": z.number(),
+    "index": z.number(),
+    "league": z.number(),
+    "pick": z.number(),
+    "player_first_name": z.string(),
+    "player_last_name": z.string(),
+    "round": z.number(),
+    "seconds_to_pick": z.number().nullable(),
+    "was_auto": z.boolean()
+})
+export type Choice = z.infer<typeof choiceSchema>
+
+export const choicesResponseSchema = z.object({
+    "choices": z.array(choiceSchema)
+})
+export type ChoicesResponse = z.infer<typeof choicesResponseSchema>

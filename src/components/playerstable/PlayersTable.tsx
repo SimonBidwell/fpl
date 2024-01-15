@@ -110,6 +110,7 @@ export const PlayersTable = () => {
         getGames,
         currentGameweek,
         positions,
+        getDraftInfo
     } = useSeasonContext();
 
     const columns = useMemo(
@@ -130,7 +131,8 @@ export const PlayersTable = () => {
                 getEntry,
                 getPosition,
                 getPlayerStatus,
-                getGames
+                getGames, 
+                getDraftInfo
             ),
         [
             players,

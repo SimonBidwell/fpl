@@ -8,9 +8,14 @@ import { getLeagueDetails } from "../requests";
 import { indexBy } from "../helpers";
 import {
     BootstrapStatic,
+    ChoicesResponse,
     ElementStatusResponse,
 } from "../api/domain";
-import { getBootstrapStatic, getElementStatus } from "../api/requests";
+import {
+    getBootstrapStatic,
+    getDraftChoices,
+    getElementStatus,
+} from "../api/requests";
 
 const getAllLeagueDetails = async (): Promise<Map<Season, LeagueDetails>> => {
     const seasons = await Promise.all(SEASONS.map(getLeagueDetails));
@@ -39,6 +44,18 @@ const getAllPlayerStatuses = async (): Promise<
     }, new Map());
 };
 
+const getAllDraftChoices = async (): Promise<Map<Season, ChoicesResponse | undefined>> => {
+    const seasons = await Promise.all(
+        SEASONS.map((s) =>
+            getDraftChoices(s).then((dc) => [s, dc] as const)
+        )
+    );
+    return seasons.reduce((acc, [season, bs]) => {
+        acc.set(season, bs);
+        return acc;
+    }, new Map());
+};
+
 const isSeason = (s: unknown): s is Season => SEASONS.includes(s as Season);
 
 export const League = () => {
@@ -46,20 +63,23 @@ export const League = () => {
         { queryKey: ["leagueDetails"], queryFn: getAllLeagueDetails },
         { queryKey: ["bootstrap"], queryFn: getAllBootstraps },
         { queryKey: ["element-status"], queryFn: getAllPlayerStatuses },
+        { queryKey: ["draft-choices"], queryFn: getAllDraftChoices },
     ]);
 
     const isLoading = requests.some((request) => request.isLoading);
     const isError = requests.some((request) => request.isError);
-    const leagueDetails = requests[0].data
-    const bootstrap = requests[1].data
-    const playerStatus = requests[2].data
+    const leagueDetails = requests[0].data;
+    const bootstrap = requests[1].data;
+    const playerStatus = requests[2].data;
+    const draftChoices = requests[3].data;
 
     if (isLoading) return "Loading...";
     if (
         isError ||
         leagueDetails === undefined ||
         bootstrap === undefined ||
-        playerStatus === undefined
+        playerStatus === undefined ||
+        draftChoices === undefined
     ) {
         return "Error";
     }
@@ -71,10 +91,11 @@ export const League = () => {
                     !isSeason(params.season) ? (
                         <Redirect to={`~/404`} />
                     ) : (
-                        <SeasonContextProvider 
-                            leagueDetails={leagueDetails.get(params.season)} 
-                            bootstrap={bootstrap.get(params.season)} 
+                        <SeasonContextProvider
+                            leagueDetails={leagueDetails.get(params.season)}
+                            bootstrap={bootstrap.get(params.season)}
                             playerStatus={playerStatus.get(params.season)}
+                            draft={draftChoices.get(params.season)}
                         >
                             <SeasonComponent />
                         </SeasonContextProvider>
