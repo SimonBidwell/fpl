@@ -42,8 +42,13 @@ export const Manager = (props: Props) => {
                 style: border
                     ? ({
                           "--tw-ring-color": border,
+                          "min-width": "2.5rem",
+                          "min-height": "2.5rem"
                       } as CSSProperties)
-                    : undefined,
+                    : {
+                        minWidth: "2.5rem",
+                        minHeight: "2.5rem"
+                    },
             }}
             description={description}
             name={teamName}

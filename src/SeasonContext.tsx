@@ -27,6 +27,7 @@ export interface SeasonContext {
     getPosition: (id: number) => Position | undefined;
     getGames: (gameweek: number, teamId: number) => Fixture[];
     getDraftInfo: (playerId: number) => "Unknown" | Choice | undefined;
+    getPlayer: (playerId: number) => Player | undefined;
     //TODO add a getManager onto here too
 }
 
@@ -66,11 +67,13 @@ export const SeasonContextProvider = ({
     const positionsById = indexBy(bootstrap.element_types, (et) => et.id);
     const draftChoices = draft === undefined ? "Unknown" : draft.choices
     const draftByPlayerId = indexBy(draftChoices === "Unknown" ? [] : draftChoices, (choice) => choice.element)
+    const players = bootstrap.elements.map((p) => Player.build(p))
+    const playersById = indexBy(players, p => p.id)
 
     const ctx: SeasonContext = {
         leagueDetails: leagueDetails,
         teams: bootstrap.teams,
-        players: bootstrap.elements.map((p) => Player.build(p)),
+        players: players,
         positions: bootstrap.element_types,
         playerStatuses: playerStatus.element_status,
         managers: MANAGERS,
@@ -87,7 +90,8 @@ export const SeasonContextProvider = ({
             bootstrap.fixtures[gameweek]?.filter(
                 (f) => f.team_h === teamId || f.team_a === teamId
             ) ?? [],
-        getDraftInfo: draftChoices === "Unknown" ? () => "Unknown" : (playerId) => draftByPlayerId.get(playerId)
+        getDraftInfo: draftChoices === "Unknown" ? () => "Unknown" : (playerId) => draftByPlayerId.get(playerId),
+        getPlayer: (id) => playersById.get(id)
     };
 
     return (

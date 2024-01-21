@@ -25,24 +25,27 @@ import { WithDefaultGameWeek } from "./WithDefaultGameWeek";
 import { useReplaceNavigate } from "../useReplaceNavigate";
 import { useSeasonContext } from "../SeasonContext";
 import { PlayersTable } from "./playerstable/PlayersTable";
+import { DraftBoard } from "./DraftBoard";
+import { Choice } from "../api/domain";
 
 export interface Props {
     allLeagueDetails: LeagueDetails[];
 }
 
-const TABS = ["standings", "results", "fixtures", "players"] as const;
+const TABS = ["standings", "results", "fixtures", "players", "draft"] as const;
 export const DEFAULT_TAB = TABS[0];
 type Tab = (typeof TABS)[number];
 const isTab = (s: unknown): s is Tab => TABS.includes(s as Tab);
-const shouldDisplayTab = (tab: Tab, fixtures: Match[]) =>
-    !(tab === "fixtures" && fixtures.length === 0);
+//TODO refactor shouldDisplayTab to be better
+const shouldDisplayTab = (tab: Tab, fixtures: Match[], draft: "Unknown" | Choice[]) =>
+    !(tab === "fixtures" && fixtures.length === 0) && !(tab === "draft" && draft === "Unknown");
 const isSeason = (s: unknown): s is Season => SEASONS.includes(s as Season);
 
 //TODO give this a better name
 export const SeasonComponent = () => {
     const { season, tab } = useParams();
     const navigate = useReplaceNavigate();
-    const { leagueDetails } = useSeasonContext()
+    const { leagueDetails, draft } = useSeasonContext()
 
     if (!isTab(tab) || !isSeason(season) || leagueDetails == undefined) {
         return <Redirect to={`~/404`} />;
@@ -108,7 +111,7 @@ export const SeasonComponent = () => {
                         }}
                     >
                         {TABS.map((t) =>
-                            shouldDisplayTab(t, fixtures) ? (
+                            shouldDisplayTab(t, fixtures, draft) ? (
                                 <Tab className="capitalize" key={t} title={t} />
                             ) : null
                         )}
@@ -156,6 +159,8 @@ export const SeasonComponent = () => {
                     </WithDefaultGameWeek>
                 ) : null}
                 {tab === "players" ? <PlayersTable /> : null}
+                {/* //TODO the redirect here isn't working as expected */}
+                {tab === "draft" ? draft === "Unknown" ? <Redirect to={`~/fpl/league/1/season/${season}/standings`} replace/> : <DraftBoard /> : null}
             </Route>
         </>
     );
