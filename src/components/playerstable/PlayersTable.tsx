@@ -84,10 +84,8 @@ const applyFilters = (
 ): PlayerRow[] =>
     rows.filter(
         (row) =>
-            applySelection(
-                positions,
-                row,
-                (row) => (row.position?.id ?? "").toString()
+            applySelection(positions, row, (row) =>
+                (row.position?.id ?? "").toString()
             ) &&
             applySelection(teams, row, (row) =>
                 (row.team?.id ?? "").toString()
@@ -110,7 +108,7 @@ export const PlayersTable = () => {
         getGames,
         currentGameweek,
         positions,
-        getDraftInfo
+        getDraftInfo,
     } = useSeasonContext();
 
     const columns = useMemo(
@@ -131,7 +129,7 @@ export const PlayersTable = () => {
                 getEntry,
                 getPosition,
                 getPlayerStatus,
-                getGames, 
+                getGames,
                 getDraftInfo
             ),
         [
@@ -210,12 +208,12 @@ export const PlayersTable = () => {
 
     return (
         <>
-            <div className="sm:flex sm:justify-between sm:items-center p-4 grid grid-rows-2 gap-2">
+            <div className="sm:flex sm:justify-between sm:items-center p-4 grid gap-2">
                 <SearchField
                     onValueChange={setNameSearchValue}
                     onClear={onClear}
                 />
-                <div className="w-full flex gap-3 justify-end">
+                <div className="w-full grid grid-cols-3 sm:flex sm:justify-end gap-2">
                     <Dropdown>
                         <DropdownTrigger>
                             <Button
@@ -262,7 +260,9 @@ export const PlayersTable = () => {
                             className="overflow-y-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-default-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-default-300 scrollbar-track:!rounded"
                         >
                             {positions.map((position) => (
-                                <DropdownItem key={position.id}>{position.singular_name}</DropdownItem>
+                                <DropdownItem key={position.id}>
+                                    {position.singular_name}
+                                </DropdownItem>
                             ))}
                         </DropdownMenu>
                     </Dropdown>
@@ -295,22 +295,23 @@ export const PlayersTable = () => {
                             ))}
                         </DropdownMenu>
                     </Dropdown>
-                    <Checkbox
-                        isSelected={freeAgentsOnly}
-                        onValueChange={setFreeAgentsOnly}
-                        color="default"
-                        classNames={{ label: "text-small" }}
-                    >
-                        Free Agents
-                    </Checkbox>
                 </div>
+                <Checkbox
+                    isSelected={freeAgentsOnly}
+                    onValueChange={setFreeAgentsOnly}
+                    color="default"
+                    classNames={{ label: "text-small whitespace-nowrap" }}
+                >
+                    Free Agents
+                </Checkbox>
             </div>
             <Table
-                aria-label="Standings"
+                isCompact
+                aria-label="Players List"
                 isHeaderSticky
                 sortDescriptor={sortDescriptor}
                 onSortChange={setSortDescriptor}
-                className="min-h-0 h-full"
+                className="lg:min-h-0 lg:h-full pb-2 lg:pb-0"
                 classNames={{
                     wrapper:
                         "overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-default-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-default-300 scrollbar-track:!rounded",

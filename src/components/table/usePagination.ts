@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 
 export const usePagination = <T,>({
     rows,
-    rowsPerPage = 10,
+    rowsPerPage = 13,
 }: {
     rows: T[];
     rowsPerPage?: number;
