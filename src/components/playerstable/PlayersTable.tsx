@@ -317,7 +317,7 @@ export const PlayersTable = () => {
                         "overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-default-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-default-300 scrollbar-track:!rounded",
                 }}
                 bottomContent={
-                    <div className="flex w-full justify-center">
+                    <div className="flex w-full justify-center sticky left-0">
                         <Pagination
                             isCompact
                             showControls
