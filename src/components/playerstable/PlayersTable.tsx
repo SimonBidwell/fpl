@@ -330,11 +330,22 @@ export const PlayersTable = () => {
                     </div>
                 }
             >
-                <TableHeader columns={selectedColumns}>
-                    {({ key, title, abbr, description, sort }) => (
+                <TableHeader
+                    columns={selectedColumns}
+                    className="bg-default-100"
+                >
+                    {({
+                        key,
+                        title,
+                        abbr,
+                        description,
+                        sort,
+                        headerClassName,
+                    }) => (
                         <TableColumn
                             key={key}
                             allowsSorting={sort !== undefined}
+                            className={headerClassName}
                         >
                             <ColumnHeader
                                 key={key}
@@ -351,7 +362,13 @@ export const PlayersTable = () => {
                     {(item) => (
                         <TableRow key={item.code}>
                             {(columnKey) => (
-                                <TableCell>
+                                <TableCell
+                                    className={
+                                        columns.find(
+                                            (col) => col.key === columnKey
+                                        )?.cellClassName
+                                    }
+                                >
                                     {columns
                                         .find((col) => col.key === columnKey)
                                         ?.render(item)}

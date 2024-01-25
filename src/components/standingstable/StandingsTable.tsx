@@ -84,8 +84,12 @@ export const StandingsTable = ({
             }}
         >
             <TableHeader columns={columns}>
-                {({ key, title, abbr, sort, description }) => (
-                    <TableColumn key={key} allowsSorting={sort !== undefined}>
+                {({ key, title, abbr, sort, description, headerClassName }) => (
+                    <TableColumn
+                        key={key}
+                        allowsSorting={sort !== undefined}
+                        className={headerClassName}
+                    >
                         <ColumnHeader
                             key={key}
                             columnKey={key}
@@ -105,7 +109,14 @@ export const StandingsTable = ({
                 {(item) => (
                     <TableRow key={item.key}>
                         {(columnKey) => (
-                            <TableCell>{renderCell(item, columnKey)}</TableCell>
+                            <TableCell
+                                className={
+                                    columns.find((col) => col.key === columnKey)
+                                        ?.cellClassName
+                                }
+                            >
+                                {renderCell(item, columnKey)}
+                            </TableCell>
                         )}
                     </TableRow>
                 )}

@@ -14,7 +14,7 @@ export type Column = ColumnType<StandingsRow> & {
         header: string | string[];
         data: (row: StandingsRow) => string | number | (string | number)[];
     };
-}
+};
 
 export const PositionCol: Column = {
     key: "Position",
@@ -85,6 +85,8 @@ export const TeamCol: Column = {
 export const TeamAndManagerCol: Column = {
     key: "Team & Manager",
     title: "Team & Manager",
+    headerClassName: "sticky -left-4",
+    cellClassName: "sticky -left-4 z-20 bg-white",
     render: ({ entry }) => (
         <Link
             className="hover:opacity-60"

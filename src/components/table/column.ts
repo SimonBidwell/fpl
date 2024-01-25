@@ -7,4 +7,6 @@ export interface Column<T> {
     description?: string;
     render: (row: T) => ReactNode;
     sort?: (a: T, b: T) => number;
+    headerClassName?: string;
+    cellClassName?: string;
 }

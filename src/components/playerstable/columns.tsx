@@ -263,6 +263,8 @@ const stringColumn = (
 export const PlayerCol: Column = {
     key: "player",
     title: "Player",
+    headerClassName: "sticky -left-4",
+    cellClassName: "sticky -left-4 z-20 bg-white",
     render: ({ code, displayName, position, team }) => (
         <User
             className="truncate"
