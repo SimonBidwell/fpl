@@ -74,8 +74,8 @@ export const DraftBoard = () => {
     const draft = maybeDraft === "Unknown" ? [] : maybeDraft
     const order = draft.slice(0, 12);
     return (
-        <div className="relative">
-            <div className="grid grid-cols-12 gap-1 mt-4 p-2 align-start top-0 z-10 text-center">
+        <div className="p-2 overflow-x-auto">
+            <div className="grid grid-cols-[repeat(12,_minmax(8rem,_1fr))] gap-1 pt-4 pb-2 align-start text-center">
                 {order.map((x, i) => (<div className="px-2 flex flex-col gap-1 items-center overflow-hidden">
                     <Avatar radius="md" src={`${import.meta.env.BASE_URL}/${getEntry(x.entry)?.manager?.id}.jpg`} />
                     <span className="text-small text-inherit truncate w-full">{getEntry(x.entry)?.name}</span>
@@ -83,7 +83,7 @@ export const DraftBoard = () => {
                 </div>
                 ))}
             </div>
-            <div className="grid grid-cols-12 gap-1 pb-2 align-start">
+            <div className="grid grid-cols-[repeat(12,_minmax(8rem,_1fr))] gap-1 pb-2 align-start">
                 {draft.map((d) => (
                     <DraftPick choice={d} />
                 ))}
