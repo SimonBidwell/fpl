@@ -260,24 +260,36 @@ const stringColumn = (
     sort: (a, b) => (a[key] ?? "").localeCompare(b[key] ?? ""),
 });
 
+const playerDescription = (team?: string, position?: string) => 
+    `${team ?? "Unknown"} - ${position ?? "Unknown"}`
+
 export const PlayerCol: Column = {
     key: "player",
     title: "Player",
     headerClassName: "sticky -left-4",
     cellClassName: "sticky -left-4 z-20 bg-white",
-    render: ({ code, displayName, position, team }) => (
-        <User
-            className="truncate"
-            name={displayName}
-            description={`${team?.name ?? "Unknown"} - ${
-                position?.singular_name ?? "Unknown"
-            }`}
-            avatarProps={{
-                radius: "md",
-                src: `https://resources.premierleague.com/premierleague/photos/players/40x40/p${code}.png`,
-            }}
-        />
-    ),
+    render: ({ code, displayName, web_name, position, team }) => {
+        const avatarProps = {
+            radius: "md",
+            src: `https://resources.premierleague.com/premierleague/photos/players/40x40/p${code}.png`,
+        } as const
+        return (
+            <>
+                <User
+                    className="hidden sm:inline-flex truncate"
+                    name={displayName}
+                    description={playerDescription(team?.name, position?.singular_name)}
+                    avatarProps={avatarProps}
+                />
+                <User
+                    className="sm:hidden truncate"
+                    name={web_name}
+                    description={playerDescription(team?.short_name, position?.singular_name_short)}
+                    avatarProps={avatarProps}
+                />
+            </>
+        );
+    },
     sort: (a, b) => a.displayName.localeCompare(b.displayName),
 };
 export const OwnerCol: Column = {
