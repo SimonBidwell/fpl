@@ -621,7 +621,7 @@ export const buildFixturesCol = (
                         {maybeFixtures.map((fixture) => {
                             const { opposition, side } = fixture;
                             return (
-                                <div>
+                                <div className="truncate">
                                     {opposition.short_name} (
                                     {side === "home" ? "H" : "A"})
                                 </div>

@@ -11,6 +11,7 @@ import { useState, useCallback, useMemo, Key, ReactNode } from "react";
 import { Column } from "./columns";
 import { ColumnHeader } from "../table/ColumnHeader";
 import { Entry, Match, Season } from "../../domain";
+import clsx from "clsx";
 
 export interface StandingsRow {
     key: Key;
@@ -78,9 +79,11 @@ export const StandingsTable = ({
             sortDescriptor={sortDescriptor}
             onSortChange={setSortDescriptor}
             topContent={topContent}
+            isCompact
             classNames={{
                 wrapper:
                     "overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-default-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-default-300 scrollbar-track:!rounded",
+                thead: "z-30"
             }}
         >
             <TableHeader columns={columns}>
@@ -88,7 +91,7 @@ export const StandingsTable = ({
                     <TableColumn
                         key={key}
                         allowsSorting={sort !== undefined}
-                        className={headerClassName}
+                        className={clsx(headerClassName, "p-1 first:pl-2")}
                     >
                         <ColumnHeader
                             key={key}
@@ -110,10 +113,8 @@ export const StandingsTable = ({
                     <TableRow key={item.key}>
                         {(columnKey) => (
                             <TableCell
-                                className={
-                                    columns.find((col) => col.key === columnKey)
-                                        ?.cellClassName
-                                }
+                                className={clsx(columns.find((col) => col.key === columnKey)
+                                    ?.cellClassName, "p-1 first:pl-2")}
                             >
                                 {renderCell(item, columnKey)}
                             </TableCell>

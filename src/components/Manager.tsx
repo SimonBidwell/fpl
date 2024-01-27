@@ -42,25 +42,26 @@ export const Manager = (props: Props) => {
                 style: border
                     ? ({
                           "--tw-ring-color": border,
-                          "min-width": "2.5rem",
-                          "min-height": "2.5rem"
+                          minWidth: "2.5rem",
+                          minHeight: "2.5rem",
                       } as CSSProperties)
                     : {
-                        minWidth: "2.5rem",
-                        minHeight: "2.5rem"
-                    },
+                          minWidth: "2.5rem",
+                          minHeight: "2.5rem",
+                      },
             }}
             description={description}
             name={teamName}
-            classNames={
-                align === "right"
+            classNames={{
+                name: "truncate",
+                ...(align === "right"
                     ? {
                           base: "flex-row-reverse",
                           description: "flex-row-reverse",
                           wrapper: "items-end",
                       }
-                    : undefined
-            }
+                    : undefined),
+            }}
         />
     );
 };

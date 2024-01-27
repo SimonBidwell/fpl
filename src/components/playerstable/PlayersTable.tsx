@@ -44,6 +44,7 @@ import { ColumnHeader } from "../table/ColumnHeader";
 import { usePagination } from "../table/usePagination";
 import { DebouncedSearch as SearchField } from "../table/DebouncedSearch";
 import { range } from "../../helpers";
+import clsx from "clsx";
 
 const buildDefaultColumns = (gameweek: number | undefined): Column[] => [
     TotalPointsRankCol,
@@ -315,6 +316,7 @@ export const PlayersTable = () => {
                 classNames={{
                     wrapper:
                         "overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-default-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-default-300 scrollbar-track:!rounded",
+                    thead: "z-30",
                 }}
                 bottomContent={
                     <div className="flex w-full justify-center sticky left-0">
@@ -330,10 +332,7 @@ export const PlayersTable = () => {
                     </div>
                 }
             >
-                <TableHeader
-                    columns={selectedColumns}
-                    className="bg-default-100"
-                >
+                <TableHeader columns={selectedColumns}>
                     {({
                         key,
                         title,
@@ -345,7 +344,7 @@ export const PlayersTable = () => {
                         <TableColumn
                             key={key}
                             allowsSorting={sort !== undefined}
-                            className={headerClassName}
+                            className={clsx(headerClassName, "p-1 first:pl-2")}
                         >
                             <ColumnHeader
                                 key={key}
@@ -363,11 +362,12 @@ export const PlayersTable = () => {
                         <TableRow key={item.code}>
                             {(columnKey) => (
                                 <TableCell
-                                    className={
+                                    className={clsx(
                                         columns.find(
                                             (col) => col.key === columnKey
-                                        )?.cellClassName
-                                    }
+                                        )?.cellClassName,
+                                        "p-1 first:pl-2"
+                                    )}
                                 >
                                     {columns
                                         .find((col) => col.key === columnKey)
