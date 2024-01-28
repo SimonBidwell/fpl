@@ -351,6 +351,7 @@ export const StatusCol: Column = {
     title: "Status",
     abbr: " ",
     render: ({ news, chance_of_playing_next_round }) => {
+        //TODO refactor this so it can be reused in the card view
         if (
             chance_of_playing_next_round === 100 ||
             chance_of_playing_next_round === undefined

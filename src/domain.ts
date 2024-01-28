@@ -629,7 +629,8 @@ export const PLAYER_NAME_OVERRIDES: Record<number, string> = {
     148508: "Trézéguet",
     109345: "Solly March",
     153256: "Mohamed Elneny",
-    205533: "Eddie Nketiah"
+    205533: "Eddie Nketiah",
+    146426: "Semi Ajayi"
 };
 
 export type Team = FplTeam;

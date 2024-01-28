@@ -4,7 +4,7 @@ import { Search as SearchIcon } from "../icons/Search";
 
 //TODO this can definitely be done better
 export const DebouncedSearch = ({
-    className = "w-full sm:max-w-[44%]",
+    className = "w-full md:max-w-[44%]",
     onValueChange,
     onClear,
 }: {
