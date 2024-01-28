@@ -198,7 +198,7 @@ export const PlayersTable = () => {
         ]
     );
 
-    const [mode, setMode] = useState<"table" | "card">("card");
+    const [mode, setMode] = useState<"table" | "card">("table");
 
     const { page, pages, setPage, items } = usePagination({
         rows: filteredSorted,
