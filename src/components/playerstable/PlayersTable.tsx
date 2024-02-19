@@ -44,7 +44,7 @@ import {
 import { ColumnHeader } from "../table/ColumnHeader";
 import { usePagination } from "../table/usePagination";
 import { DebouncedSearch as SearchField } from "../table/DebouncedSearch";
-import { range } from "../../helpers";
+import { indexBy, range, rankBy } from "../../helpers";
 import clsx from "clsx";
 import { PlayerCard } from "./PlayerCard";
 
@@ -118,6 +118,19 @@ export const PlayersTable = () => {
         () => buildColumns(currentGameweek),
         [currentGameweek]
     );
+    const columnsByKey = useMemo(
+        () => indexBy(columns, (c) => c.key),
+        [columns]
+    );
+    const columnOrder = useMemo(
+        () =>
+            rankBy(
+                columns,
+                () => 0,
+                (col) => col.key
+            ),
+        [columns]
+    );
     const defaultColumns = useMemo(
         () => buildDefaultColumns(currentGameweek),
         [currentGameweek]
@@ -153,7 +166,7 @@ export const PlayersTable = () => {
 
     const sorted = useMemo(() => {
         const { direction, column } = sortDescriptor;
-        const sortFn = columns.find((col) => col.key === column)?.sort;
+        const sortFn = columnsByKey.get(column?.toString() ?? "")?.sort;
         return playerRows.toSorted((a, b) => {
             if (sortFn) {
                 const comparison = sortFn(a, b);
@@ -162,7 +175,7 @@ export const PlayersTable = () => {
                 return 0;
             }
         });
-    }, [columns, sortDescriptor, playerRows]);
+    }, [columnsByKey, sortDescriptor, playerRows]);
 
     const [selectedPositions, setSelectedPositions] = useState<Selection>(
         new Set()
@@ -207,10 +220,15 @@ export const PlayersTable = () => {
 
     const selectedColumns = useMemo(
         () =>
-            columns.filter((col) =>
-                Array.from(visibleColumns).includes(col.key)
-            ),
-        [columns, visibleColumns]
+            Array.from(visibleColumns)
+                .map((key) => columnsByKey.get(key?.toString() ?? ""))
+                .filter((col): col is Column => col !== undefined)
+                .sort(
+                    (a, b) =>
+                        (columnOrder.get(a.key) ?? 0) -
+                        (columnOrder.get(b.key) ?? 0)
+                ),
+        [columnsByKey, visibleColumns]
     );
 
     return (
@@ -457,16 +475,14 @@ export const PlayersTable = () => {
                                 {(columnKey) => (
                                     <TableCell
                                         className={clsx(
-                                            columns.find(
-                                                (col) => col.key === columnKey
+                                            columnsByKey.get(
+                                                columnKey?.toString() ?? ""
                                             )?.cellClassName,
                                             "p-1 first:pl-2"
                                         )}
                                     >
-                                        {columns
-                                            .find(
-                                                (col) => col.key === columnKey
-                                            )
+                                        {columnsByKey
+                                            .get(columnKey?.toString() ?? "")
                                             ?.render(item)}
                                     </TableCell>
                                 )}
