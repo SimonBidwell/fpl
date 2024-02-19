@@ -44,7 +44,7 @@ export const Manager = (props: Props) => {
                           "--tw-ring-color": border,
                           minWidth: "2.5rem",
                           minHeight: "2.5rem",
-                      } as CSSProperties)
+                      })
                     : {
                           minWidth: "2.5rem",
                           minHeight: "2.5rem",

@@ -35,7 +35,7 @@ export const Graph = ({
                             "--marginRight": `${margins.right}px`,
                             "--marginBottom": `${margins.bottom}px`,
                             "--marginLeft": `${margins.left}px`,
-                        } as CSSProperties
+                        }
                     }
                 >
                     {/* X axis */}
