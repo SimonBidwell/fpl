@@ -5,6 +5,7 @@ import { LineGraph } from "./LineGraph";
 
 export const GRAPHS = [
     "League Position by Gameweek",
+    "Fair League Position by Gameweek",
     "Points For by Gameweek",
     "Fair Points Difference by Gameweek",
     "Fair Position Difference by Gameweek",
@@ -47,6 +48,26 @@ export const StandingsGraph = ({
                     }}
                 />
             );
+            case "Fair League Position by Gameweek":
+                return (
+                    <LineGraph
+                        title={graph}
+                        standings={standings}
+                        gameweek={gameweek}
+                        entries={entries}
+                        getY={(row) => row.fairPosition}
+                        xConfig={{
+                            title: "Gameweek",
+                            direction: "ASC",
+                            min: 1,
+                        }}
+                        yConfig={{
+                            title: "Fair Position",
+                            direction: "DESC",
+                            min: 1,
+                        }}
+                    />
+                );
         case "Points For by Gameweek":
             return (
                 <LineGraph
