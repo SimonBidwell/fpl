@@ -1,6 +1,7 @@
 import { Avatar, Card, CardBody } from "@nextui-org/react";
 import { Choice } from "../api/domain";
 import { useSeasonContext } from "../SeasonContext";
+import { MoveRight } from "lucide-react";
 
 const getRotation = (round: number, pick: number, managers: number) => {
     if (round * pick === 15 * managers) {
@@ -50,20 +51,11 @@ const DraftPick = ({ choice }: { choice: Choice }) => {
                     className="absolute h-3/5 bottom-0 right-0"
                     src={`https://resources.premierleague.com/premierleague/photos/players/110x140/p${player?.code}.png`}
                 />
-                <svg
-                    className={`bottom-1 left-1 h-4 absolute ${getRotation(
+                <MoveRight className={`bottom-1 left-1 h-4 w-3 absolute ${getRotation(
                         round,
                         pick,
                         12
-                    )} fill-foreground-400`}
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        d="m18.707 12.707-3 3a1 1 0 0 1-1.414-1.414L15.586 13H6a1 1 0 0 1 0-2h9.586l-1.293-1.293a1 1 0 0 1 1.414-1.414l3 3a1 1 0 0 1 0 1.414z"
-                        data-name="Right"
-                    />
-                </svg>
+                    )} text-foreground-400`}/>
             </CardBody>
         </Card>
     );

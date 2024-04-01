@@ -47,6 +47,7 @@ import { DebouncedSearch as SearchField } from "../table/DebouncedSearch";
 import { indexBy, range, rankBy } from "../../helpers";
 import clsx from "clsx";
 import { PlayerCard } from "./PlayerCard";
+import { GalleryHorizontalEnd, Table2 } from "lucide-react";
 
 const buildDefaultColumns = (gameweek: number | undefined): Column[] => [
     TotalPointsRankCol,
@@ -343,30 +344,7 @@ export const PlayersTable = () => {
                             isIconOnly
                             className="w-full md:w-fit"
                         >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="1"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="text-gray-700"
-                                opacity="0.5"
-                            >
-                                <path d="M12 3v18" />
-                                <rect
-                                    width="18"
-                                    height="18"
-                                    x="3"
-                                    y="3"
-                                    rx="2"
-                                />
-                                <path d="M3 9h18" />
-                                <path d="M3 15h18" />
-                            </svg>
+                            <Table2 strokeWidth={1}/>
                         </Button>
                         <Button
                             variant={mode === "card" ? undefined : "flat"}
@@ -374,42 +352,7 @@ export const PlayersTable = () => {
                             onClick={() => setMode("card")}
                             className="w-full md:w-fit"
                         >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="1"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="text-gray-700"
-                                opacity="0.5"
-                            >
-                                <rect width="7" height="7" x="3" y="3" rx="1" />
-                                <rect
-                                    width="7"
-                                    height="7"
-                                    x="14"
-                                    y="3"
-                                    rx="1"
-                                />
-                                <rect
-                                    width="7"
-                                    height="7"
-                                    x="14"
-                                    y="14"
-                                    rx="1"
-                                />
-                                <rect
-                                    width="7"
-                                    height="7"
-                                    x="3"
-                                    y="14"
-                                    rx="1"
-                                />
-                            </svg>
+                            <GalleryHorizontalEnd strokeWidth={1}/>
                         </Button>
                     </ButtonGroup>
                 </div>
