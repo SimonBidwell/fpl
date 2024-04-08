@@ -10,11 +10,13 @@ import {
     BootstrapStatic,
     ChoicesResponse,
     ElementStatusResponse,
+    TransactionResponse,
 } from "../api/domain";
 import {
     getBootstrapStatic,
     getDraftChoices,
     getElementStatus,
+    getTransactions,
 } from "../api/requests";
 
 const getAllLeagueDetails = async (): Promise<Map<Season, LeagueDetails>> => {
@@ -56,6 +58,18 @@ const getAllDraftChoices = async (): Promise<Map<Season, ChoicesResponse | undef
     }, new Map());
 };
 
+const getAllTransactions = async (): Promise<Map<Season, TransactionResponse | undefined>> => {
+    const seasons = await Promise.all(
+        SEASONS.map((s) =>
+            getTransactions(s).then((t) => [s, t] as const)
+        )
+    );
+    return seasons.reduce((acc, [season, t]) => {
+        acc.set(season, t);
+        return acc;
+    }, new Map());
+};
+
 const isSeason = (s: unknown): s is Season => SEASONS.includes(s as Season);
 
 export const League = () => {
@@ -64,6 +78,7 @@ export const League = () => {
         { queryKey: ["bootstrap"], queryFn: getAllBootstraps },
         { queryKey: ["element-status"], queryFn: getAllPlayerStatuses },
         { queryKey: ["draft-choices"], queryFn: getAllDraftChoices },
+        { queryKey: ["transactions"], queryFn: getAllTransactions }
     ]);
 
     const isLoading = requests.some((request) => request.isLoading);
@@ -72,6 +87,7 @@ export const League = () => {
     const bootstrap = requests[1].data;
     const playerStatus = requests[2].data;
     const draftChoices = requests[3].data;
+    const transactions = requests[4].data;
 
     if (isLoading) return "Loading...";
     if (
@@ -79,7 +95,8 @@ export const League = () => {
         leagueDetails === undefined ||
         bootstrap === undefined ||
         playerStatus === undefined ||
-        draftChoices === undefined
+        draftChoices === undefined || 
+        transactions === undefined
     ) {
         return "Error";
     }
@@ -96,6 +113,7 @@ export const League = () => {
                             bootstrap={bootstrap.get(params.season)}
                             playerStatus={playerStatus.get(params.season)}
                             draft={draftChoices.get(params.season)}
+                            transactions={transactions.get(params.season)}
                         >
                             <SeasonComponent />
                         </SeasonContextProvider>

@@ -39,12 +39,19 @@ import {
     PositionCol,
     TeamAndManagerCol,
     UpNextCol,
+    TotalWaiversCol,
+    AcceptedWaiversCol,
+    RejectedWaiversCol,
+    FreeAgentsCol,
+    TransactionsCol,
     WonCol,
 } from "../standingstable/columns";
 import { LineChart, Table2 } from "lucide-react";
+import { Transaction } from "../../api/domain";
 
 export interface Props {
     leagueDetails: LeagueDetails;
+    transactions: Transaction[] | undefined;
 }
 
 const COLUMNS = [
@@ -67,6 +74,11 @@ const COLUMNS = [
     AveragePointsCol,
     AverageFairPointsCol,
     ELOCol,
+    AcceptedWaiversCol,
+    RejectedWaiversCol,
+    TotalWaiversCol,
+    FreeAgentsCol,
+    TransactionsCol,
     FormCol,
     UpNextCol,
 ];
@@ -88,7 +100,7 @@ const INITIAL_COLUMNS = [
     UpNextCol,
 ].map((col) => col.key);
 
-export const Standings = ({ leagueDetails }: Props) => {
+export const Standings = ({ leagueDetails, transactions }: Props) => {
     const { gameWeek } = useParams();
     const [, navigate] = useLocation();
     const finishedGameWeeks = useMemo(
@@ -122,8 +134,8 @@ export const Standings = ({ leagueDetails }: Props) => {
     );
 
     const standings = useMemo(
-        () => buildStandings(leagueDetails),
-        [leagueDetails]
+        () => buildStandings(leagueDetails, transactions),
+        [leagueDetails, transactions]
     );
     const selectedStandings = useMemo(() => {
         const selected =
@@ -159,6 +171,7 @@ export const Standings = ({ leagueDetails }: Props) => {
                                 selectedKeys={visibleColumns}
                                 selectionMode="multiple"
                                 onSelectionChange={setVisibleColumns}
+                                className="max-h-64 overflow-y-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent scrollbar-track:!bg-default-100 scrollbar-thumb:!rounded scrollbar-thumb:!bg-default-300 scrollbar-track:!rounded"
                             >
                                 {COLUMNS.map(({ key, abbr }) => (
                                     <DropdownItem key={key}>
@@ -187,7 +200,7 @@ export const Standings = ({ leagueDetails }: Props) => {
                                 selectionMode="single"
                                 onSelectionChange={setGraph}
                             >
-                                {GRAPHS.map((graph) => (
+                                {GRAPHS.filter(x => transactions === undefined ? x !== "Total Waivers by Gameweek" : true).map((graph) => (
                                     <DropdownItem key={graph}>
                                         {graph}
                                     </DropdownItem>

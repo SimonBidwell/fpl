@@ -504,3 +504,58 @@ export const ELOCol: Column = {
         data: ({ elo }) => elo,
     },
 };
+
+export const TotalWaiversCol: Column = {
+    key: "Total Waivers",
+    title: "Total Waivers",
+    render: ({ totalWaivers }) => totalWaivers ?? "-",
+    sort: (a, b) => (a.totalWaivers ?? 0) - (b.totalWaivers ?? 0),
+    serialise: {
+        header: "Total Waivers",
+        data: ({ totalWaivers }) => totalWaivers ?? "-",
+    },
+}
+
+export const AcceptedWaiversCol: Column = {
+    key: "Accepted Waivers",
+    title: "Accepted Waivers",
+    render: ({ acceptedWaivers }) => acceptedWaivers ?? "-",
+    sort: (a, b) => (a.acceptedWaivers ?? 0) - (b.acceptedWaivers ?? 0),
+    serialise: {
+        header: "Accepted Waivers",
+        data: ({ acceptedWaivers }) => acceptedWaivers ?? "-",
+    },
+}
+
+export const RejectedWaiversCol: Column = {
+    key: "Rejected Waivers",
+    title: "Rejected Waivers",
+    render: ({ rejectedWaivers }) => rejectedWaivers ?? "-",
+    sort: (a, b) => (a.rejectedWaivers ?? 0) - (b.rejectedWaivers ?? 0),
+    serialise: {
+        header: "Rejected Waivers",
+        data: ({ rejectedWaivers }) => rejectedWaivers ?? "-",
+    },
+}
+
+export const FreeAgentsCol: Column = {
+    key: "Free Agents",
+    title: "Free Agents",
+    render: ({ freeAgents }) => freeAgents ?? "-",
+    sort: (a, b) => (a.freeAgents ?? 0) - (b.freeAgents ?? 0),
+    serialise: {
+        header: "Free Agents",
+        data: ({ freeAgents }) => freeAgents ?? "-",
+    },
+}
+
+export const TransactionsCol: Column = {
+    key: "Transactions",
+    title: "Transactions",
+    render: ({ transactions }) => transactions ?? "-",
+    sort: (a, b) => (a.transactions ?? 0) - (b.transactions ?? 0),
+    serialise: {
+        header: "Transactions",
+        data: ({ transactions }) => transactions ?? "-",
+    },
+}

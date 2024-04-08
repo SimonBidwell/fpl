@@ -11,6 +11,7 @@ export const GRAPHS = [
     "Fair Position Difference by Gameweek",
     "ELO",
     "Points Difference",
+    "Total Waivers by Gameweek"
 ];
 export type Graph = (typeof GRAPHS)[number];
 
@@ -48,26 +49,47 @@ export const StandingsGraph = ({
                     }}
                 />
             );
-            case "Fair League Position by Gameweek":
-                return (
-                    <LineGraph
-                        title={graph}
-                        standings={standings}
-                        gameweek={gameweek}
-                        entries={entries}
-                        getY={(row) => row.fairPosition}
-                        xConfig={{
-                            title: "Gameweek",
-                            direction: "ASC",
-                            min: 1,
-                        }}
-                        yConfig={{
-                            title: "Fair Position",
-                            direction: "DESC",
-                            min: 1,
-                        }}
-                    />
-                );
+        case "Fair League Position by Gameweek":
+            return (
+                <LineGraph
+                    title={graph}
+                    standings={standings}
+                    gameweek={gameweek}
+                    entries={entries}
+                    getY={(row) => row.fairPosition}
+                    xConfig={{
+                        title: "Gameweek",
+                        direction: "ASC",
+                        min: 1,
+                    }}
+                    yConfig={{
+                        title: "Fair Position",
+                        direction: "DESC",
+                        min: 1,
+                    }}
+                />
+            );
+        case "Total Waivers by Gameweek":
+            return (
+                <LineGraph
+                    title={graph}
+                    standings={standings}
+                    gameweek={gameweek}
+                    entries={entries}
+                    getY={(row) => row.totalWaivers ?? 0}
+                    initialPoint={{ x: 0, y: 0 }}
+                    xConfig={{
+                        title: "Gameweek",
+                        direction: "ASC",
+                        min: 0,
+                    }}
+                    yConfig={{
+                        title: "Total Waivers",
+                        direction: "ASC",
+                        ticks: 10
+                    }}
+                />
+            );
         case "Points For by Gameweek":
             return (
                 <LineGraph

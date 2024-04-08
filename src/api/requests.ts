@@ -3,6 +3,7 @@ import {
     leagueDetailsSchema,
     elementStatusResponseSchema,
     choicesResponseSchema,
+    transactionsResponseSchema,
 } from "./domain";
 
 export const getLeagueDetails = async (seasonId: string) => {
@@ -31,6 +32,17 @@ export const getDraftChoices = async (seasonId: string) => {
     if (res.ok) {
         return choicesResponseSchema.parse(await res.json());
     } else {
-        return undefined
+        return undefined;
+    }
+};
+
+export const getTransactions = async (seasonId: string) => {
+    const res = await fetch(
+        `${import.meta.env.BASE_URL}/transactions-${seasonId}.json`
+    );
+    if (res.ok) {
+        return transactionsResponseSchema.parse(await res.json());
+    } else {
+        return undefined;
     }
 };

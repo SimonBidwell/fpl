@@ -45,7 +45,7 @@ const isSeason = (s: unknown): s is Season => SEASONS.includes(s as Season);
 export const SeasonComponent = () => {
     const { season, tab } = useParams();
     const navigate = useReplaceNavigate();
-    const { leagueDetails, draft } = useSeasonContext()
+    const { leagueDetails, draft, transactions } = useSeasonContext()
 
     if (!isTab(tab) || !isSeason(season) || leagueDetails == undefined) {
         return <Redirect to={`~/404`} />;
@@ -129,6 +129,7 @@ export const SeasonComponent = () => {
                         <Standings
                             key={`standings-${season}`}
                             leagueDetails={leagueDetails}
+                            transactions={transactions === "Unknown" ? undefined : transactions}
                         />
                     </WithDefaultGameWeek>
                 ) : null}

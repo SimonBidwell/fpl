@@ -320,3 +320,22 @@ export const choicesResponseSchema = z.object({
     choices: z.array(choiceSchema),
 });
 export type ChoicesResponse = z.infer<typeof choicesResponseSchema>;
+
+export const transactionSchema = z.object({
+    added: z.string(),
+    element_in: z.number(),
+    element_out: z.number(),
+    entry: z.number(),
+    event: z.number(),
+    id: z.number(),
+    index: z.number().nullable(), 
+    kind: z.string(),
+    priority: z.number().nullable(),
+    result: z.string() 
+})
+export type Transaction = z.infer<typeof transactionSchema>;
+
+export const transactionsResponseSchema = z.object({
+    transactions: z.array(transactionSchema)
+})
+export type TransactionResponse = z.infer<typeof transactionsResponseSchema>;

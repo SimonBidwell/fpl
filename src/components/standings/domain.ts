@@ -1,5 +1,6 @@
+import { Transaction } from "../../api/domain";
 import { Match, LeagueDetails } from "../../domain";
-import { groupBy, indexBy, rankBy } from "../../helpers";
+import { groupBy, indexBy, partition, rankBy } from "../../helpers";
 import { StandingsRow } from "../standingstable/StandingsTable";
 import { calculateElo } from "./elo";
 
@@ -185,7 +186,7 @@ export const buildStandings = ({
     league,
     matches,
     entries,
-}: LeagueDetails): Map<number, Map<number, StandingsRow>> => {
+}: LeagueDetails, transactions: Transaction[] | undefined): Map<number, Map<number, StandingsRow>> => {
     const teamIds = entries.map((e) => e.id);
     const allPossibleMatches = getUniquePairs(teamIds);
     const matchesByTeam = matches.reduce((acc, match) => {
@@ -223,8 +224,12 @@ export const buildStandings = ({
             ([teamId]) => teamId
         );
 
+        //TODO make this more efficient. Lots of wasted work atm. 
+        const transactionsUpToGameweek = (transactions ?? []).filter(t => t.event <= gameweek);
+        const transactionsByEntry = groupBy(transactionsUpToGameweek, t => t.entry)
+
         const standings = entries.map((entry) => {
-            const { id } = entry;
+            const { id, entryId } = entry;
             const position = pointsPositionByTeamId.get(id) ?? 0;
             const fairPosition = fairPositionByTeamId.get(id) ?? 0;
             const previousStanding = acc.get(gameweek - 1)?.get(id);
@@ -239,6 +244,12 @@ export const buildStandings = ({
                 fairPoints,
                 elo,
             } = records.get(id)?.get(gameweek) ?? EMPTY_RECORD;
+            const transactionsForEntry = transactionsByEntry.get(entryId) ?? []
+            const [acceptedWaivers, rejectedWaivers] = partition(
+                transactionsForEntry.filter(t => t.kind === "w"),
+                t => t.result === "a"
+            );
+            const freeAgents = transactionsForEntry.filter(t => t.kind === "f")
             return {
                 key: `${league.season}-${gameweek}-${id}`,
                 played,
@@ -256,6 +267,11 @@ export const buildStandings = ({
                 season: league.season,
                 previousPosition: previousStanding?.position,
                 elo,
+                totalWaivers: transactions === undefined ? undefined : acceptedWaivers.length + rejectedWaivers.length,
+                acceptedWaivers: transactions === undefined ? undefined : acceptedWaivers.length,
+                rejectedWaivers: transactions === undefined ? undefined : rejectedWaivers.length,
+                freeAgents: transactions === undefined ? undefined : freeAgents.length,
+                transactions: transactions === undefined ? undefined : transactionsForEntry.length
             };
         });
 

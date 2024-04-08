@@ -18,6 +18,8 @@ jobs:
         run: curl https://draft.premierleague.com/api/league/32589/element-status -o public/element-status-2023-24.json
       - name: Create Bootstrap file
         run: curl https://draft.premierleague.com/api/bootstrap-static -o public/bootstrap-static-2023-24.json
+      - name: Create Transactions file
+        run: curl https://draft.premierleague.com/api/draft/league/32589/transactions -o public/transactions-2023-24.json
       - name: Commit updated json file
         run: |
           git config user.name github-actions

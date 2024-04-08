@@ -83,7 +83,7 @@ export const ManagerPage = ({ leagueDetails }: Props) => {
     }
 
     const allTimeStandings = leagueDetails.map((ld) => {
-        const standings = buildStandings(ld);
+        const standings = buildStandings(ld, undefined);
         const seasonMostRecentStandings =
             standings.get(Math.max(...standings.keys())) ?? new Map();
         const managerTeamId = manager.teams[ld.league.season];

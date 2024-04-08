@@ -30,6 +30,11 @@ export interface StandingsRow {
     fairPoints: number;
     fairPosition: number;
     elo: number;
+    totalWaivers: number | undefined;
+    acceptedWaivers: number | undefined;
+    rejectedWaivers: number | undefined;
+    freeAgents: number | undefined;
+    transactions: number | undefined;
 }
 
 export interface Props {

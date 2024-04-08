@@ -10,7 +10,7 @@ import {
     Entry,
 } from "./domain";
 import { indexBy } from "./helpers";
-import { BootstrapStatic, Choice, ChoicesResponse, ElementStatusResponse, Fixture } from "./api/domain"; //TODO replace this with my own domain object
+import { BootstrapStatic, Choice, ChoicesResponse, ElementStatusResponse, Fixture, Transaction, TransactionResponse } from "./api/domain"; //TODO replace this with my own domain object
 
 export interface SeasonContext {
     leagueDetails: LeagueDetails;
@@ -20,6 +20,7 @@ export interface SeasonContext {
     positions: Position[];
     managers: Manager[];
     draft: Choice[] | "Unknown";
+    transactions: Transaction[] | "Unknown";
     currentGameweek: number | undefined;
     getTeam: (teamId: number) => Team | undefined;
     getPlayerStatus: (playerId: number) => PlayerStatus | undefined;
@@ -46,13 +47,15 @@ export const SeasonContextProvider = ({
     leagueDetails,
     bootstrap, 
     playerStatus,
-    draft
+    draft,
+    transactions
 }: {
     children: ReactNode;
     leagueDetails: LeagueDetails | undefined;
     bootstrap: BootstrapStatic | undefined;
     playerStatus: ElementStatusResponse | undefined;
     draft: ChoicesResponse | undefined;
+    transactions: TransactionResponse | undefined;
 }) => {
     if (
         leagueDetails === undefined ||
@@ -65,10 +68,10 @@ export const SeasonContextProvider = ({
     const teams = indexBy(bootstrap.teams, (t) => t.id);
     const statuses = indexBy(playerStatus.element_status, (e) => e.element);
     const positionsById = indexBy(bootstrap.element_types, (et) => et.id);
-    const draftChoices = draft === undefined ? "Unknown" : draft.choices
-    const draftByPlayerId = indexBy(draftChoices === "Unknown" ? [] : draftChoices, (choice) => choice.element)
-    const players = bootstrap.elements.map((p) => Player.build(p))
-    const playersById = indexBy(players, p => p.id)
+    const draftChoices = draft === undefined ? "Unknown" : draft.choices;
+    const draftByPlayerId = indexBy(draftChoices === "Unknown" ? [] : draftChoices, (choice) => choice.element);
+    const players = bootstrap.elements.map((p) => Player.build(p));
+    const playersById = indexBy(players, p => p.id);
 
     const ctx: SeasonContext = {
         leagueDetails: leagueDetails,
@@ -78,6 +81,7 @@ export const SeasonContextProvider = ({
         playerStatuses: playerStatus.element_status,
         managers: MANAGERS,
         draft: draftChoices,
+        transactions: transactions === undefined ? "Unknown" : transactions.transactions,
         currentGameweek:
             bootstrap.events.current === null ? undefined : bootstrap.events.current,
         getTeam: (id) => teams.get(id),
