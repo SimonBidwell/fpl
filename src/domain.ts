@@ -88,7 +88,7 @@ export const MANAGERS = [
             "2022-23": 4,
             "2023-24": 115955,
         },
-        notablePlacements: [],
+        notablePlacements: [{ season: "2023-24", position: 1 }],
         color: "#fde047",
     },
     {
@@ -160,7 +160,7 @@ export const MANAGERS = [
             "2022-23": 2,
             "2023-24": 139981,
         },
-        notablePlacements: [{ season: "2021-22", position: 12 }],
+        notablePlacements: [{ season: "2021-22", position: 12 }, { season: "2023-24", position: 12 }],
         color: "#06b6d4",
     },
     {
