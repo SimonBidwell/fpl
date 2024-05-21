@@ -63,7 +63,7 @@ const DraftPick = ({ choice }: { choice: Choice }) => {
 
 export const DraftBoard = () => {
     const { draft: maybeDraft, getEntry } = useSeasonContext();
-    const draft = maybeDraft === "Unknown" ? [] : maybeDraft
+    const draft = (maybeDraft === "Unknown" ? [] : maybeDraft).sort((a, b) => a.index - b.index)
     const order = draft.slice(0, 12);
     return (
         <div className="p-2 overflow-x-auto">

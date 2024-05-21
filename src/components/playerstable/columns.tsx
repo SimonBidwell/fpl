@@ -616,6 +616,14 @@ export const GoalInvolvementsMinusExpectedGoalInvolvementsCol = numberColumn(
         description: `A positive value means a player is overperforming expectation (i.e scoring and assisting more goals than you'd expect given the chances they're involved with). A negative number means they're underperforming.`,
     }
 );
+export const ElementIdCol = numberColumn(
+    "id",
+    {
+        title: "FPL Season ID",
+        abbr: "ID",
+        description: "A unique identifier assigned to every player in FPL this season",
+    }
+);
 
 export const buildFixturesCol = (
     currentGameweek: number,
@@ -717,6 +725,7 @@ export const DraftedByCol: Column = {
 
 export const buildColumns = (gameweek: number | undefined): Column[] => {
     return [
+        ElementIdCol,
         TotalPointsRankCol,
         StatusCol,
         CodeCol,
