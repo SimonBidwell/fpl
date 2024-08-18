@@ -37,8 +37,8 @@ export const DEFAULT_TAB = TABS[0];
 type Tab = (typeof TABS)[number];
 const isTab = (s: unknown): s is Tab => TABS.includes(s as Tab);
 //TODO refactor shouldDisplayTab to be better
-const shouldDisplayTab = (tab: Tab, fixtures: Match[], draft: "Unknown" | Choice[]) =>
-    !(tab === "fixtures" && fixtures.length === 0) && !(tab === "draft" && draft === "Unknown");
+const shouldDisplayTab = (tab: Tab, fixtures: Match[], results: Match[], draft: "Unknown" | Choice[]) =>
+    !(tab === "fixtures" && fixtures.length === 0) && !(tab === "draft" && draft === "Unknown") && !(tab === "results" && results.length === 0);
 const isSeason = (s: unknown): s is Season => SEASONS.includes(s as Season);
 
 //TODO give this a better name
@@ -56,6 +56,7 @@ export const SeasonComponent = () => {
 
     const title = `A Real Sport (${Season.toDisplayFormat(season)})`;
     const [results, fixtures] = partition(matches, Match.isFinished);
+    const defaultResultsGameweek = results.length == 0 ? 1 : results[results.length - 1].gameWeek
     return (
         <>
             <Card shadow="sm" className="shrink-0">
@@ -111,7 +112,7 @@ export const SeasonComponent = () => {
                         }}
                     >
                         {TABS.map((t) =>
-                            shouldDisplayTab(t, fixtures, draft) ? (
+                            shouldDisplayTab(t, fixtures, results, draft) ? (
                                 <Tab className="capitalize" key={t} title={t} />
                             ) : null
                         )}
@@ -121,7 +122,7 @@ export const SeasonComponent = () => {
             <Route path={"/:gameWeek?"}>
                 {tab === "standings" ? (
                     <WithDefaultGameWeek
-                        defaultGameWeek={results[results.length - 1].gameWeek}
+                        defaultGameWeek={defaultResultsGameweek}
                         isValidGameWeek={(gameWeek, defaultGameWeek) =>
                             gameWeek > 0 && gameWeek <= defaultGameWeek
                         }
@@ -133,9 +134,9 @@ export const SeasonComponent = () => {
                         />
                     </WithDefaultGameWeek>
                 ) : null}
-                {tab === "results" ? (
+                {tab === "results" && results.length > 0 ? (
                     <WithDefaultGameWeek
-                        defaultGameWeek={results[results.length - 1].gameWeek}
+                        defaultGameWeek={defaultResultsGameweek}
                         isValidGameWeek={(gameWeek, defaultGameWeek) =>
                             gameWeek > 0 && gameWeek <= defaultGameWeek
                         }

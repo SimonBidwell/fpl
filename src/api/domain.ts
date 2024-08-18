@@ -30,7 +30,7 @@ export const matchSchema = z.object({
 export type Match = z.infer<typeof matchSchema>;
 
 export const standingSchema = z.object({
-    last_rank: z.number(),
+    last_rank: z.number().nullish(),
     league_entry: z.number(),
     matches_drawn: z.number(),
     matches_lost: z.number(),
@@ -38,7 +38,7 @@ export const standingSchema = z.object({
     matches_won: z.number(),
     points_against: z.number(),
     points_for: z.number(),
-    rank: z.number(),
+    rank: z.number().nullish(),
     total: z.number(),
 });
 export type Standing = z.infer<typeof standingSchema>;

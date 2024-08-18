@@ -205,6 +205,48 @@ export const buildStandings = ({
     ].sort((a, b) => a - b);
     const records = buildTeamRecords(finishedMatches, allPossibleMatches);
 
+    const defaultStandings: Map<number, Map<number, StandingsRow>> = new Map()
+    const initialStandings: Map<number, StandingsRow> = entries.reduce((acc, entry, i) => {
+        const { id } = entry;
+        const {
+            played,
+            wins,
+            draws,
+            losses,
+            pointsScoreFor,
+            pointsScoreAgainst,
+            points,
+            fairPoints,
+            elo,
+        } = EMPTY_RECORD
+        const row: StandingsRow = {
+            key: `${league.season}-1-${id}`,
+            played,
+            entry,
+            position: 0,
+            wins,
+            draws,
+            losses,
+            upcoming: matchesByTeam.get(id)?.get(1),
+            pointsScoreFor,
+            pointsScoreAgainst,
+            points,
+            fairPoints,
+            fairPosition: 0,
+            season: league.season,
+            previousPosition: 0,
+            elo,
+            totalWaivers: 0,
+            acceptedWaivers: 0,
+            rejectedWaivers: 0,
+            freeAgents: 0,
+            transactions: 0
+        };
+        acc.set(id, row)
+        return acc
+    }, new Map())
+    defaultStandings.set(1, initialStandings)
+
     return finishedGameweeks.reduce((acc, gameweek) => {
         const results: [number, TeamRecord][] = teamIds.map((teamId) => [
             teamId,
@@ -279,5 +321,5 @@ export const buildStandings = ({
 
         acc.set(gameweek, standingsByTeamId);
         return acc;
-    }, new Map());
+    }, defaultStandings);
 };
