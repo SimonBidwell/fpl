@@ -1,0 +1,7067 @@
+{
+  "choices": [
+    {
+      "choice_time": "2025-08-15T11:00:19.948595Z",
+      "element": 381,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755711,
+      "index": 1,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 1,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:00:26.225735Z",
+      "element": 430,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755712,
+      "index": 2,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 1,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:00:35.214188Z",
+      "element": 235,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755713,
+      "index": 3,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 1,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:00:51.155085Z",
+      "element": 499,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755714,
+      "index": 4,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 1,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:01:02.007875Z",
+      "element": 64,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755715,
+      "index": 5,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 1,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:01:13.011818Z",
+      "element": 16,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755716,
+      "index": 6,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 1,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:01:46.228304Z",
+      "element": 449,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755717,
+      "index": 7,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 1,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:02:03.734182Z",
+      "element": 666,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755718,
+      "index": 8,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 1,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:02:33.791518Z",
+      "element": 382,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755719,
+      "index": 9,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 1,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:03:20.220652Z",
+      "element": 624,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755720,
+      "index": 10,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 1,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:03:23.267993Z",
+      "element": 661,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755721,
+      "index": 11,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 1,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:04:26.325483Z",
+      "element": 413,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755722,
+      "index": 12,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 1,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:04:26.424144Z",
+      "element": 119,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755723,
+      "index": 13,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 2,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:05:16.754385Z",
+      "element": 596,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755724,
+      "index": 14,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 2,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:05:56.391687Z",
+      "element": 450,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755725,
+      "index": 15,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 2,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:06:05.983397Z",
+      "element": 249,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755726,
+      "index": 16,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 2,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:07:03.844712Z",
+      "element": 17,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755727,
+      "index": 17,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 2,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:07:08.974113Z",
+      "element": 283,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755728,
+      "index": 18,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 2,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:07:53.301591Z",
+      "element": 679,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755729,
+      "index": 19,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 2,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:07:58.777646Z",
+      "element": 30,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755730,
+      "index": 20,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 2,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:08:28.635601Z",
+      "element": 266,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755731,
+      "index": 21,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 2,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:08:32.070576Z",
+      "element": 250,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755732,
+      "index": 22,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 2,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:09:04.317140Z",
+      "element": 97,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755733,
+      "index": 23,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 2,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:09:35.541841Z",
+      "element": 525,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755734,
+      "index": 24,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 2,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:10:18.477918Z",
+      "element": 419,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755735,
+      "index": 25,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 3,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:10:55.657297Z",
+      "element": 47,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755736,
+      "index": 26,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 3,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:11:17.235765Z",
+      "element": 135,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755737,
+      "index": 27,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 3,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:11:29.094257Z",
+      "element": 582,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755738,
+      "index": 28,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 3,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:11:37.723245Z",
+      "element": 310,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755739,
+      "index": 29,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 3,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:11:45.120261Z",
+      "element": 654,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755740,
+      "index": 30,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 3,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:12:44.933223Z",
+      "element": 178,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755741,
+      "index": 31,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 3,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:13:12.926327Z",
+      "element": 597,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755742,
+      "index": 32,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 3,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:13:39.820081Z",
+      "element": 414,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755743,
+      "index": 33,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 3,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:13:51.404033Z",
+      "element": 136,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755744,
+      "index": 34,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 3,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:13:55.555470Z",
+      "element": 384,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755745,
+      "index": 35,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 3,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:13:55.635478Z",
+      "element": 515,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755746,
+      "index": 36,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 3,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:13:55.719313Z",
+      "element": 485,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755747,
+      "index": 37,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 4,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:14:25.020264Z",
+      "element": 486,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755748,
+      "index": 38,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 4,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:14:57.145230Z",
+      "element": 82,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755749,
+      "index": 39,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 4,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:15:18.583643Z",
+      "element": 299,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755750,
+      "index": 40,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 4,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:15:38.057170Z",
+      "element": 157,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755751,
+      "index": 41,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 4,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:16:35.118337Z",
+      "element": 267,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755752,
+      "index": 42,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 4,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:17:13.097829Z",
+      "element": 5,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755753,
+      "index": 43,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 4,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:17:17.275165Z",
+      "element": 417,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755754,
+      "index": 44,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 4,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:17:19.148976Z",
+      "element": 337,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755755,
+      "index": 45,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 4,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:17:22.761294Z",
+      "element": 387,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755756,
+      "index": 46,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 4,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:17:42.232371Z",
+      "element": 6,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755757,
+      "index": 47,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 4,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:18:30.852980Z",
+      "element": 402,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755758,
+      "index": 48,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 4,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:19:19.145043Z",
+      "element": 21,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755759,
+      "index": 49,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 5,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:19:37.077529Z",
+      "element": 373,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755760,
+      "index": 50,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 5,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:19:45.091343Z",
+      "element": 370,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755761,
+      "index": 51,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 5,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:19:48.469978Z",
+      "element": 371,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755762,
+      "index": 52,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 5,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:19:56.974964Z",
+      "element": 238,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755763,
+      "index": 53,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 5,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:20:40.140321Z",
+      "element": 415,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755764,
+      "index": 54,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 5,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:20:42.670719Z",
+      "element": 403,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755765,
+      "index": 55,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 5,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:20:53.858029Z",
+      "element": 224,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755766,
+      "index": 56,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 5,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:21:46.137505Z",
+      "element": 505,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755767,
+      "index": 57,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 5,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:22:19.554562Z",
+      "element": 374,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755768,
+      "index": 58,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 5,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:23:08.854893Z",
+      "element": 508,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755769,
+      "index": 59,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 5,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:23:08.934082Z",
+      "element": 236,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755770,
+      "index": 60,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 5,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:23:09.027905Z",
+      "element": 465,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755771,
+      "index": 61,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 6,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:24:08.265203Z",
+      "element": 517,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755772,
+      "index": 62,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 6,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:24:54.655880Z",
+      "element": 256,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755773,
+      "index": 63,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 6,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:25:39.748025Z",
+      "element": 225,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755774,
+      "index": 64,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 6,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:26:05.803995Z",
+      "element": 452,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755775,
+      "index": 65,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 6,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:26:35.749693Z",
+      "element": 1,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755776,
+      "index": 66,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 6,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:26:41.659541Z",
+      "element": 568,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755777,
+      "index": 67,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 6,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:27:29.672674Z",
+      "element": 158,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755778,
+      "index": 68,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 6,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:27:43.927393Z",
+      "element": 677,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755779,
+      "index": 69,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 6,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:27:46.489874Z",
+      "element": 18,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755780,
+      "index": 70,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 6,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:28:29.909726Z",
+      "element": 121,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755781,
+      "index": 71,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 6,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:28:43.698542Z",
+      "element": 427,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755782,
+      "index": 72,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 6,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:28:47.780608Z",
+      "element": 625,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755783,
+      "index": 73,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 7,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:29:33.256086Z",
+      "element": 81,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755784,
+      "index": 74,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 7,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:29:36.443070Z",
+      "element": 237,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755785,
+      "index": 75,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 7,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:29:53.401793Z",
+      "element": 160,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755786,
+      "index": 76,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 7,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:29:58.480555Z",
+      "element": 291,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755787,
+      "index": 77,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 7,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:30:06.089648Z",
+      "element": 120,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755788,
+      "index": 78,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 7,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:31:05.106060Z",
+      "element": 386,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755789,
+      "index": 79,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 7,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:31:11.556318Z",
+      "element": 569,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755790,
+      "index": 80,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 7,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:31:33.752592Z",
+      "element": 477,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755791,
+      "index": 81,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 7,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:32:07.750861Z",
+      "element": 408,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755792,
+      "index": 82,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 7,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:32:14.762046Z",
+      "element": 38,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755793,
+      "index": 83,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 7,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:32:14.840621Z",
+      "element": 251,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755794,
+      "index": 84,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 7,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:32:14.917989Z",
+      "element": 31,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755795,
+      "index": 85,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 8,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:32:42.652257Z",
+      "element": 19,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755796,
+      "index": 86,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 8,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:33:12.821843Z",
+      "element": 473,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755797,
+      "index": 87,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 8,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:33:53.649407Z",
+      "element": 516,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755798,
+      "index": 88,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 8,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:34:42.108866Z",
+      "element": 488,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755799,
+      "index": 89,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 8,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:35:05.368016Z",
+      "element": 362,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755800,
+      "index": 90,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 8,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:35:08.024248Z",
+      "element": 474,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755801,
+      "index": 91,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 8,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:35:34.630736Z",
+      "element": 506,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755802,
+      "index": 92,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 8,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:35:55.951516Z",
+      "element": 145,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755803,
+      "index": 93,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 8,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:35:59.823711Z",
+      "element": 324,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755804,
+      "index": 94,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 8,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:36:08.020032Z",
+      "element": 8,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755805,
+      "index": 95,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 8,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:37:11.084019Z",
+      "element": 580,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755806,
+      "index": 96,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 8,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:37:11.185078Z",
+      "element": 526,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755807,
+      "index": 97,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 9,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:37:58.668271Z",
+      "element": 441,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755808,
+      "index": 98,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 9,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:38:01.051507Z",
+      "element": 260,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755809,
+      "index": 99,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 9,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:38:32.923358Z",
+      "element": 10,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755810,
+      "index": 100,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 9,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:38:54.384908Z",
+      "element": 48,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755811,
+      "index": 101,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 9,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:39:24.966727Z",
+      "element": 366,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755812,
+      "index": 102,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 9,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:40:18.215570Z",
+      "element": 421,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755813,
+      "index": 103,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 9,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:41:15.355871Z",
+      "element": 106,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755814,
+      "index": 104,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 9,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:41:17.332488Z",
+      "element": 311,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755815,
+      "index": 105,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 9,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:42:12.739658Z",
+      "element": 123,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755816,
+      "index": 106,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 9,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:42:20.513047Z",
+      "element": 575,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755817,
+      "index": 107,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 9,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:42:20.598974Z",
+      "element": 372,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755818,
+      "index": 108,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 9,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:42:20.681162Z",
+      "element": 287,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755819,
+      "index": 109,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 10,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:42:57.973022Z",
+      "element": 300,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755820,
+      "index": 110,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 10,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:43:05.334526Z",
+      "element": 487,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755821,
+      "index": 111,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 10,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:44:03.714018Z",
+      "element": 239,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755822,
+      "index": 112,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 10,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:44:07.684918Z",
+      "element": 502,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755823,
+      "index": 113,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 10,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:45:07.672591Z",
+      "element": 440,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755824,
+      "index": 114,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 10,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:45:13.748633Z",
+      "element": 53,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755825,
+      "index": 115,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 10,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:45:18.770268Z",
+      "element": 603,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755826,
+      "index": 116,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 10,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:46:04.827981Z",
+      "element": 565,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755827,
+      "index": 117,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 10,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:46:07.764075Z",
+      "element": 399,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755828,
+      "index": 118,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 10,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:46:39.678709Z",
+      "element": 20,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755829,
+      "index": 119,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 10,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:47:42.736676Z",
+      "element": 507,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755830,
+      "index": 120,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 10,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:47:42.822408Z",
+      "element": 220,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755831,
+      "index": 121,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 11,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:48:39.598542Z",
+      "element": 573,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755832,
+      "index": 122,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 11,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:48:42.443506Z",
+      "element": 182,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755833,
+      "index": 123,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 11,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:49:34.136601Z",
+      "element": 253,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755834,
+      "index": 124,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 11,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:49:37.705026Z",
+      "element": 110,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755835,
+      "index": 125,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 11,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:50:29.825798Z",
+      "element": 252,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755836,
+      "index": 126,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 11,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:50:58.371751Z",
+      "element": 316,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755837,
+      "index": 127,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 11,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:51:21.123535Z",
+      "element": 290,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755838,
+      "index": 128,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 11,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:51:35.805051Z",
+      "element": 101,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755839,
+      "index": 129,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 11,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:52:17.379180Z",
+      "element": 669,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755840,
+      "index": 130,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 11,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:52:23.227981Z",
+      "element": 407,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755841,
+      "index": 131,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 11,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:52:23.314320Z",
+      "element": 11,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755842,
+      "index": 132,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 11,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:52:23.407946Z",
+      "element": 7,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755843,
+      "index": 133,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 12,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:52:41.676772Z",
+      "element": 314,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755844,
+      "index": 134,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 12,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:53:26.309629Z",
+      "element": 560,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755845,
+      "index": 135,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 12,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:54:03.681800Z",
+      "element": 672,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755846,
+      "index": 136,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 12,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:54:10.310609Z",
+      "element": 215,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755847,
+      "index": 137,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 12,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:55:04.297125Z",
+      "element": 257,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755848,
+      "index": 138,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 12,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:55:49.784940Z",
+      "element": 261,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755849,
+      "index": 139,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 12,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:55:53.576155Z",
+      "element": 32,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755850,
+      "index": 140,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 12,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:55:58.332442Z",
+      "element": 683,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755851,
+      "index": 141,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 12,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:56:00.360653Z",
+      "element": 226,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755852,
+      "index": 142,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 12,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:56:29.253636Z",
+      "element": 561,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755853,
+      "index": 143,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 12,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:57:32.321267Z",
+      "element": 317,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755854,
+      "index": 144,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 12,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:57:32.417380Z",
+      "element": 610,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755855,
+      "index": 145,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 13,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:58:02.164315Z",
+      "element": 139,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755856,
+      "index": 146,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 13,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:58:04.117253Z",
+      "element": 338,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755857,
+      "index": 147,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 13,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:58:06.769140Z",
+      "element": 424,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755858,
+      "index": 148,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 13,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:58:17.090084Z",
+      "element": 489,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755859,
+      "index": 149,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 13,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:58:43.197057Z",
+      "element": 293,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755860,
+      "index": 150,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 13,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:59:19.659211Z",
+      "element": 476,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755861,
+      "index": 151,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 13,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:59:23.148131Z",
+      "element": 325,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755862,
+      "index": 152,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 13,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:59:50.603742Z",
+      "element": 436,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755863,
+      "index": 153,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 13,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:59:53.780043Z",
+      "element": 469,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755864,
+      "index": 154,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 13,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:59:58.960474Z",
+      "element": 258,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755865,
+      "index": 155,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 13,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T11:59:59.046402Z",
+      "element": 404,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755866,
+      "index": 156,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 13,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T11:59:59.148698Z",
+      "element": 405,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755867,
+      "index": 157,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 14,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T12:00:34.487061Z",
+      "element": 678,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755868,
+      "index": 158,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 14,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:01:17.156382Z",
+      "element": 74,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755869,
+      "index": 159,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 14,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:02:20.223040Z",
+      "element": 466,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755870,
+      "index": 160,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 14,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T12:02:21.931299Z",
+      "element": 67,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755871,
+      "index": 161,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 14,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:02:43.442108Z",
+      "element": 426,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755872,
+      "index": 162,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 14,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:03:14.100377Z",
+      "element": 329,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755873,
+      "index": 163,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 14,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:03:17.333926Z",
+      "element": 570,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755874,
+      "index": 164,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 14,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:03:24.400227Z",
+      "element": 181,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755875,
+      "index": 165,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 14,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:03:28.545961Z",
+      "element": 40,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755876,
+      "index": 166,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 14,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:03:35.071413Z",
+      "element": 612,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755877,
+      "index": 167,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 14,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:03:35.173677Z",
+      "element": 151,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755878,
+      "index": 168,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 14,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T12:03:35.276899Z",
+      "element": 470,
+      "entry": 335728,
+      "entry_name": "Will Still Standing",
+      "id": 5755879,
+      "index": 169,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 1,
+      "player_first_name": "Oliver",
+      "player_last_name": "Craig",
+      "round": 15,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T12:04:19.182856Z",
+      "element": 432,
+      "entry": 391545,
+      "entry_name": "Šeško Meal Deal",
+      "id": 5755880,
+      "index": 170,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 2,
+      "player_first_name": "Ben",
+      "player_last_name": "Malpass",
+      "round": 15,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:04:31.364364Z",
+      "element": 659,
+      "entry": 344919,
+      "entry_name": "Hawk Tchouaméni",
+      "id": 5755881,
+      "index": 171,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 3,
+      "player_first_name": "Sam",
+      "player_last_name": "Senior",
+      "round": 15,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:05:25.087862Z",
+      "element": 406,
+      "entry": 334301,
+      "entry_name": "Mitoma night's dream",
+      "id": 5755882,
+      "index": 172,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 4,
+      "player_first_name": "Ed",
+      "player_last_name": "Brett",
+      "round": 15,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:05:27.667083Z",
+      "element": 33,
+      "entry": 333841,
+      "entry_name": "Name TBD",
+      "id": 5755883,
+      "index": 173,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 5,
+      "player_first_name": "Simon",
+      "player_last_name": "Bidwell",
+      "round": 15,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:05:30.435154Z",
+      "element": 600,
+      "entry": 335912,
+      "entry_name": "European Champions",
+      "id": 5755884,
+      "index": 174,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 6,
+      "player_first_name": "Luke",
+      "player_last_name": "Trevett",
+      "round": 15,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:05:56.707150Z",
+      "element": 628,
+      "entry": 362708,
+      "entry_name": "Wirtz decision ever",
+      "id": 5755885,
+      "index": 175,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 7,
+      "player_first_name": "Anjit",
+      "player_last_name": "Aulakh",
+      "round": 15,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:05:58.850850Z",
+      "element": 444,
+      "entry": 335088,
+      "entry_name": "Atomic Gittens",
+      "id": 5755886,
+      "index": 176,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 8,
+      "player_first_name": "Alex",
+      "player_last_name": "Harrison",
+      "round": 15,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:07:01.912884Z",
+      "element": 400,
+      "entry": 421637,
+      "entry_name": "Kinder Mbuemo",
+      "id": 5755887,
+      "index": 177,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 9,
+      "player_first_name": "Aaron",
+      "player_last_name": "Veale",
+      "round": 15,
+      "seconds_to_pick": null,
+      "was_auto": true
+    },
+    {
+      "choice_time": "2025-08-15T12:07:04.548141Z",
+      "element": 673,
+      "entry": 399667,
+      "entry_name": "Go with the Flo",
+      "id": 5755888,
+      "index": 178,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 10,
+      "player_first_name": "Sebastian",
+      "player_last_name": "Waters",
+      "round": 15,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:07:33.968276Z",
+      "element": 528,
+      "entry": 341006,
+      "entry_name": "DontLookBackElanga",
+      "id": 5755889,
+      "index": 179,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 11,
+      "player_first_name": "Jonathan",
+      "player_last_name": "Purvis",
+      "round": 15,
+      "seconds_to_pick": null,
+      "was_auto": false
+    },
+    {
+      "choice_time": "2025-08-15T12:07:34.053494Z",
+      "element": 431,
+      "entry": 375295,
+      "entry_name": "Al Sesko Dining",
+      "id": 5755890,
+      "index": 180,
+      "draft": 68663,
+      "league": 65002,
+      "pick": 12,
+      "player_first_name": "Alexander",
+      "player_last_name": "Greenhalgh",
+      "round": 15,
+      "seconds_to_pick": null,
+      "was_auto": true
+    }
+  ],
+  "idle": [],
+  "element_status": [
+    {
+      "element": 170,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 434,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 218,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 138,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 185,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 73, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 124,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 263,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 187,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 420,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 294,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 66, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 529,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 331,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 629,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 302,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 471,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 601,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 146,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 600,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 579,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 663,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 632,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 400,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 55, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 514,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 422,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 409,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 340,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 480,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 614,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 627,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 680,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 43, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 363,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 676,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 270,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 159,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 604,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 232,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 2, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 153,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 86, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 472,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 152,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 479,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 346,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 571,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 474,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 399,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 254,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 401,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 372,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 54, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 545,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 405,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 24, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 570,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 630,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 40, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 617,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 61, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 272,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 495,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 324,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 336,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 329,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 674,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 429,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 88, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 369,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 264,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 327,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 87, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 659,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 392,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 507,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 326,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 416,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 319,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 48, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 322,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 539,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 209,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 98, "in_accepted_trade": false, "owner": null, "status": "a" },
+    { "element": 89, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 484,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 316,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 255,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 376,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 555,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 581,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 206,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 317,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 451,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 202,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 198,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 490,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 647,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 201,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 455,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 328,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 642,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 108,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 186,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 109,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 50, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 618,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 11, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 354,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 285,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 494,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 353,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 27, "in_accepted_trade": false, "owner": null, "status": "a" },
+    { "element": 85, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 487,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 432,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 585,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 143,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 147,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 125,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 53, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 512,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 522,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 284,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 31, "in_accepted_trade": false, "owner": null, "status": "a" },
+    { "element": 12, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 388,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 330,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 126,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 199,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 456,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 140,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 325,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 271,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 527,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 521,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 607,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 404,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 332,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 240,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 616,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 605,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 377,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 566,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 610,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 508,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 613,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 550,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 49, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 259,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 164,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 320,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 379,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 421,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 219,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 533,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 132,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 352,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 437,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 448,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 343,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 549,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 149,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 385,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 79, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 504,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 292,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 91, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 342,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 58, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 112,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 587,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 621,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 288,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 438,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 668,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 644,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 111,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 636,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 459,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 528,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 52, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 150,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 534,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 318,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 606,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 102,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 589,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 362,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 653,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 142,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 194,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 229,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 580,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 386,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 520,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 347,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 296,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 383,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 123,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 321,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 188,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 358,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 355,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 107,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 519,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 204,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 93, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 350,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 128,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 315,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 656,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 426,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 182,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 300,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 648,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 357,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 541,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 344,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 590,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 78, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 339,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 345,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 29, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 214,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 23, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 268,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 154,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 121,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 395,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 678,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 9, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 564,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 482,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 171,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 92, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 638,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 39, "in_accepted_trade": false, "owner": null, "status": "a" },
+    { "element": 19, "in_accepted_trade": false, "owner": null, "status": "a" },
+    { "element": 68, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 113,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 389,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 583,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 397,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 289,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 211,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 646,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 59, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 655,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 615,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 196,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 277,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 133,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 278,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 509,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 466,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 556,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 227,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 193,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 535,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 548,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 57, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 498,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 435,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 189,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 609,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 35, "in_accepted_trade": false, "owner": null, "status": "a" },
+    { "element": 34, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 360,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 3, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 239,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 77, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 207,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 423,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 540,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 145,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 245,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 275,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 664,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 454,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 681,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 173,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 51, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 210,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 361,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 223,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 116,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 141,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 161,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 298,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 503,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 649,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 410,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 536,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 424,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 71, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 191,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 554,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 190,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 593,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 635,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 602,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 547,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 511,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 567,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 677,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 356,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 574,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 179,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 208,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 473,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 184,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 380,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 276,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 530,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 304,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 623,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 599,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 633,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 460,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 620,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 247,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 312,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 56, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 394,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 309,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 537,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 349,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 375,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 216,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 351,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 572,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 558,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 192,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 70, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 524,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 297,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 391,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 273,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 308,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 650,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 465,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 15, "in_accepted_trade": false, "owner": null, "status": "a" },
+    { "element": 10, "in_accepted_trade": false, "owner": null, "status": "a" },
+    { "element": 25, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 662,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 252,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 118,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 592,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 595,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 660,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 398,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 559,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 634,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 301,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 90, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 103,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 675,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 307,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 105,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 129,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 221,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 643,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 166,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 415,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 637,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 518,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 584,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 162,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 177,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 169,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 45, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 244,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 538,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 334,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 44, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 262,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 165,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 458,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 631,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 251,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 641,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 183,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 611,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 622,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 76, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 542,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 197,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 95, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 281,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 658,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 280,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 163,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 246,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 137,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 104,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 167,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 543,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 393,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 608,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 359,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 313,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 279,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 168,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 63, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 500,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 75, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 122,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 481,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 544,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 462,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 557,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 446,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 591,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 497,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 156,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 306,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 576,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 513,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 172,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 195,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 553,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 222,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 144,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 176,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 94, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 243,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 588,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 563,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 213,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 672,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 4, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 598,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 577,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 551,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 461,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 464,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 62, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 639,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 13, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 561,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 496,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 364,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 626,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 428,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 175,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 69, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 523,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 117,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 586,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 333,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 282,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 231,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 468,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 425,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 510,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 506,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 80, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 212,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 65, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 286,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 233,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 619,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 552,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 335,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 60, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 445,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 406,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 483,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 203,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 274,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 368,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 46, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 433,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 14, "in_accepted_trade": false, "owner": null, "status": "a" },
+    { "element": 28, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 155,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 657,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 265,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 99, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 134,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 323,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 396,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 652,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 467,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 651,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 441,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 501,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 130,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 447,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    { "element": 96, "in_accepted_trade": false, "owner": null, "status": "a" },
+    { "element": 42, "in_accepted_trade": false, "owner": null, "status": "a" },
+    {
+      "element": 269,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 180,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 305,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 578,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 248,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 174,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 378,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 562,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 115,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 412,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 463,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 114,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 234,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 594,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 127,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 546,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 131,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 492,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 640,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 645,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 439,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 685,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 686,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 687,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 688,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 689,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 690,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 692,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 693,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 695,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 696,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 697,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 699,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 700,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 701,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 702,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 703,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 704,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 705,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 706,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 707,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 708,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 709,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 710,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 711,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 712,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 713,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 714,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 716,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 717,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 719,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 721,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 722,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 723,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 724,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 725,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 726,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 727,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 730,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 731,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 732,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 734,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 736,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 737,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 738,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 739,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 740,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 741,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 742,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 743,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 744,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 745,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 746,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 747,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 748,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 749,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 750,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 751,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 752,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 753,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 754,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 755,
+      "in_accepted_trade": false,
+      "owner": null,
+      "status": "a"
+    },
+    {
+      "element": 291,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 178,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 341,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 525,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 457,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 470,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 33,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 671,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    },
+    {
+      "element": 478,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 476,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 314,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 667,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 502,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 625,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 442,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    },
+    {
+      "element": 373,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 469,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 32,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 37,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 337,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 295,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    },
+    {
+      "element": 443,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 287,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    },
+    {
+      "element": 489,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 419,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 20,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 366,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 381,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 449,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 628,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 1,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 596,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 408,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 205,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    },
+    {
+      "element": 253,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 365,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 624,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 64,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 224,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 493,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 226,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 17,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 565,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 22,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 36,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    },
+    {
+      "element": 38,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 101,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 665,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 84,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 21,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 374,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 488,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 260,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 516,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 414,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 436,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 597,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 348,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 220,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 517,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 242,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 440,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 370,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 135,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 499,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 30,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 475,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 72,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 569,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 515,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 81,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 430,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 16,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 531,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 612,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 661,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 673,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 225,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 5,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 505,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 148,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 283,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 267,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 266,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 485,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    },
+    {
+      "element": 573,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 303,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    },
+    {
+      "element": 384,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 338,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 258,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 47,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 235,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 41,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 256,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 654,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 236,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 18,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 418,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    },
+    {
+      "element": 387,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 261,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 450,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 215,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    },
+    {
+      "element": 491,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 106,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 427,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 217,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 257,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 560,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 82,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 413,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 299,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 568,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 477,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 390,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 97,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 200,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 230,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 8,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 119,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    },
+    {
+      "element": 237,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 402,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 367,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 486,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 431,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    },
+    {
+      "element": 157,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 669,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 67,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 582,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 6,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 250,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 158,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 407,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 417,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 7,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 151,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 411,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 249,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 403,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 290,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 26,
+      "in_accepted_trade": false,
+      "owner": 344919,
+      "status": "o"
+    },
+    {
+      "element": 228,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 526,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 679,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 311,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 241,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 532,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 139,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 575,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 453,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 452,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 74,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 382,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 670,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 136,
+      "in_accepted_trade": false,
+      "owner": 399667,
+      "status": "o"
+    },
+    {
+      "element": 666,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 293,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 120,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 83,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 371,
+      "in_accepted_trade": false,
+      "owner": 341006,
+      "status": "o"
+    },
+    {
+      "element": 444,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 100,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 310,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 160,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 110,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 603,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 238,
+      "in_accepted_trade": false,
+      "owner": 333841,
+      "status": "o"
+    },
+    {
+      "element": 181,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 682,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    },
+    {
+      "element": 683,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 684,
+      "in_accepted_trade": false,
+      "owner": 335728,
+      "status": "o"
+    },
+    {
+      "element": 691,
+      "in_accepted_trade": false,
+      "owner": 362708,
+      "status": "o"
+    },
+    {
+      "element": 694,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    },
+    {
+      "element": 698,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 715,
+      "in_accepted_trade": false,
+      "owner": 334301,
+      "status": "o"
+    },
+    {
+      "element": 718,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 720,
+      "in_accepted_trade": false,
+      "owner": 335912,
+      "status": "o"
+    },
+    {
+      "element": 728,
+      "in_accepted_trade": false,
+      "owner": 421637,
+      "status": "o"
+    },
+    {
+      "element": 729,
+      "in_accepted_trade": false,
+      "owner": 391545,
+      "status": "o"
+    },
+    {
+      "element": 733,
+      "in_accepted_trade": false,
+      "owner": 335088,
+      "status": "o"
+    },
+    {
+      "element": 735,
+      "in_accepted_trade": false,
+      "owner": 375295,
+      "status": "o"
+    }
+  ]
+}
