@@ -1,23 +1,23 @@
 #!/bin/bash
 
 entry_ids=(
-    28723
-    23994
-    22752
-    23503
-    21751
-    23588
-    145310
-    145824
-    197538
-    190843
-    300884
-    266197
+    334301
+    335088
+    335728
+    341006
+    333841
+    362708
+    421637
+    399667
+    375295
+    344919
+    391545
+    335912
 )
 for entry_id in ${entry_ids[*]};
 do
     for i in $(seq 1 38);
     do
-        curl --create-dirs "https://draft.premierleague.com/api/entry/$entry_id/event/$i" -o "public/2024-25/lineups/$entry_id/$i.json"
+        curl --create-dirs "https://draft.premierleague.com/api/entry/$entry_id/event/$i" -o "public/2025-26/lineups/$entry_id/$i.json"
     done
 done

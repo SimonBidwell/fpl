@@ -1,7 +1,7 @@
 name: Update league json file
-on: 
+on:
   schedule:
-    - cron: '0 1,12,18 * * *'
+    - cron: "0 1,12,18 * * *"
   workflow_dispatch:
 permissions:
   contents: write
@@ -9,8 +9,8 @@ jobs:
   update_json:
     runs-on: ubuntu-latest
     env:
-      league_id: 7215
-      season: 2024-25
+      league_id: 65002
+      season: 2025-26
     steps:
       - uses: actions/checkout@v4
         with:
