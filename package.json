@@ -10,33 +10,33 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@nextui-org/react": "^2.1.12",
-    "clsx": "^2.1.0",
-    "d3": "^7.8.5",
-    "framer-motion": "^10.16.4",
-    "lucide-react": "^0.364.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-query": "^3.39.3",
+    "@nextui-org/react": "2.1.12",
+    "clsx": "2.1.0",
+    "d3": "7.8.5",
+    "framer-motion": "10.16.4",
+    "lucide-react": "0.364.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-query": "3.39.3",
     "wouter": "3.0.0-rc.2",
-    "zod": "^3.21.4"
+    "zod": "3.22.2"
   },
   "devDependencies": {
-    "@types/d3": "^7.4.3",
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
-    "@typescript-eslint/eslint-plugin": "^5.61.0",
-    "@typescript-eslint/parser": "^5.61.0",
-    "@vitejs/plugin-react-swc": "^3.3.2",
-    "autoprefixer": "^10.4.14",
-    "eslint": "^8.44.0",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.1",
-    "postcss": "^8.4.27",
-    "tailwindcss": "^3.3.3",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.0"
+    "@types/d3": "7.4.3",
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.7",
+    "@typescript-eslint/eslint-plugin": "5.62.0",
+    "@typescript-eslint/parser": "5.62.0",
+    "@vitejs/plugin-react-swc": "3.3.2",
+    "autoprefixer": "10.4.15",
+    "eslint": "8.49.0",
+    "eslint-plugin-react": "7.33.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-react-refresh": "0.4.3",
+    "postcss": "8.4.29",
+    "tailwindcss": "3.3.3",
+    "typescript": "5.2.2",
+    "vite": "4.4.9"
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "packageManager": "pnpm@10.24.0"
 }
