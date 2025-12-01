@@ -38,8 +38,8 @@ export interface NotablePlacement {
 export interface Manager {
   id: number;
   name: string;
-  teams: Record<Season, number>;
-  entries: Record<Season, number>;
+  teams: Partial<Record<Season, number>>;
+  entries: Partial<Record<Season, number>>;
   notablePlacements: NotablePlacement[];
   color: string;
 }
@@ -115,16 +115,13 @@ export const MANAGERS = [
   },
   {
     id: 4,
-    // name: "Charlie Schofield",
-    name: "Jonathan Purvis",
+    name: "Charlie Schofield",
     teams: {
       "2020-21": 6,
       "2021-22": 201935,
       "2022-23": 6,
       "2023-24": 118328,
       "2024-25": 23533,
-      //Jon from here
-      "2025-26": 340643,
     },
     entries: {
       "2020-21": 6,
@@ -132,12 +129,8 @@ export const MANAGERS = [
       "2022-23": 6,
       "2023-24": 117961,
       "2024-25": 23503,
-      //Jon from here
-      "2025-26": 341006,
     },
-    notablePlacements: [
-      // { season: "2022-23", position: 1 }
-    ],
+    notablePlacements: [{ season: "2022-23", position: 1 }],
     color: "#22c55e",
   },
   {
@@ -325,19 +318,31 @@ export const MANAGERS = [
     notablePlacements: [],
     color: "#404040",
   },
+  {
+    id: 13,
+    name: "Jonathan Purvis",
+    teams: {
+      "2025-26": 340643,
+    },
+    entries: {
+      "2025-26": 341006,
+    },
+    notablePlacements: [],
+    color: "#16a34a",
+  },
 ];
 
 export const Manager = {
   bySeason: SEASONS.reduce<Partial<Record<Season, Record<number, Manager>>>>(
     (acc, season) => ({
       ...acc,
-      [season]: MANAGERS.reduce(
-        (acc, manager) => ({
-          ...acc,
-          [manager.teams[season]]: manager,
-        }),
-        {}
-      ),
+      [season]: MANAGERS.reduce((acc, manager) => {
+        const teamId = manager.teams[season];
+        if (teamId !== undefined) {
+          acc[teamId] = manager;
+        }
+        return acc;
+      }, {} as Record<number, Manager>),
     }),
     {}
   ),
@@ -346,13 +351,13 @@ export const Manager = {
   >(
     (acc, season) => ({
       ...acc,
-      [season]: MANAGERS.reduce(
-        (acc, manager) => ({
-          ...acc,
-          [manager.entries[season]]: manager,
-        }),
-        {}
-      ),
+      [season]: MANAGERS.reduce((acc, manager) => {
+        const entryId = manager.entries[season];
+        if (entryId !== undefined) {
+          acc[entryId] = manager;
+        }
+        return acc;
+      }, {} as Record<number, Manager>),
     }),
     {}
   ),
