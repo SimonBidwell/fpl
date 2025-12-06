@@ -61,7 +61,7 @@ export const PlayerCard = ({ player }: Props) => {
         >
           <img
             className="absolute h-28 bottom-0 right-2"
-            src={`https://resources.premierleague.com/premierleague/photos/players/110x140/p${code}.png`}
+            src={`https://resources.premierleague.com/premierleague25/photos/players/110x140/${code}.png`}
           />
           <div className="font-extrabold">#{totalPointsRank}</div>
           <div>
