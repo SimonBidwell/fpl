@@ -141,7 +141,7 @@ export function ManagerPageClient({ id }: Props) {
             avatarProps={{
               size: "lg",
               radius: "md",
-              src: `/fpl/${id}.jpg`,
+              src: `/${id}.jpg`,
             }}
           />
           <div className="flex gap-4">

@@ -37,7 +37,7 @@ export const Manager = (props: Props) => {
         <User
             avatarProps={{
                 radius: "md",
-                src: `/fpl/${id}.jpg`,
+                src: `/${id}.jpg`,
                 isBordered: !!border,
                 style: border
                     ? ({
