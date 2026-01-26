@@ -6,28 +6,30 @@ import {
   transactionsResponseSchema,
 } from "./domain";
 
+const BASE_PATH = "/fpl";
+
 export const getLeagueDetails = async (seasonId: string) => {
-  const res = await fetch(`${import.meta.env.BASE_URL}/${seasonId}.json`);
+  const res = await fetch(`${BASE_PATH}/${seasonId}.json`);
   return leagueDetailsSchema.parse(await res.json());
 };
 
 export const getBootstrapStatic = async (seasonId: string) => {
   const res = await fetch(
-    `${import.meta.env.BASE_URL}/bootstrap-static-${seasonId}.json`
+    `${BASE_PATH}/bootstrap-static-${seasonId}.json`
   );
   return bootstrapStaticSchema.parse(await res.json());
 };
 
 export const getElementStatus = async (seasonId: string) => {
   const res = await fetch(
-    `${import.meta.env.BASE_URL}/element-status-${seasonId}.json`
+    `${BASE_PATH}/element-status-${seasonId}.json`
   );
   return elementStatusResponseSchema.parse(await res.json());
 };
 
 export const getDraftChoices = async (seasonId: string) => {
   const res = await fetch(
-    `${import.meta.env.BASE_URL}/draft-choices-${seasonId}.json`
+    `${BASE_PATH}/draft-choices-${seasonId}.json`
   );
   if (res.ok && !res.headers.get("content-type")?.includes("text/html")) {
     return choicesResponseSchema.parse(await res.json());
@@ -38,7 +40,7 @@ export const getDraftChoices = async (seasonId: string) => {
 
 export const getTransactions = async (seasonId: string) => {
   const res = await fetch(
-    `${import.meta.env.BASE_URL}/transactions-${seasonId}.json`
+    `${BASE_PATH}/transactions-${seasonId}.json`
   );
   if (res.ok && !res.headers.get("content-type")?.includes("text/html")) {
     return transactionsResponseSchema.parse(await res.json());

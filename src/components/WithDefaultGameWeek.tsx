@@ -1,17 +1,37 @@
-import { ReactNode } from "react"
-import { Redirect, useParams } from "wouter"
+"use client";
+
+import { ReactNode, useEffect } from "react";
 
 export interface Props {
-    defaultGameWeek: number
-    isValidGameWeek: (gameWeek: number, defaultGameWeek: number) => boolean
-    children: ReactNode
+  defaultGameWeek: number;
+  currentGameWeek?: number;
+  isValidGameWeek: (gameWeek: number, defaultGameWeek: number) => boolean;
+  onNavigate: (gameWeek: number) => void;
+  children: ReactNode;
 }
 
-export const WithDefaultGameWeek = ({defaultGameWeek, children, isValidGameWeek}: Props) => {
-    const { gameWeek } = useParams();
-    if (gameWeek !== undefined && isValidGameWeek(Number(gameWeek), defaultGameWeek)) {
-        return children
-    } else {
-        return <Redirect to={`/${defaultGameWeek}`} replace/>
+export const WithDefaultGameWeek = ({
+  defaultGameWeek,
+  currentGameWeek,
+  children,
+  isValidGameWeek,
+  onNavigate,
+}: Props) => {
+  useEffect(() => {
+    if (
+      currentGameWeek === undefined ||
+      !isValidGameWeek(currentGameWeek, defaultGameWeek)
+    ) {
+      onNavigate(defaultGameWeek);
     }
-}
+  }, [currentGameWeek, defaultGameWeek, isValidGameWeek, onNavigate]);
+
+  if (
+    currentGameWeek !== undefined &&
+    isValidGameWeek(currentGameWeek, defaultGameWeek)
+  ) {
+    return <>{children}</>;
+  }
+
+  return null;
+};

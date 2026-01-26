@@ -1,9 +1,11 @@
+"use client";
+
+import { notFound } from "next/navigation";
 import { Card, CardBody, User } from "@nextui-org/react";
-import { Redirect, useParams } from "wouter";
-import { LeagueDetails, MANAGERS, Manager, Match } from "../domain";
-import { groupBy } from "../helpers";
-import { RecordsRow, RecordsTable } from "./recordstable/RecordsTable";
-import { buildStandings } from "./standings/domain";
+import { LeagueDetails, MANAGERS, Manager, Match } from "@/src/domain";
+import { groupBy } from "@/src/helpers";
+import { RecordsRow, RecordsTable } from "@/src/components/recordstable/RecordsTable";
+import { buildStandings } from "@/src/components/standings/domain";
 import {
   DrawnCol,
   FairPointsCol,
@@ -20,12 +22,12 @@ import {
   SeasonCol,
   TeamCol,
   WonCol,
-} from "./standingstable/columns";
-import { StandingsRow, StandingsTable } from "./standingstable/StandingsTable";
-
-export interface Props {
-  leagueDetails: LeagueDetails[];
-}
+} from "@/src/components/standingstable/columns";
+import {
+  StandingsRow,
+  StandingsTable,
+} from "@/src/components/standingstable/StandingsTable";
+import { useLeagueData } from "@/app/league/1/LeagueDataProvider";
 
 const COLUMNS = [
   SeasonCol,
@@ -70,15 +72,19 @@ const mergeStandingRows = (
     }
   );
 
-export const ManagerPage = ({ leagueDetails }: Props) => {
-  const { id } = useParams();
+interface Props {
+  id: string;
+}
+
+export function ManagerPageClient({ id }: Props) {
+  const { leagueDetails } = useLeagueData();
   const manager = Manager.byId.get(Number(id));
 
   if (manager === undefined) {
-    return <Redirect to="~/" />;
+    notFound();
   }
 
-  const allTimeStandings = leagueDetails
+  const allTimeStandings = [...leagueDetails.values()]
     .map((ld) => {
       const standings = buildStandings(ld, undefined);
       const seasonMostRecentStandings =
@@ -135,7 +141,7 @@ export const ManagerPage = ({ leagueDetails }: Props) => {
             avatarProps={{
               size: "lg",
               radius: "md",
-              src: `${import.meta.env.BASE_URL}/${id}.jpg`,
+              src: `/fpl/${id}.jpg`,
             }}
           />
           <div className="flex gap-4">
@@ -186,4 +192,4 @@ export const ManagerPage = ({ leagueDetails }: Props) => {
       />
     </div>
   );
-};
+}

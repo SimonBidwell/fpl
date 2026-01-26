@@ -1,10 +1,12 @@
-import { useLocation, useRouter } from "wouter";
+"use client";
+
+import { usePathname, useRouter } from "next/navigation";
 
 export const useReplaceNavigate = () => {
-    const { base } = useRouter();
-    const [, navigate] = useLocation();
-    
-    return (str: string, replacement: string) => {
-        navigate(`~${base.replaceAll(str, replacement)}`)
-    }
-}
+  const pathname = usePathname();
+  const router = useRouter();
+
+  return (str: string, replacement: string) => {
+    router.push(pathname.replace(str, replacement));
+  };
+};

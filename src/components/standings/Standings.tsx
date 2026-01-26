@@ -1,3 +1,5 @@
+"use client";
+
 import {
     Selection,
     Dropdown,
@@ -16,7 +18,7 @@ import { Chevron } from "../Chevron";
 import { DownloadCSV, buildStandingsSerialiser } from "../DownloadCSV";
 import { GameWeekSelector } from "../GameweekSelector";
 import { GRAPHS, Graph, StandingsGraph } from "./graphs/StandingsGraph";
-import { useLocation, useParams } from "wouter";
+import { useParams, useRouter } from "next/navigation";
 import { StandingsTable, StandingsRow } from "../standingstable/StandingsTable";
 import {
     AverageFairPointsCol,
@@ -101,8 +103,16 @@ const INITIAL_COLUMNS = [
 ].map((col) => col.key);
 
 export const Standings = ({ leagueDetails, transactions }: Props) => {
-    const { gameWeek } = useParams();
-    const [, navigate] = useLocation();
+    const params = useParams();
+    const router = useRouter();
+    const gameWeek = params.gameWeek as string | undefined;
+    
+    const navigateToGameWeek = (gw: number) => {
+        const season = params.season;
+        const tab = params.tab;
+        router.push(`/league/1/season/${season}/${tab}/${gw}`);
+    };
+    
     const finishedGameWeeks = useMemo(
         () =>
             [
@@ -150,7 +160,7 @@ export const Standings = ({ leagueDetails, transactions }: Props) => {
                 <GameWeekSelector
                     gameWeeks={finishedGameWeeks}
                     selectedGameWeek={Number(gameWeek)}
-                    setSelectedGameWeek={(gameWeek) => navigate(`/${gameWeek}`)}
+                    setSelectedGameWeek={navigateToGameWeek}
                 />
                 <div className="w-full flex gap-3 justify-end">
                     {mode === "table" ? (

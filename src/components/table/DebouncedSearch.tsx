@@ -1,3 +1,5 @@
+"use client";
+
 import { Input } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { Search as SearchIcon } from "../icons/Search";
