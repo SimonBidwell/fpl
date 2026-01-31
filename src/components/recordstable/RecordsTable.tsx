@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from "@nextui-org/react";
 import { Key, ReactNode, useCallback, useMemo, useState } from "react";
-import { Link } from "wouter";
+import Link from "next/link";
 import { Manager, Match } from "../../domain";
 import { Manager as ManagerComponent } from "../Manager";
 import { Result } from "../standingstable/Result";
@@ -36,7 +36,7 @@ const COLUMNS: Column[] = [
     render: ({ manager }) => (
       <Link
         className="hover:text-foreground-400"
-        to={`~/fpl/league/1/manager/${manager.id}`}
+        href={`/league/1/manager/${manager.id}`}
       >
         {manager.name}
       </Link>

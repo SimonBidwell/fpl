@@ -72,7 +72,7 @@ export const DraftBoard = () => {
           <div className="px-2 flex flex-col gap-1 items-center overflow-hidden">
             <Avatar
               radius="md"
-              src={`${import.meta.env.BASE_URL}/${
+              src={`/${
                 getEntry(x.entry)?.manager?.id
               }.jpg`}
             />

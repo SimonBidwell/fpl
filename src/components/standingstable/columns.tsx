@@ -6,7 +6,7 @@ import { Manager } from "../Manager";
 import { ResultsListHover } from "./ResultsListHover";
 import { Result } from "./Result";
 import { Tooltip } from "@nextui-org/react";
-import { Link } from "wouter";
+import Link from "next/link";
 import { Column as ColumnType } from "../table/column";
 
 export type Column = ColumnType<StandingsRow> & {
@@ -58,8 +58,7 @@ export const SeasonCol: Column = {
     render: ({ season }) => (
         <Link
             className="hover:text-foreground-400"
-            //TODO work out why this doesn't work without the /standings
-            to={`~/fpl/league/1/season/${season}/standings`}
+            href={`/league/1/season/${season}/standings`}
         >
             {season}
         </Link>
@@ -90,7 +89,7 @@ export const TeamAndManagerCol: Column = {
     render: ({ entry }) => (
         <Link
             className="hover:opacity-60"
-            to={`~/fpl/league/1/manager/${entry.manager.id}/`}
+            href={`/league/1/manager/${entry.manager.id}/`}
         >
             <Manager manager={entry.manager} teamName={entry.name} />
         </Link>
@@ -408,7 +407,7 @@ export const UpNextCol: Column = {
             return (
                 <Link
                     className="hover:opacity-60"
-                    to={`~/fpl/league/1/manager/${opposition.manager.id}/`}
+                    href={`/league/1/manager/${opposition.manager.id}/`}
                 >
                     <Manager
                         manager={opposition.manager}
