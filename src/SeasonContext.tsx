@@ -10,7 +10,7 @@ import {
     Entry,
 } from "./domain";
 import { indexBy } from "./helpers";
-import { BootstrapStatic, Choice, ChoicesResponse, ElementStatusResponse, Fixture, Transaction, TransactionResponse } from "./api/domain"; //TODO replace this with my own domain object
+import { BootstrapStatic, Choice, ChoicesResponse, ElementStatusResponse, Event, Fixture, Transaction, TransactionResponse } from "./api/domain"; //TODO replace this with my own domain object
 
 export interface SeasonContext {
     leagueDetails: LeagueDetails;
@@ -22,6 +22,7 @@ export interface SeasonContext {
     draft: Choice[] | "Unknown";
     transactions: Transaction[] | "Unknown";
     currentGameweek: number | undefined;
+    nextEvent: Event | undefined;
     getTeam: (teamId: number) => Team | undefined;
     getPlayerStatus: (playerId: number) => PlayerStatus | undefined;
     getEntry: (entryId: number) => Entry | undefined;
@@ -73,6 +74,12 @@ export const SeasonContextProvider = ({
     const players = bootstrap.elements.map((p) => Player.build(p));
     const playersById = indexBy(players, p => p.id);
 
+    const nextEventId = bootstrap.events.next;
+    const nextEvent =
+        nextEventId === null
+            ? undefined
+            : bootstrap.events.data.find((event) => event.id === nextEventId);
+
     const ctx: SeasonContext = {
         leagueDetails: leagueDetails,
         teams: bootstrap.teams,
@@ -84,6 +91,7 @@ export const SeasonContextProvider = ({
         transactions: transactions === undefined ? "Unknown" : transactions.transactions,
         currentGameweek:
             bootstrap.events.current === null ? undefined : bootstrap.events.current,
+        nextEvent: nextEvent,
         getTeam: (id) => teams.get(id),
         getPlayerStatus: (id) => statuses.get(id),
         getEntry: (entryId) =>
