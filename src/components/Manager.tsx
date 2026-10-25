@@ -1,7 +1,7 @@
 import { User } from "@nextui-org/react";
 import { Records } from "../Records";
 import { Manager as ManagerType } from "../domain";
-import { CSSProperties, ReactNode } from "react";
+import { ReactNode } from "react";
 
 export type Props = ManagerProps | DescriptionProps;
 interface ManagerProps {
@@ -9,6 +9,7 @@ interface ManagerProps {
     teamName: ReactNode;
     align?: "left" | "right";
     border?: string;
+    descriptionClassName?: string;
 }
 interface DescriptionProps {
     id: number;
@@ -16,12 +17,13 @@ interface DescriptionProps {
     description: ReactNode;
     align?: "left" | "right";
     border?: string;
+    descriptionClassName?: string;
 }
 const isManagerProps = (props: Props): props is ManagerProps =>
     Reflect.has(props, "manager");
 
 export const Manager = (props: Props) => {
-    const { teamName, align, border } = props;
+    const { teamName, align, border, descriptionClassName } = props;
     const { id, description } = isManagerProps(props)
         ? {
               id: props.manager.id,
@@ -54,10 +56,11 @@ export const Manager = (props: Props) => {
             name={teamName}
             classNames={{
                 name: "truncate",
+                description: descriptionClassName,
                 ...(align === "right"
                     ? {
                           base: "flex-row-reverse",
-                          description: "flex-row-reverse",
+                          description: `flex-row-reverse ${descriptionClassName ?? ""}`,
                           wrapper: "items-end",
                       }
                     : undefined),

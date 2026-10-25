@@ -33,7 +33,7 @@ for (const { entry_id } of league.league_entries) {
     lineupEndpoints.push(endpoint);
     fixtures.set(endpoint, {
       filename: `2026-27/lineups/${entry_id}/${gameweek}.json`,
-      data: { ...lineup, extra_api_field: "preserved" },
+      data: { ...lineup, picks: lineup.picks.map(pick => ({ ...pick, points: 0 })), extra_api_field: "preserved" },
     });
   }
 }
@@ -51,6 +51,10 @@ async function setup(t, override) {
     leagueId: 5944,
     fetchImpl: async url => {
       const endpoint = new URL(url).pathname.replace("/api/", "");
+      if (/^event\/\d+\/live$/.test(endpoint)) {
+        return Response.json({ elements: Object.fromEntries(lineup.picks.map(pick =>
+          [pick.element, { stats: { total_points: 0 } }])) });
+      }
       assert.ok(fixtures.has(endpoint), `Unexpected request: ${endpoint}`);
       const data = structuredClone(fixtures.get(endpoint).data);
       return override?.(endpoint, data) ?? Response.json(data);

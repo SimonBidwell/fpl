@@ -1,6 +1,7 @@
 import { Match } from "../domain";
 import { Manager } from "./Manager";
 import { Card, CardBody } from "@nextui-org/react";
+import { Link } from "wouter";
 
 export interface Props {
     gameweek: number;
@@ -18,6 +19,7 @@ export const MatchList = ({ gameweek, matches }: Props) => {
                     {matches.map((match, i) => {
                         return (
                             <div
+                                key={`${match.teamOne.id}-${match.teamTwo.id}`}
                                 className={`grid grid-cols-5 items-center border-b ${
                                     i === 0 ? "border-t" : ""
                                 }`}
@@ -30,7 +32,13 @@ export const MatchList = ({ gameweek, matches }: Props) => {
                                     />
                                 </div>
                                 <div className="justify-self-center text-center col-start-3 text-sm">
-                                    {Match.isFinished(match) ? `${match.teamOne.points} - ${match.teamTwo.points}` : `v`}
+                                    <Link
+                                        href={`~/fpl/league/1/season/${match.season}/manager/${match.teamOne.manager.id}/gameweek/${gameweek}`}
+                                        className="rounded-sm hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                                        aria-label={`View lineups: ${match.teamOne.name} versus ${match.teamTwo.name}, gameweek ${gameweek}`}
+                                    >
+                                        {Match.isFinished(match) ? `${match.teamOne.points} - ${match.teamTwo.points}` : "v"}
+                                    </Link>
                                 </div>
                                 <div className="justify-self-start col-span-2 items-center flex py-2">
                                     <Manager

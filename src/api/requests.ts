@@ -3,8 +3,22 @@ import {
   choicesResponseSchema,
   elementStatusResponseSchema,
   leagueDetailsSchema,
+  lineupResponseSchema,
   transactionsResponseSchema,
 } from "./domain";
+
+export const getLineup = async (season: string, entryId: number, gameweek: number) => {
+  const response = await fetch(
+    `${import.meta.env.BASE_URL}/${season}/lineups/${entryId}/${gameweek}.json`
+  );
+  if (response.status === 404) return null;
+  if (!response.ok) throw new Error(`Could not load lineup (HTTP ${response.status})`);
+  // GitHub Pages can serve the SPA fallback for a missing archived file.
+  if (response.headers.get("content-type")?.includes("text/html")) return null;
+  const data: unknown = await response.json();
+  if (data === "No pick history") return null;
+  return lineupResponseSchema.parse(data);
+};
 
 export const getLeagueDetails = async (seasonId: string) => {
   const res = await fetch(`${import.meta.env.BASE_URL}/${seasonId}.json`);
