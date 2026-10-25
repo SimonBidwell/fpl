@@ -9,24 +9,25 @@ jobs:
   update_json:
     runs-on: ubuntu-latest
     env:
-      league_id: 65002
-      season: 2025-26
+      league_id: 5944
+      season: 2026-27
     steps:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.FPL_UPDATOR_TOKEN }}
-      - name: Create League Details file
-        run: curl https://draft.premierleague.com/api/league/$league_id/details -o public/$season.json
-      - name: Create Element Status file
-        run: curl https://draft.premierleague.com/api/league/$league_id/element-status -o public/element-status-$season.json
-      - name: Create Bootstrap file
-        run: curl https://draft.premierleague.com/api/bootstrap-static -o public/bootstrap-static-$season.json
-      - name: Create Transactions file
-        run: curl https://draft.premierleague.com/api/draft/league/$league_id/transactions -o public/transactions-$season.json
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Download and validate season data
+        run: node scripts/update-season.mjs "$season" "$league_id"
       - name: Commit updated json file
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add .
-          git diff-index --quiet HEAD || git commit -m "Updated league json file"
+          git add "public/$season.json" "public/element-status-$season.json" "public/bootstrap-static-$season.json" "public/transactions-$season.json" "public/draft-choices-$season.json"
+          git diff --cached --quiet || git commit -m "Updated league json file"
           git push
