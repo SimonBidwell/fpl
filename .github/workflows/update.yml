@@ -22,12 +22,15 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Download and validate season data
+      - name: Download and validate season data and lineups
         run: node scripts/update-season.mjs "$season" "$league_id"
       - name: Commit updated json file
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add "public/$season.json" "public/element-status-$season.json" "public/bootstrap-static-$season.json" "public/transactions-$season.json" "public/draft-choices-$season.json"
+          if [ -d "public/$season/lineups" ]; then
+            git add "public/$season/lineups"
+          fi
           git diff --cached --quiet || git commit -m "Updated league json file"
           git push

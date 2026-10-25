@@ -18,6 +18,22 @@ export const entrySchema = z.object({
 });
 export type Entry = z.infer<typeof entrySchema>;
 
+export const lineupResponseSchema = z.object({
+    picks: z.array(z.object({
+        element: z.number().int().positive(),
+        position: z.number().int().positive(),
+        is_captain: z.boolean(),
+        is_vice_captain: z.boolean(),
+        multiplier: z.number(),
+    })).min(1),
+    entry_history: z.record(z.string(), z.unknown()),
+    subs: z.array(z.object({
+        element_in: z.number().int().positive(),
+        element_out: z.number().int().positive(),
+        event: z.number().int().positive(),
+    })),
+});
+
 export const matchSchema = z.object({
     event: z.number(),
     finished: z.boolean(),

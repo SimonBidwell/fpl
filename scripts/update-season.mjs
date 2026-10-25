@@ -1,11 +1,12 @@
 import { mkdir, writeFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import {
   bootstrapStaticSchema,
   choicesResponseSchema,
   elementStatusResponseSchema,
   leagueDetailsSchema,
+  lineupResponseSchema,
   transactionsResponseSchema,
 } from "../src/api/domain.ts";
 
@@ -14,6 +15,7 @@ export async function updateSeason({
   leagueId,
   outputDir = "public",
   fetchImpl = fetch,
+  backfillLineups = false,
 }) {
   const year = Number(season?.slice(0, 4));
   if (!/^\d{4}-\d{2}$/.test(season) || season !== `${year}-${String(year + 1).slice(-2)}`) {
@@ -31,8 +33,7 @@ export async function updateSeason({
     [`draft-choices-${season}.json`, `draft/${leagueId}/choices`, choicesResponseSchema],
   ];
 
-  // Download and validate the whole batch before replacing any saved data.
-  const downloads = await Promise.all(sources.map(async ([filename, endpoint, schema]) => {
+  const download = async ([filename, endpoint, schema]) => {
     const response = await fetchImpl(`https://draft.premierleague.com/api/${endpoint}`, {
       signal: AbortSignal.timeout(30_000),
     });
@@ -42,7 +43,10 @@ export async function updateSeason({
     const data = await response.json();
     schema.parse(data);
     return { filename, data };
-  }));
+  };
+
+  // Download and validate the whole batch before replacing any saved data.
+  const downloads = await Promise.all(sources.map(download));
 
   if (downloads[0].data.league.id !== Number(leagueId)) {
     throw new Error("League response does not match the requested league ID");
@@ -52,14 +56,39 @@ export async function updateSeason({
     throw new Error(`Bootstrap data does not belong to ${season}; check for a season rollover`);
   }
 
-  await mkdir(outputDir, { recursive: true });
+  const { events } = downloads[2].data;
+  // After the season ends, keep refreshing the final two completed gameweeks.
+  const currentGameweek = events.current ?? Math.max(0, ...events.data
+    .filter(event => event.finished).map(event => event.id));
+  const gameweeks = events.data.filter(event =>
+    (event.finished || event.id === events.current) &&
+    (backfillLineups || event.id === currentGameweek || event.id === currentGameweek - 1)
+  );
+  const lineupSources = downloads[0].data.league_entries.flatMap(({ entry_id }) =>
+    gameweeks.map(({ id }) => [
+      `${season}/lineups/${entry_id}/${id}.json`,
+      `entry/${entry_id}/event/${id}`,
+      lineupResponseSchema,
+    ])
+  );
+  // Keep the request concurrency bounded when backfilling a whole season.
+  for (let i = 0; i < lineupSources.length; i += 5) {
+    downloads.push(...await Promise.all(lineupSources.slice(i, i + 5).map(download)));
+  }
+
   for (const { filename, data } of downloads) {
+    const path = resolve(outputDir, filename);
+    await mkdir(dirname(path), { recursive: true });
     // Preserve API fields that the application schema does not currently use.
-    await writeFile(resolve(outputDir, filename), JSON.stringify(data));
+    await writeFile(path, JSON.stringify(data));
   }
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  await updateSeason({ season: process.argv[2], leagueId: process.argv[3] });
+  await updateSeason({
+    season: process.argv[2],
+    leagueId: process.argv[3],
+    backfillLineups: process.argv.includes("--backfill-lineups"),
+  });
   console.log(`Updated ${process.argv[2]} data for league ${process.argv[3]}`);
 }
