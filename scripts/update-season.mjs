@@ -5,6 +5,7 @@ import {
   bootstrapStaticSchema,
   choicesResponseSchema,
   elementStatusResponseSchema,
+  gameweekLiveSchema,
   leagueDetailsSchema,
   lineupResponseSchema,
   transactionsResponseSchema,
@@ -64,16 +65,35 @@ export async function updateSeason({
     (event.finished || event.id === events.current) &&
     (backfillLineups || event.id === currentGameweek || event.id === currentGameweek - 1)
   );
+  // The bootstrap only contains points for its current week. Save each selected
+  // week's individual player points with its picks for historical lineup views.
+  const pointsByGameweek = new Map(await Promise.all(gameweeks.map(async ({ id }) => {
+    const { data } = await download([undefined, `event/${id}/live`, gameweekLiveSchema]);
+    return [id, data.elements];
+  })));
   const lineupSources = downloads[0].data.league_entries.flatMap(({ entry_id }) =>
     gameweeks.map(({ id }) => [
       `${season}/lineups/${entry_id}/${id}.json`,
       `entry/${entry_id}/event/${id}`,
       lineupResponseSchema,
+      id,
     ])
   );
+  const downloadLineup = async source => {
+    const result = await download(source);
+    const elements = pointsByGameweek.get(source[3]);
+    result.data.picks = result.data.picks.map(pick => {
+      const points = elements[pick.element]?.stats.total_points;
+      if (points === undefined) {
+        throw new Error(`${source[1]}: missing gameweek points for player ${pick.element}`);
+      }
+      return { ...pick, points };
+    });
+    return result;
+  };
   // Keep the request concurrency bounded when backfilling a whole season.
   for (let i = 0; i < lineupSources.length; i += 5) {
-    downloads.push(...await Promise.all(lineupSources.slice(i, i + 5).map(download)));
+    downloads.push(...await Promise.all(lineupSources.slice(i, i + 5).map(downloadLineup)));
   }
 
   for (const { filename, data } of downloads) {

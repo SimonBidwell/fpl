@@ -25,12 +25,20 @@ export const lineupResponseSchema = z.object({
         is_captain: z.boolean(),
         is_vice_captain: z.boolean(),
         multiplier: z.number(),
+        points: z.number().optional(),
     })).min(1),
     entry_history: z.record(z.string(), z.unknown()),
     subs: z.array(z.object({
         element_in: z.number().int().positive(),
         element_out: z.number().int().positive(),
         event: z.number().int().positive(),
+    })),
+});
+export type LineupResponse = z.infer<typeof lineupResponseSchema>;
+
+export const gameweekLiveSchema = z.object({
+    elements: z.record(z.string(), z.object({
+        stats: z.object({ total_points: z.number() }),
     })),
 });
 

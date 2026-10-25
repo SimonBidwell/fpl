@@ -6,6 +6,7 @@ import { ManagerPage } from "./ManagerPage";
 import { SeasonContextProvider } from "../SeasonContext";
 import { getLeagueDetails } from "../requests";
 import { indexBy } from "../helpers";
+import { LineupPage } from "./lineups/LineupPage";
 import {
     BootstrapStatic,
     ChoicesResponse,
@@ -103,6 +104,9 @@ export const League = () => {
 
     return (
         <Switch>
+            <Route path="/season/:season/manager/:id/gameweek/:gameweek">
+                <LineupPage leagueDetails={leagueDetails} bootstrap={bootstrap} draftChoices={draftChoices} />
+            </Route>
             <Route path="/season/:season/:tab" nest>
                 {(params) =>
                     !isSeason(params.season) ? (
